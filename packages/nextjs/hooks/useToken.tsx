@@ -36,6 +36,8 @@ export const useToken = (tokenId: bigint, replacementType: "ipfs" | "nftstorage"
   const token = {} as any;
   token.contract = scaffoldErc721;
   token.metadata = result;
+  token.id = tokenId;
+  token.uri = formattedURI;
   token.collectionName = collectionName;
   token.collectionSymbol = collectionSymbol;
   return token;

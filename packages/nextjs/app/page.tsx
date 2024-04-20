@@ -11,8 +11,28 @@ const Home: NextPage = () => {
     <>
       <NftCard
         token={token}
-        prettyLoad={{ card: true, values: { image: true, name: true, description: true, attributes: true } }}
-        renderOrder={["Image", "Name", "Description", "Attributes", "CollectionName", "CollectionSymbol", "Address"]}
+        prettyLoad={{
+          card: false,
+          values: {
+            image: true,
+            name: true,
+            description: true,
+            attributes: true,
+            collectionName: true,
+            collectionSymbol: true,
+            id: true,
+          },
+        }}
+        renderOrder={[
+          "Image",
+          "Name",
+          "Description",
+          "Attributes",
+          "CollectionName",
+          "CollectionSymbol",
+          "Id",
+          "Address",
+        ]}
       />
 
       {/* <button

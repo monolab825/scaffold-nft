@@ -12,16 +12,8 @@ const styleMap = {
   rounded: "rounded-lg",
 };
 
-export const AddressCard = ({ value, prettyLoad = false, style = "rounded" }: Props) => {
+export const AddressCard = ({ value, style = "rounded" }: Props) => {
   const component = <Address address={value} />;
 
-  let output;
-
-  if (prettyLoad) {
-    output = value ? component : <p>Loading Name...</p>;
-  } else {
-    output = component;
-  }
-
-  return <div className={`bg-base-200 ${styleMap[style]} p-2 m-2 max-w-3xl`}>{output}</div>;
+  return <div className={`bg-base-200 ${styleMap[style]} p-2 m-2 max-w-3xl`}>{component}</div>;
 };
