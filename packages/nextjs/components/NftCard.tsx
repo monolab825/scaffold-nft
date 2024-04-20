@@ -46,6 +46,16 @@ type Props = {
     | "Id"
   )[];
   size?: "base";
+  showComponentDescriptors?: {
+    image?: boolean;
+    name?: boolean;
+    description?: boolean;
+    attributes?: boolean;
+    address?: boolean;
+    collectionName?: boolean;
+    collectionSymbol?: boolean;
+    id?: boolean;
+  };
 };
 
 const loadingSizeMap = {
@@ -61,6 +71,16 @@ export const NftCard = ({
   prettyLoad,
   renderOrder = ["Image", "Name", "Description", "Attributes", "CollectionName", "CollectionSymbol", "Id", "Address"],
   size = "base",
+  showComponentDescriptors = {
+    image: false,
+    name: true,
+    description: true,
+    attributes: true,
+    address: true,
+    collectionName: true,
+    collectionSymbol: true,
+    id: true,
+  },
 }: Props) => {
   const components = [];
 
@@ -68,7 +88,11 @@ export const NftCard = ({
     if (renderOrder[i] === "Image") {
       components.push(
         <div key={i}>
-          <ImageCard value={token?.metadata?.image} prettyLoad={prettyLoad?.values?.image} />
+          <ImageCard
+            value={token?.metadata?.image}
+            prettyLoad={prettyLoad?.values?.image}
+            showDescriptor={showComponentDescriptors.image}
+          />
         </div>,
       );
     }
@@ -76,7 +100,11 @@ export const NftCard = ({
     if (renderOrder[i] === "Name") {
       components.push(
         <div key={i}>
-          <NameCard value={token?.metadata?.name} prettyLoad={prettyLoad?.values?.name} />
+          <NameCard
+            value={token?.metadata?.name}
+            prettyLoad={prettyLoad?.values?.name}
+            showDescriptor={showComponentDescriptors.name}
+          />
         </div>,
       );
     }
@@ -84,7 +112,11 @@ export const NftCard = ({
     if (renderOrder[i] === "Description") {
       components.push(
         <div key={i}>
-          <DescriptionCard value={token?.metadata?.description} prettyLoad={prettyLoad?.values?.description} />
+          <DescriptionCard
+            value={token?.metadata?.description}
+            prettyLoad={prettyLoad?.values?.description}
+            showDescriptor={showComponentDescriptors.description}
+          />
         </div>,
       );
     }
@@ -92,7 +124,11 @@ export const NftCard = ({
     if (renderOrder[i] === "Attributes") {
       components.push(
         <div key={i}>
-          <AttributesCard value={token?.metadata?.attributes} prettyLoad={prettyLoad?.values?.attributes} />
+          <AttributesCard
+            value={token?.metadata?.attributes}
+            prettyLoad={prettyLoad?.values?.attributes}
+            showDescriptor={showComponentDescriptors.attributes}
+          />
         </div>,
       );
     }
@@ -100,7 +136,7 @@ export const NftCard = ({
     if (renderOrder[i] === "Address") {
       components.push(
         <div key={i}>
-          <AddressCard value={token?.contract?.address} />
+          <AddressCard value={token?.contract?.address} showDescriptor={showComponentDescriptors.address} />
         </div>,
       );
     }
@@ -108,7 +144,11 @@ export const NftCard = ({
     if (renderOrder[i] === "CollectionName") {
       components.push(
         <div key={i}>
-          <CollectionNameCard value={token?.collectionName} prettyLoad={prettyLoad?.values?.collectionName} />
+          <CollectionNameCard
+            value={token?.collectionName}
+            prettyLoad={prettyLoad?.values?.collectionName}
+            showDescriptor={showComponentDescriptors.collectionName}
+          />
         </div>,
       );
     }
@@ -116,7 +156,11 @@ export const NftCard = ({
     if (renderOrder[i] === "CollectionSymbol") {
       components.push(
         <div key={i}>
-          <CollectionSymbolCard value={token?.collectionSymbol} prettyLoad={prettyLoad?.values?.collectionSymbol} />
+          <CollectionSymbolCard
+            value={token?.collectionSymbol}
+            prettyLoad={prettyLoad?.values?.collectionSymbol}
+            showDescriptor={showComponentDescriptors.collectionSymbol}
+          />
         </div>,
       );
     }
@@ -124,7 +168,12 @@ export const NftCard = ({
     if (renderOrder[i] === "Id") {
       components.push(
         <div key={i}>
-          <IdCard value={token?.id} uri={token?.uri} prettyLoad={prettyLoad?.values?.id} />
+          <IdCard
+            value={token?.id}
+            uri={token?.uri}
+            prettyLoad={prettyLoad?.values?.id}
+            showDescriptor={showComponentDescriptors.id}
+          />
         </div>,
       );
     }

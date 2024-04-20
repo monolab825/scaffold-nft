@@ -5,13 +5,20 @@ type Props = {
   alt?: string;
   prettyLoad?: boolean;
   size?: "base";
+  showDescriptor?: boolean;
 };
 
 const sizeMap = {
   base: "w-96",
 };
 
-export const ImageCard = ({ value, alt = "Test", prettyLoad = false, size = "base" }: Props) => {
+export const ImageCard = ({
+  value,
+  alt = "Test",
+  prettyLoad = false,
+  size = "base",
+  showDescriptor = false,
+}: Props) => {
   const component = <img src={value} alt={alt} className={`bg-base-300 ${sizeMap[size]}`} />;
 
   let output;
@@ -24,7 +31,7 @@ export const ImageCard = ({ value, alt = "Test", prettyLoad = false, size = "bas
 
   return (
     <div className="p-2 bg-base-200 rounded-lg m-2">
-      <p className="text-center">Image</p>
+      {showDescriptor ? <p className="text-center">Image</p> : <></>}
 
       {output}
     </div>

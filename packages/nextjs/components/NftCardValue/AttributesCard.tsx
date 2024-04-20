@@ -3,9 +3,10 @@
 type Props = {
   value?: { trait_type: string; value: string }[];
   prettyLoad?: boolean;
+  showDescriptor?: boolean;
 };
 
-export const AttributesCard = ({ value, prettyLoad = false }: Props) => {
+export const AttributesCard = ({ value, prettyLoad = false, showDescriptor }: Props) => {
   const components = value?.map((attribute: any, index: number) => {
     return (
       <div key={index} className="bg-base-100 w-[115px] text-center m-2 rounded-lg">
@@ -25,7 +26,7 @@ export const AttributesCard = ({ value, prettyLoad = false }: Props) => {
 
   return (
     <div className={`m-2 bg-base-200 rounded-lg p-2 max-w-3xl`}>
-      <p className="text-center">Attributes</p>
+      {showDescriptor ? <p className="text-center">Attributes</p> : <></>}
       <div className="flex flex-wrap justify-center">{output}</div>
     </div>
   );
