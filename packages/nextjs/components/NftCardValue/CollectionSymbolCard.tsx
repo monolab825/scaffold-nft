@@ -10,13 +10,13 @@ const styleMap = {
   rounded: "rounded-lg",
 };
 
-export const NameCard = ({ value, prettyLoad = false, style = "rounded" }: Props) => {
+export const CollectionSymbolCard = ({ value, prettyLoad = false, style = "rounded" }: Props) => {
   const component = <p className={`text-4xl text-center`}>{value}</p>;
 
   let output;
 
   if (prettyLoad) {
-    output = value ? component : <p>Loading Name...</p>;
+    output = value ? component : <p>Loading Collection Symbol...</p>;
   } else {
     output = component;
   }

@@ -5,16 +5,15 @@ import { NftCard } from "~~/components/NftCard";
 import { useToken } from "~~/hooks/useToken";
 
 const Home: NextPage = () => {
-  const token = useToken(BigInt(1), "nftstorage");
+  const token = useToken(BigInt(4), "nftstorage");
 
   return (
     <>
-      <div className="flex items-center flex-col flex-grow pt-10">
-        <NftCard
-          token={token}
-          prettyLoad={{ card: true, values: { image: true, name: true, description: true, attributes: true } }}
-        />
-      </div>
+      <NftCard
+        token={token}
+        prettyLoad={{ card: true, values: { image: true, name: true, description: true, attributes: true } }}
+        renderOrder={["Image", "Name", "Description", "Attributes", "CollectionName", "CollectionSymbol", "Address"]}
+      />
 
       {/* <button
         onClick={async () => {

@@ -12,7 +12,7 @@ const sizeMap = {
 };
 
 export const ImageCard = ({ value, alt = "Test", prettyLoad = false, size = "base" }: Props) => {
-  const component = <img src={value} alt={alt} className={`rounded-lg ${sizeMap[size]}`} />;
+  const component = <img src={value} alt={alt} className={`bg-base-300 ${sizeMap[size]}`} />;
 
   let output;
 
@@ -22,5 +22,5 @@ export const ImageCard = ({ value, alt = "Test", prettyLoad = false, size = "bas
     output = component;
   }
 
-  return <>{output}</>;
+  return <div className="p-2 bg-base-200 rounded-lg m-2">{output}</div>;
 };

@@ -6,24 +6,22 @@ type Props = {
 };
 
 export const AttributesCard = ({ value, prettyLoad = false }: Props) => {
-  const allAttributes = value?.map((attribute: any, index: number) => {
+  const components = value?.map((attribute: any, index: number) => {
     return (
-      <div key={index} className="flex rounded-lg bg-base-100 p-2 space-x-1">
-        <p className="rounded-lg bg-base-200 text-xl p-1">{attribute["trait_type"]}:</p>
-        <p className="rounded-lg bg-base-200 text-xl p-1">{attribute["value"]}</p>
+      <div key={index} className="bg-base-100 w-[115px] text-center m-2 rounded-lg">
+        <p className="text-sm">{attribute["trait_type"]}</p>
+        <p className="text-lg">{attribute["value"]}</p>
       </div>
     );
   });
 
-  const component = <div className="flex flex-wrap items-center justify-center">{allAttributes}</div>;
-
   let output;
 
   if (prettyLoad) {
-    output = allAttributes ? component : <p>Loading Attributes...</p>;
+    output = value ? components : <p>Loading Attributes...</p>;
   } else {
-    output = component;
+    output = components;
   }
 
-  return <>{output}</>;
+  return <div className="flex flex-wrap justify-center bg-base-200 rounded-lg m-2 max-w-3xl">{output}</div>;
 };

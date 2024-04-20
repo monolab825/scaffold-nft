@@ -1,5 +1,7 @@
 "use client";
 
+import { Address } from "../scaffold-eth";
+
 type Props = {
   value?: string;
   prettyLoad?: boolean;
@@ -10,8 +12,8 @@ const styleMap = {
   rounded: "rounded-lg",
 };
 
-export const NameCard = ({ value, prettyLoad = false, style = "rounded" }: Props) => {
-  const component = <p className={`text-4xl text-center`}>{value}</p>;
+export const AddressCard = ({ value, prettyLoad = false, style = "rounded" }: Props) => {
+  const component = <Address address={value} />;
 
   let output;
 

@@ -1,16 +1,24 @@
 "use client";
 
+import { AddressCard } from "./NftCardValue/AddressCard";
 import { AttributesCard } from "./NftCardValue/AttributesCard";
+import { CollectionNameCard } from "./NftCardValue/CollectionNameCard";
+import { CollectionSymbolCard } from "./NftCardValue/CollectionSymbolCard";
 import { DescriptionCard } from "./NftCardValue/DescriptionCard";
 import { ImageCard } from "./NftCardValue/ImageCard";
 import { NameCard } from "./NftCardValue/NameCard";
 
 type Props = {
   token?: {
-    name?: string;
-    description?: string;
-    image?: string;
-    attributes?: any[];
+    contract?: any;
+    collectionName?: string;
+    collectionSymbol?: string;
+    metadata?: {
+      name?: string;
+      description?: string;
+      image?: string;
+      attributes?: any[];
+    };
   };
   prettyLoad?: {
     card?: boolean;
@@ -21,7 +29,7 @@ type Props = {
       attributes?: boolean;
     };
   };
-  renderOrder?: ("Image" | "Name" | "Description" | "Attributes")[];
+  renderOrder?: ("Image" | "Name" | "Description" | "Attributes" | "Address" | "CollectionName" | "CollectionSymbol")[];
   size?: "base";
 };
 
@@ -29,14 +37,14 @@ const loadingSizeMap = {
   base: "text-8xl",
 };
 
-const sizeMap = {
-  base: "w-[700px] h-[700px]",
-};
+// const sizeMap = {
+//   base: "w-[700px] h-[700px]",
+// };
 
 export const NftCard = ({
   token,
   prettyLoad,
-  renderOrder = ["Image", "Name", "Description", "Attributes"],
+  renderOrder = ["Image", "Name", "Description", "Attributes", "CollectionName", "CollectionSymbol", "Address"],
   size = "base",
 }: Props) => {
   const components = [];
@@ -45,7 +53,7 @@ export const NftCard = ({
     if (renderOrder[i] === "Image") {
       components.push(
         <div key={i}>
-          <ImageCard value={token?.image} prettyLoad={prettyLoad?.values?.image} />
+          <ImageCard value={token?.metadata?.image} prettyLoad={prettyLoad?.values?.image} />
         </div>,
       );
     }
@@ -53,7 +61,7 @@ export const NftCard = ({
     if (renderOrder[i] === "Name") {
       components.push(
         <div key={i}>
-          <NameCard value={token?.name} prettyLoad={prettyLoad?.values?.name} />
+          <NameCard value={token?.metadata?.name} prettyLoad={prettyLoad?.values?.name} />
         </div>,
       );
     }
@@ -61,7 +69,7 @@ export const NftCard = ({
     if (renderOrder[i] === "Description") {
       components.push(
         <div key={i}>
-          <DescriptionCard value={token?.description} prettyLoad={prettyLoad?.values?.description} />
+          <DescriptionCard value={token?.metadata?.description} prettyLoad={prettyLoad?.values?.description} />
         </div>,
       );
     }
@@ -69,7 +77,31 @@ export const NftCard = ({
     if (renderOrder[i] === "Attributes") {
       components.push(
         <div key={i}>
-          <AttributesCard value={token?.attributes} prettyLoad={prettyLoad?.values?.attributes} />
+          <AttributesCard value={token?.metadata?.attributes} prettyLoad={prettyLoad?.values?.attributes} />
+        </div>,
+      );
+    }
+
+    if (renderOrder[i] === "Address") {
+      components.push(
+        <div key={i}>
+          <AddressCard value={token?.contract?.address} prettyLoad={prettyLoad?.values?.attributes} />
+        </div>,
+      );
+    }
+
+    if (renderOrder[i] === "CollectionName") {
+      components.push(
+        <div key={i}>
+          <CollectionNameCard value={token?.collectionName} prettyLoad={prettyLoad?.values?.name} />
+        </div>,
+      );
+    }
+
+    if (renderOrder[i] === "CollectionSymbol") {
+      components.push(
+        <div key={i}>
+          <CollectionSymbolCard value={token?.collectionSymbol} prettyLoad={prettyLoad?.values?.name} />
         </div>,
       );
     }
@@ -78,7 +110,12 @@ export const NftCard = ({
   let cardContent;
 
   if (prettyLoad?.card) {
-    if (token?.image === undefined || token?.name === undefined || token?.description === undefined) {
+    if (
+      token?.metadata?.image === undefined ||
+      token?.metadata?.name === undefined ||
+      token?.metadata?.description === undefined ||
+      token?.metadata?.attributes === undefined
+    ) {
       cardContent = <p className={`${loadingSizeMap[size]}`}>Loading NFT...</p>;
     } else {
       cardContent = components;
@@ -87,9 +124,13 @@ export const NftCard = ({
     cardContent = components;
   }
 
-  return (
-    <div className={`flex flex-col items-center justify-center rounded-2xl bg-base-300 ${sizeMap[size]}`}>
-      {cardContent}
-    </div>
-  );
+  return <div className="flex flex-col items-center bg-base-300">{cardContent}</div>;
+
+  //   return (
+  //     <div
+  //       className={`flex flex-col items-center align-top justify-center rounded-2xl bg-base-300 ${/*sizeMap[size]*/ ""}`}
+  //     >
+  //       {cardContent}
+  //     </div>
+  //   );
 };
