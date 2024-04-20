@@ -16,10 +16,16 @@ export const CollectionSymbolCard = ({ value, prettyLoad = false, style = "round
   let output;
 
   if (prettyLoad) {
-    output = value ? component : <p>Loading Collection Symbol...</p>;
+    output = value ? component : <p>Loading...</p>;
   } else {
     output = component;
   }
 
-  return <div className={`bg-base-200 ${styleMap[style]} p-2 m-2 max-w-3xl`}>{output}</div>;
+  return (
+    <div className={`bg-base-200 ${styleMap[style]} p-2 m-2 max-w-3xl`}>
+      <p className="text-center">Collection Symbol</p>
+
+      {output}
+    </div>
+  );
 };

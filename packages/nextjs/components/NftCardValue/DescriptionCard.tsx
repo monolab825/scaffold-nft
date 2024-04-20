@@ -16,10 +16,15 @@ export const DescriptionCard = ({ value, prettyLoad = false, style = "rounded" }
   let output;
 
   if (prettyLoad) {
-    output = value ? component : <p>Loading Description...</p>;
+    output = value ? component : <p>Loading...</p>;
   } else {
     output = component;
   }
 
-  return <div className={`m-2 bg-base-200 ${styleMap[style]} p-2 max-w-3xl`}>{output}</div>;
+  return (
+    <div className={`m-2 bg-base-200 ${styleMap[style]} p-2 max-w-3xl`}>
+      <p className="text-center">Description</p>
+      {output}
+    </div>
+  );
 };

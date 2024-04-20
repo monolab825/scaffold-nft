@@ -23,10 +23,15 @@ export const IdCard = ({ value, uri, prettyLoad = false, style = "rounded" }: Pr
   let output;
 
   if (prettyLoad) {
-    output = value ? component : <p>Loading Token Id...</p>;
+    output = value ? component : <p>Loading...</p>;
   } else {
     output = component;
   }
 
-  return <div className={`bg-base-200 ${styleMap[style]} p-2 m-2 max-w-3xl`}>{output}</div>;
+  return (
+    <div className={`bg-base-200 ${styleMap[style]} p-2 m-2 max-w-3xl`}>
+      <p className="text-center">Token Id</p>
+      {output}
+    </div>
+  );
 };

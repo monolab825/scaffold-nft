@@ -18,10 +18,15 @@ export const AttributesCard = ({ value, prettyLoad = false }: Props) => {
   let output;
 
   if (prettyLoad) {
-    output = value ? components : <p>Loading Attributes...</p>;
+    output = value ? components : <p>Loading</p>;
   } else {
     output = components;
   }
 
-  return <div className="flex flex-wrap justify-center bg-base-200 rounded-lg m-2 max-w-3xl">{output}</div>;
+  return (
+    <div className={`m-2 bg-base-200 rounded-lg p-2 max-w-3xl`}>
+      <p className="text-center">Attributes</p>
+      <div className="flex flex-wrap justify-center">{output}</div>
+    </div>
+  );
 };

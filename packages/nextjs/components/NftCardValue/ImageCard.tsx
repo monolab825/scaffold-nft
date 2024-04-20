@@ -17,10 +17,16 @@ export const ImageCard = ({ value, alt = "Test", prettyLoad = false, size = "bas
   let output;
 
   if (prettyLoad) {
-    output = value ? component : <p>Loading Image...</p>;
+    output = value ? component : <p>Loading....</p>;
   } else {
     output = component;
   }
 
-  return <div className="p-2 bg-base-200 rounded-lg m-2">{output}</div>;
+  return (
+    <div className="p-2 bg-base-200 rounded-lg m-2">
+      <p className="text-center">Image</p>
+
+      {output}
+    </div>
+  );
 };
