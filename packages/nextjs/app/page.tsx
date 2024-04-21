@@ -20,18 +20,20 @@ const Home: NextPage = () => {
             attributes: true,
             collectionName: true,
             collectionSymbol: true,
+            collectionDetails: { card: true },
             id: true,
           },
         }}
         renderOrder={[
-          "Image",
-          "Name",
-          "Description",
-          "Attributes",
-          "CollectionName",
-          "CollectionSymbol",
-          "Id",
-          "Address",
+          // "Image",
+          // "Name",
+          // "Description",
+          // "Attributes",
+          // "Id",
+          // "CollectionName",
+          // "CollectionSymbol",
+          "CollectionDetails",
+          // "Address",
         ]}
       />
 

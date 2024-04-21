@@ -5,13 +5,22 @@ type Props = {
   prettyLoad?: boolean;
   style?: "rounded";
   showDescriptor?: boolean;
+  descriptorText?: string;
+  bgColor?: string;
 };
 
 const styleMap = {
   rounded: "rounded-lg",
 };
 
-export const CollectionSymbolCard = ({ value, prettyLoad = false, style = "rounded", showDescriptor }: Props) => {
+export const CollectionSymbolCard = ({
+  value,
+  prettyLoad = false,
+  style = "rounded",
+  showDescriptor,
+  descriptorText = "Collection Symbol",
+  bgColor = "bg-base-200",
+}: Props) => {
   const component = <p className={`text-4xl text-center`}>{value}</p>;
 
   let output;
@@ -23,8 +32,8 @@ export const CollectionSymbolCard = ({ value, prettyLoad = false, style = "round
   }
 
   return (
-    <div className={`bg-base-200 ${styleMap[style]} p-2 m-2 max-w-3xl`}>
-      {showDescriptor ? <p className="text-center">Collection Symbol</p> : <></>}
+    <div className={`${bgColor} ${styleMap[style]} p-2 m-2 max-w-3xl`}>
+      {showDescriptor ? <p className="text-center">{descriptorText}</p> : <></>}
 
       {output}
     </div>

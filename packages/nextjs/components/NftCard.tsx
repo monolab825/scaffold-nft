@@ -1,5 +1,6 @@
 "use client";
 
+import { CollectionDetails } from "./CollectionDetails";
 import { AddressCard } from "./NftCardValue/AddressCard";
 import { AttributesCard } from "./NftCardValue/AttributesCard";
 import { CollectionNameCard } from "./NftCardValue/CollectionNameCard";
@@ -8,21 +9,10 @@ import { DescriptionCard } from "./NftCardValue/DescriptionCard";
 import { IdCard } from "./NftCardValue/IdCard";
 import { ImageCard } from "./NftCardValue/ImageCard";
 import { NameCard } from "./NftCardValue/NameCard";
+import { ScaffoldToken } from "~~/types/ScaffoldToken";
 
 type Props = {
-  token?: {
-    contract?: any;
-    collectionName?: string;
-    collectionSymbol?: string;
-    id?: bigint;
-    uri?: string;
-    metadata?: {
-      name?: string;
-      description?: string;
-      image?: string;
-      attributes?: any[];
-    };
-  };
+  token?: ScaffoldToken;
   prettyLoad?: {
     card?: boolean;
     values?: {
@@ -32,6 +22,13 @@ type Props = {
       attributes?: boolean;
       collectionName?: boolean;
       collectionSymbol?: boolean;
+      collectionDetails?: {
+        card?: boolean;
+        components?: {
+          collectionName?: boolean;
+          collectionSymbol?: boolean;
+        };
+      };
       id?: boolean;
     };
   };
@@ -43,6 +40,7 @@ type Props = {
     | "Address"
     | "CollectionName"
     | "CollectionSymbol"
+    | "CollectionDetails"
     | "Id"
   )[];
   size?: "base";
@@ -54,6 +52,14 @@ type Props = {
     address?: boolean;
     collectionName?: boolean;
     collectionSymbol?: boolean;
+    collectionDetails?: {
+      detailsDescriptor?: boolean;
+      componentsDescriptor?: {
+        address?: boolean;
+        collectionName?: boolean;
+        collectionSymbol?: boolean;
+      };
+    };
     id?: boolean;
   };
 };
@@ -79,6 +85,14 @@ export const NftCard = ({
     address: true,
     collectionName: true,
     collectionSymbol: true,
+    collectionDetails: {
+      detailsDescriptor: true,
+      componentsDescriptor: {
+        address: true,
+        collectionName: true,
+        collectionSymbol: true,
+      },
+    },
     id: true,
   },
 }: Props) => {
@@ -91,7 +105,7 @@ export const NftCard = ({
           <ImageCard
             value={token?.metadata?.image}
             prettyLoad={prettyLoad?.values?.image}
-            showDescriptor={showComponentDescriptors.image}
+            showDescriptor={showComponentDescriptors?.image}
           />
         </div>,
       );
@@ -103,7 +117,7 @@ export const NftCard = ({
           <NameCard
             value={token?.metadata?.name}
             prettyLoad={prettyLoad?.values?.name}
-            showDescriptor={showComponentDescriptors.name}
+            showDescriptor={showComponentDescriptors?.name}
           />
         </div>,
       );
@@ -115,7 +129,7 @@ export const NftCard = ({
           <DescriptionCard
             value={token?.metadata?.description}
             prettyLoad={prettyLoad?.values?.description}
-            showDescriptor={showComponentDescriptors.description}
+            showDescriptor={showComponentDescriptors?.description}
           />
         </div>,
       );
@@ -127,39 +141,7 @@ export const NftCard = ({
           <AttributesCard
             value={token?.metadata?.attributes}
             prettyLoad={prettyLoad?.values?.attributes}
-            showDescriptor={showComponentDescriptors.attributes}
-          />
-        </div>,
-      );
-    }
-
-    if (renderOrder[i] === "Address") {
-      components.push(
-        <div key={i}>
-          <AddressCard value={token?.contract?.address} showDescriptor={showComponentDescriptors.address} />
-        </div>,
-      );
-    }
-
-    if (renderOrder[i] === "CollectionName") {
-      components.push(
-        <div key={i}>
-          <CollectionNameCard
-            value={token?.collectionName}
-            prettyLoad={prettyLoad?.values?.collectionName}
-            showDescriptor={showComponentDescriptors.collectionName}
-          />
-        </div>,
-      );
-    }
-
-    if (renderOrder[i] === "CollectionSymbol") {
-      components.push(
-        <div key={i}>
-          <CollectionSymbolCard
-            value={token?.collectionSymbol}
-            prettyLoad={prettyLoad?.values?.collectionSymbol}
-            showDescriptor={showComponentDescriptors.collectionSymbol}
+            showDescriptor={showComponentDescriptors?.attributes}
           />
         </div>,
       );
@@ -172,7 +154,51 @@ export const NftCard = ({
             value={token?.id}
             uri={token?.uri}
             prettyLoad={prettyLoad?.values?.id}
-            showDescriptor={showComponentDescriptors.id}
+            showDescriptor={showComponentDescriptors?.id}
+          />
+        </div>,
+      );
+    }
+
+    if (renderOrder[i] === "CollectionDetails") {
+      components.push(
+        <div key={i}>
+          <CollectionDetails
+            token={token}
+            prettyLoad={prettyLoad?.values?.collectionDetails}
+            showDescriptors={showComponentDescriptors?.collectionDetails}
+          />
+        </div>,
+      );
+    }
+
+    if (renderOrder[i] === "Address") {
+      components.push(
+        <div key={i}>
+          <AddressCard value={token?.contract?.address} showDescriptor={showComponentDescriptors?.address} />
+        </div>,
+      );
+    }
+
+    if (renderOrder[i] === "CollectionName") {
+      components.push(
+        <div key={i}>
+          <CollectionNameCard
+            value={token?.collectionName}
+            prettyLoad={prettyLoad?.values?.collectionName}
+            showDescriptor={showComponentDescriptors?.collectionName}
+          />
+        </div>,
+      );
+    }
+
+    if (renderOrder[i] === "CollectionSymbol") {
+      components.push(
+        <div key={i}>
+          <CollectionSymbolCard
+            value={token?.collectionSymbol}
+            prettyLoad={prettyLoad?.values?.collectionSymbol}
+            showDescriptor={showComponentDescriptors?.collectionSymbol}
           />
         </div>,
       );
