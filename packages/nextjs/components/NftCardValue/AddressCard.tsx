@@ -4,7 +4,6 @@ import { Address } from "../scaffold-eth";
 
 export type AddressCardProps = {
   value?: string;
-  prettyLoad?: boolean;
   style?: "rounded";
   showDescriptor?: boolean;
   descriptorText?: string;

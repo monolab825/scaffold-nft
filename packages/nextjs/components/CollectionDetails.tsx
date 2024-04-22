@@ -51,7 +51,7 @@ export const CollectionDetails = ({
   prettyLoad,
   style = "rounded",
   showDescriptors,
-  showDescriptor = true,
+  showDescriptor,
   AddressCard = AddressCardComponent,
   CollectionNameCard = CollectionNameCardComponent,
   CollectionSymbolCard = CollectionSymbolCardComponent,

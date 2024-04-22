@@ -17,6 +17,10 @@ export enum CollectionLoadType {
   Together,
 }
 
+const loadingSizeMap = {
+  base: "text-8xl",
+};
+
 type Props = {
   token?: ScaffoldToken;
   NameCard?: ComponentType<NameCardProps>;
@@ -30,6 +34,7 @@ type Props = {
   CollectionDetailsCard?: ComponentType<CollectionDetailsProps>;
   collectionDataLoadType?: CollectionLoadType;
   size?: "base";
+  prettyLoad?: boolean;
 
   // components?: {
   //   value?: any;
@@ -84,10 +89,6 @@ type Props = {
   // };
 };
 
-// const loadingSizeMap = {
-//   base: "text-8xl",
-// };
-
 // const sizeMap = {
 //   base: "w-[700px] h-[700px]",
 // };
@@ -140,6 +141,8 @@ export const NftCard = ({
   IdCard = IdCardComponent,
   CollectionDetailsCard = CollectionDetailsCardComponent,
   collectionDataLoadType = CollectionLoadType.Together,
+  prettyLoad = true,
+  size = "base",
 }: // components = [
 //   {
 //     value: token?.metadata?.name,
@@ -159,7 +162,6 @@ export const NftCard = ({
 // ],
 // prettyLoad,
 // renderOrder = ["Image", "Name", "Description", "Attributes", "CollectionName", "CollectionSymbol", "Id", "Address"],
-// size = "base",
 // showComponentDescriptors = {
 //   image: false,
 //   name: true,
@@ -290,53 +292,53 @@ Props) => {
   //   }
   // }
 
-  // let cardContent: any;
-
-  // if (prettyLoad?.card) {
-  //   if (
-  //     token?.metadata?.image === undefined ||
-  //     token?.metadata?.name === undefined ||
-  //     token?.metadata?.description === undefined ||
-  //     token?.metadata?.attributes === undefined ||
-  //     token?.collectionName === undefined ||
-  //     token?.collectionSymbol === undefined ||
-  //     token?.contract === undefined ||
-  //     token?.id === undefined
-  //   ) {
-  //     cardContent = <p className={`${loadingSizeMap[size]}`}>Loading NFT...</p>;
-  //   } else {
-  //     cardContent = renderedComponents;
-  //   }
-  // } else {
-  //   cardContent = renderedComponents;
-  // }
-
   let collectionOutput;
 
   if (collectionDataLoadType === CollectionLoadType.Together) {
-    collectionOutput = <CollectionDetailsCard token={token} />;
+    collectionOutput = <CollectionDetailsCard token={token} showDescriptor={true} />;
   } else if (collectionDataLoadType === CollectionLoadType.Individual) {
     collectionOutput = (
       <>
-        <AddressCard value={token?.contract?.address} />
-        <CollectionNameCard value={token?.collectionName} />
-        <CollectionSymbolCard value={token?.collectionSymbol} />
+        <AddressCard value={token?.contract?.address} showDescriptor={true} />
+        <CollectionNameCard value={token?.collectionName} showDescriptor={true} />
+        <CollectionSymbolCard value={token?.collectionSymbol} showDescriptor={true} />
       </>
     );
   }
 
-  return (
-    <div className="flex flex-col items-center bg-base-300">
-      {/* {nameCard} */}
-      <NameCard value={token?.metadata?.name} />
-      <ImageCard value={token?.metadata?.image} />
-      <DescriptionCard value={token?.metadata?.description} />
-      <AttributesCard value={token?.metadata?.attributes} />
-      <IdCard value={token?.id} />
+  const componentsOutput = (
+    <>
+      <NameCard value={token?.metadata?.name} showDescriptor={true} />
+      <ImageCard value={token?.metadata?.image} showDescriptor={true} />
+      <DescriptionCard value={token?.metadata?.description} showDescriptor={true} />
+      <AttributesCard value={token?.metadata?.attributes} showDescriptor={true} />
+      <IdCard value={token?.id} showDescriptor={true} />
       {collectionOutput}
-      {/* {cardContent} */}
-    </div>
+    </>
   );
+
+  let cardContent: any;
+
+  if (prettyLoad) {
+    if (
+      token?.metadata?.image === undefined ||
+      token?.metadata?.name === undefined ||
+      token?.metadata?.description === undefined ||
+      token?.metadata?.attributes === undefined ||
+      token?.collectionName === undefined ||
+      token?.collectionSymbol === undefined ||
+      token?.contract === undefined ||
+      token?.id === undefined
+    ) {
+      cardContent = <p className={`text-center ${loadingSizeMap[size]}`}>Loading NFT...</p>;
+    } else {
+      cardContent = componentsOutput;
+    }
+  } else {
+    cardContent = componentsOutput;
+  }
+
+  return <div className="flex flex-col items-center bg-base-300 m-4">{cardContent}</div>;
 
   //   return (
   //     <div
