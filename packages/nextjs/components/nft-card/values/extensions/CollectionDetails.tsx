@@ -1,13 +1,13 @@
 "use client";
 
 import { ComponentType } from "react";
-import { AddressCard } from "./NftCardValue/AddressCard";
-import { AddressCardProps } from "./NftCardValue/AddressCard";
-import { CollectionNameCard } from "./NftCardValue/CollectionNameCard";
-import { CollectionNameCardProps } from "./NftCardValue/CollectionNameCard";
-import { CollectionSymbolCard } from "./NftCardValue/CollectionSymbolCard";
-import { CollectionSymbolCardProps } from "./NftCardValue/CollectionSymbolCard";
-import { Style, styleMap } from "./NftCardValue/Types";
+import { AddressCard } from "../AddressCard";
+import { AddressCardProps } from "../AddressCard";
+import { CollectionNameCard } from "../CollectionNameCard";
+import { CollectionNameCardProps } from "../CollectionNameCard";
+import { CollectionSymbolCard } from "../CollectionSymbolCard";
+import { CollectionSymbolCardProps } from "../CollectionSymbolCard";
+import { Style, styleMap } from "../Types";
 import { ScaffoldToken } from "~~/types/ScaffoldToken";
 
 export type CollectionDetailsProps = {

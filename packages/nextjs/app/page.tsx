@@ -1,7 +1,7 @@
 "use client";
 
 import type { NextPage } from "next";
-import { NftCard } from "~~/components/NftCard";
+import { NftCard } from "~~/components/nft-card/NftCard";
 // import { NameCard, NameCardProps } from "~~/components/NftCardValue/NameCard";
 import { useToken } from "~~/hooks/useToken";
 

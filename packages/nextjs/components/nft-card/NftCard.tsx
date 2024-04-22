@@ -1,22 +1,17 @@
 "use client";
 
 import { ComponentType } from "react";
-import { CollectionDetails, CollectionDetailsProps } from "./CollectionDetails";
-import { AddressCard, AddressCardProps } from "./NftCardValue/AddressCard";
-import { AttributesCard, AttributesCardProps } from "./NftCardValue/AttributesCard";
-import { CollectionNameCard, CollectionNameCardProps } from "./NftCardValue/CollectionNameCard";
-import { CollectionSymbolCard, CollectionSymbolCardProps } from "./NftCardValue/CollectionSymbolCard";
-import { DescriptionCard, DescriptionCardProps } from "./NftCardValue/DescriptionCard";
-import { IdCard, IdCardProps } from "./NftCardValue/IdCard";
-import { ImageCard, ImageCardProps } from "./NftCardValue/ImageCard";
-import { NameCard, NameCardProps } from "./NftCardValue/NameCard";
-import { Style, styleMap } from "./NftCardValue/Types";
+import { AddressCard, AddressCardProps } from "./values/AddressCard";
+import { AttributesCard, AttributesCardProps } from "./values/AttributesCard";
+import { CollectionNameCard, CollectionNameCardProps } from "./values/CollectionNameCard";
+import { CollectionSymbolCard, CollectionSymbolCardProps } from "./values/CollectionSymbolCard";
+import { DescriptionCard, DescriptionCardProps } from "./values/DescriptionCard";
+import { IdCard, IdCardProps } from "./values/IdCard";
+import { ImageCard, ImageCardProps } from "./values/ImageCard";
+import { NameCard, NameCardProps } from "./values/NameCard";
+import { Style, styleMap } from "./values/Types";
+import { CollectionDetails, CollectionDetailsProps } from "./values/extensions/CollectionDetails";
 import { ScaffoldToken } from "~~/types/ScaffoldToken";
-
-export enum CollectionLoadType {
-  Individual,
-  Together,
-}
 
 const loadingSizeMap = {
   base: "text-8xl",
