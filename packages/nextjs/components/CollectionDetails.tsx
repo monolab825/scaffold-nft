@@ -15,7 +15,7 @@ export type CollectionDetailsProps = {
   prettyLoad?: boolean;
   style?: "rounded";
   showDescriptor?: boolean;
-
+  renderOrder?: ("Address" | "CollectionName" | "CollectionSymbol")[];
   AddressCard?: ComponentType<AddressCardProps>;
   CollectionNameCard?: ComponentType<CollectionNameCardProps>;
   CollectionSymbolCard?: ComponentType<CollectionSymbolCardProps>;
@@ -52,16 +52,53 @@ export const CollectionDetails = ({
   style = "rounded",
   showDescriptors,
   showDescriptor,
+
+  renderOrder = ["Address", "CollectionName", "CollectionSymbol"],
   AddressCard = AddressCardComponent,
   CollectionNameCard = CollectionNameCardComponent,
   CollectionSymbolCard = CollectionSymbolCardComponent,
 }: CollectionDetailsProps) => {
+  const renderedComponents: any = [];
+
+  for (let i = 0; i < renderOrder.length; i++) {
+    if (renderOrder[i] === "Address") {
+      renderedComponents.push(
+        <AddressCard
+          value={token?.contract?.address}
+          showDescriptor={showDescriptors?.componentsDescriptor?.address}
+          bgColor="bg-base-100"
+        />,
+      );
+    } else if (renderOrder[i] === "CollectionName") {
+      renderedComponents.push(
+        <CollectionNameCard
+          value={token?.collectionName}
+          // prettyLoad={prettyLoad?.components?.collectionName}
+          showDescriptor={showDescriptors?.componentsDescriptor?.collectionName}
+          descriptorText="Name"
+          bgColor="bg-base-100"
+        />,
+      );
+    } else if (renderOrder[i] === "CollectionSymbol") {
+      renderedComponents.push(
+        <CollectionSymbolCard
+          value={token?.collectionSymbol}
+          // prettyLoad={prettyLoad?.components?.collectionSymbol}
+          showDescriptor={showDescriptors?.componentsDescriptor?.collectionSymbol}
+          descriptorText="Symbol"
+          bgColor="bg-base-100"
+        />,
+      );
+    }
+  }
+
   const component = (
     <>
       {showDescriptor ? <p className="text-center">Collection Details</p> : <></>}
 
       <div className="flex flex-wrap justify-center">
-        <AddressCard
+        {renderedComponents}
+        {/* <AddressCard
           value={token?.contract?.address}
           showDescriptor={showDescriptors?.componentsDescriptor?.address}
           bgColor="bg-base-100"
@@ -79,7 +116,7 @@ export const CollectionDetails = ({
           showDescriptor={showDescriptors?.componentsDescriptor?.collectionSymbol}
           descriptorText="Symbol"
           bgColor="bg-base-100"
-        />
+        /> */}
       </div>
     </>
   );

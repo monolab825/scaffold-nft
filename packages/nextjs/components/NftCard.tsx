@@ -21,6 +21,11 @@ const loadingSizeMap = {
   base: "text-8xl",
 };
 
+const styleMap = {
+  rounded: "rounded-lg",
+  straight: "",
+};
+
 type Props = {
   token?: ScaffoldToken;
   NameCard?: ComponentType<NameCardProps>;
@@ -32,10 +37,21 @@ type Props = {
   CollectionSymbolCard?: ComponentType<CollectionSymbolCardProps>;
   IdCard?: ComponentType<IdCardProps>;
   CollectionDetailsCard?: ComponentType<CollectionDetailsProps>;
-  collectionDataLoadType?: CollectionLoadType;
+
+  renderOrder?: (
+    | "Image"
+    | "Name"
+    | "Description"
+    | "Attributes"
+    | "Address"
+    | "CollectionName"
+    | "CollectionSymbol"
+    | "Id"
+  )[];
+  collectionDataLoadType?: "Together" | "Individual";
   size?: "base";
   prettyLoad?: boolean;
-
+  style?: "rounded" | "straight";
   // components?: {
   //   value?: any;
   //   prettyLoad?: any;
@@ -58,17 +74,7 @@ type Props = {
   // nameCard?: ReactElement<NameCardProps>;
 
   // Imae
-  // renderOrder?: (
-  //   | "Image"
-  //   | "Name"
-  //   | "Description"
-  //   | "Attributes"
-  //   | "Address"
-  //   | "CollectionName"
-  //   | "CollectionSymbol"
-  //   | "CollectionDetails"
-  //   | "Id"
-  // )[];
+
   // showComponentDescriptors?: {
   //   image?: boolean;
   //   name?: boolean;
@@ -140,9 +146,11 @@ export const NftCard = ({
   CollectionSymbolCard = CollectionSymbolCardComponent,
   IdCard = IdCardComponent,
   CollectionDetailsCard = CollectionDetailsCardComponent,
-  collectionDataLoadType = CollectionLoadType.Together,
+  collectionDataLoadType = "Together",
+  renderOrder = ["Image", "Name", "Description", "Attributes", "Address", "CollectionName", "CollectionSymbol", "Id"],
   prettyLoad = true,
   size = "base",
+  style = "rounded",
 }: // components = [
 //   {
 //     value: token?.metadata?.name,
@@ -161,7 +169,6 @@ export const NftCard = ({
 //   },
 // ],
 // prettyLoad,
-// renderOrder = ["Image", "Name", "Description", "Attributes", "CollectionName", "CollectionSymbol", "Id", "Address"],
 // showComponentDescriptors = {
 //   image: false,
 //   name: true,
@@ -181,141 +188,68 @@ export const NftCard = ({
 //   id: true,
 // },
 Props) => {
-  // const renderedComponents: any = [];
+  const renderedComponents: any = [];
+  const collectionComponents: any = [];
 
   //   renderedComponents.push(<div key={99}>{nameCard}</div>);
 
-  // for (let i = 0; i < renderOrder.length; i++) {
-  //   if (renderOrder[i] === "Image") {
-  //     renderedComponents.push(
-  //       <div key={i}>
-  //         <ImageCard
-  //           value={token?.metadata?.image}
-  //           prettyLoad={prettyLoad?.values?.image}
-  //           showDescriptor={showComponentDescriptors?.image}
-  //         />
-  //       </div>,
-  //     );
-  //   }
+  for (let i = 0; i < renderOrder.length; i++) {
+    if (renderOrder[i] === "Image") {
+      renderedComponents.push(<ImageCard key={i} value={token?.metadata?.image} showDescriptor={true} />);
+    }
 
-  //   if (renderOrder[i] === "Name") {
-  //     renderedComponents.push(
-  //       <div key={i}>
-  //         <NameCard
-  //           value={token?.metadata?.name}
-  //           prettyLoad={prettyLoad?.values?.name}
-  //           showDescriptor={showComponentDescriptors?.name}
-  //         />
-  //       </div>,
-  //     );
-  //   }
+    if (renderOrder[i] === "Name") {
+      renderedComponents.push(<NameCard key={i} value={token?.metadata?.name} showDescriptor={true} />);
+    }
 
-  //   if (renderOrder[i] === "Description") {
-  //     renderedComponents.push(
-  //       <div key={i}>
-  //         <DescriptionCard
-  //           value={token?.metadata?.description}
-  //           prettyLoad={prettyLoad?.values?.description}
-  //           showDescriptor={showComponentDescriptors?.description}
-  //         />
-  //       </div>,
-  //     );
-  //   }
+    if (renderOrder[i] === "Description") {
+      renderedComponents.push(<DescriptionCard key={i} value={token?.metadata?.description} showDescriptor={true} />);
+    }
 
-  //   if (renderOrder[i] === "Attributes") {
-  //     renderedComponents.push(
-  //       <div key={i}>
-  //         <AttributesCard
-  //           value={token?.metadata?.attributes}
-  //           prettyLoad={prettyLoad?.values?.attributes}
-  //           showDescriptor={showComponentDescriptors?.attributes}
-  //         />
-  //       </div>,
-  //     );
-  //   }
+    if (renderOrder[i] === "Attributes") {
+      renderedComponents.push(<AttributesCard key={i} value={token?.metadata?.attributes} showDescriptor={true} />);
+    }
 
-  //   if (renderOrder[i] === "Id") {
-  //     renderedComponents.push(
-  //       <div key={i}>
-  //         <IdCard
-  //           value={token?.id}
-  //           uri={token?.uri}
-  //           prettyLoad={prettyLoad?.values?.id}
-  //           showDescriptor={showComponentDescriptors?.id}
-  //         />
-  //       </div>,
-  //     );
-  //   }
+    if (renderOrder[i] === "Id") {
+      renderedComponents.push(<IdCard key={i} value={token?.id} showDescriptor={true} />);
+    }
 
-  //   if (renderOrder[i] === "CollectionDetails") {
-  //     renderedComponents.push(
-  //       <div key={i}>
-  //         <CollectionDetails
-  //           token={token}
-  //           prettyLoad={prettyLoad?.values?.collectionDetails}
-  //           showDescriptors={showComponentDescriptors?.collectionDetails}
-  //         />
-  //       </div>,
-  //     );
-  //   }
-
-  //   if (renderOrder[i] === "Address") {
-  //     renderedComponents.push(
-  //       <div key={i}>
-  //         <AddressCard value={token?.contract?.address} showDescriptor={showComponentDescriptors?.address} />
-  //       </div>,
-  //     );
-  //   }
-
-  //   if (renderOrder[i] === "CollectionName") {
-  //     renderedComponents.push(
-  //       <div key={i}>
-  //         <CollectionNameCard
-  //           value={token?.collectionName}
-  //           prettyLoad={prettyLoad?.values?.collectionName}
-  //           showDescriptor={showComponentDescriptors?.collectionName}
-  //         />
-  //       </div>,
-  //     );
-  //   }
-
-  //   if (renderOrder[i] === "CollectionSymbol") {
-  //     renderedComponents.push(
-  //       <div key={i}>
-  //         <CollectionSymbolCard
-  //           value={token?.collectionSymbol}
-  //           prettyLoad={prettyLoad?.values?.collectionSymbol}
-  //           showDescriptor={showComponentDescriptors?.collectionSymbol}
-  //         />
-  //       </div>,
-  //     );
-  //   }
-  // }
-
-  let collectionOutput;
-
-  if (collectionDataLoadType === CollectionLoadType.Together) {
-    collectionOutput = <CollectionDetailsCard token={token} showDescriptor={true} />;
-  } else if (collectionDataLoadType === CollectionLoadType.Individual) {
-    collectionOutput = (
-      <>
-        <AddressCard value={token?.contract?.address} showDescriptor={true} />
-        <CollectionNameCard value={token?.collectionName} showDescriptor={true} />
-        <CollectionSymbolCard value={token?.collectionSymbol} showDescriptor={true} />
-      </>
-    );
+    if (renderOrder[i] === "Address" || renderOrder[i] === "CollectionName" || renderOrder[i] === "CollectionSymbol") {
+      collectionComponents.push(renderOrder[i]);
+    }
   }
 
-  const componentsOutput = (
-    <>
-      <NameCard value={token?.metadata?.name} showDescriptor={true} />
-      <ImageCard value={token?.metadata?.image} showDescriptor={true} />
-      <DescriptionCard value={token?.metadata?.description} showDescriptor={true} />
-      <AttributesCard value={token?.metadata?.attributes} showDescriptor={true} />
-      <IdCard value={token?.id} showDescriptor={true} />
-      {collectionOutput}
-    </>
-  );
+  if (collectionComponents.length > 0) {
+    if (collectionDataLoadType === "Together") {
+      renderedComponents.push(
+        <CollectionDetailsCard token={token} showDescriptor={true} renderOrder={collectionComponents} />,
+      );
+    } else if (collectionDataLoadType === "Individual") {
+      for (let i = 0; i < collectionComponents.length; i++) {
+        if (collectionComponents[i] === "Address") {
+          renderedComponents.push(<AddressCard value={token?.contract?.address} showDescriptor={true} />);
+        }
+
+        if (collectionComponents[i] === "CollectionName") {
+          renderedComponents.push(<CollectionNameCard value={token?.collectionName} showDescriptor={true} />);
+        }
+        if (collectionComponents[i] === "CollectionSymbol") {
+          renderedComponents.push(<CollectionSymbolCard value={token?.collectionSymbol} showDescriptor={true} />);
+        }
+      }
+    }
+  }
+
+  // const componentsOutput = (
+  //   <>
+  //     <NameCard value={token?.metadata?.name} showDescriptor={true} />
+  //     <ImageCard value={token?.metadata?.image} showDescriptor={true} />
+  //     <DescriptionCard value={token?.metadata?.description} showDescriptor={true} />
+  //     <AttributesCard value={token?.metadata?.attributes} showDescriptor={true} />
+  //     <IdCard value={token?.id} showDescriptor={true} />
+  //     {collectionOutput}
+  //   </>
+  // );
 
   let cardContent: any;
 
@@ -332,13 +266,13 @@ Props) => {
     ) {
       cardContent = <p className={`text-center ${loadingSizeMap[size]}`}>Loading NFT...</p>;
     } else {
-      cardContent = componentsOutput;
+      cardContent = renderedComponents;
     }
   } else {
-    cardContent = componentsOutput;
+    cardContent = renderedComponents;
   }
 
-  return <div className="flex flex-col items-center bg-base-300 m-4">{cardContent}</div>;
+  return <div className={`flex flex-col items-center bg-base-300 m-4 ${styleMap[style]}`}>{cardContent}</div>;
 
   //   return (
   //     <div

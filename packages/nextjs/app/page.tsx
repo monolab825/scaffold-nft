@@ -1,7 +1,7 @@
 "use client";
 
 import type { NextPage } from "next";
-import { CollectionLoadType, NftCard } from "~~/components/NftCard";
+import { NftCard } from "~~/components/NftCard";
 import { NameCard, NameCardProps } from "~~/components/NftCardValue/NameCard";
 // import { NameCard, NameCardProps } from "~~/components/NftCardValue/NameCard";
 import { useToken } from "~~/hooks/useToken";
@@ -17,7 +17,7 @@ const Home: NextPage = () => {
     <>
       <NftCard
         token={token}
-        collectionDataLoadType={CollectionLoadType.Together}
+        collectionDataLoadType="Together"
         NameCard={NameCardComponent}
         // prettyLoad={{
         //   values: {
