@@ -1,6 +1,6 @@
 "use client";
 
-import { Style, styleMap } from "./Types";
+import { Style, styleMap } from "../types/Types";
 
 export type CollectionNameCardProps = {
   value?: string;

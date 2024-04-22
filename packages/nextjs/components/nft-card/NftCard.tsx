@@ -1,6 +1,7 @@
 "use client";
 
 import { ComponentType } from "react";
+import { Style, styleMap } from "./types/Types";
 import { AddressCard, AddressCardProps } from "./values/AddressCard";
 import { AttributesCard, AttributesCardProps } from "./values/AttributesCard";
 import { CollectionNameCard, CollectionNameCardProps } from "./values/CollectionNameCard";
@@ -9,7 +10,6 @@ import { DescriptionCard, DescriptionCardProps } from "./values/DescriptionCard"
 import { IdCard, IdCardProps } from "./values/IdCard";
 import { ImageCard, ImageCardProps } from "./values/ImageCard";
 import { NameCard, NameCardProps } from "./values/NameCard";
-import { Style, styleMap } from "./values/Types";
 import { CollectionDetails, CollectionDetailsProps } from "./values/extensions/CollectionDetails";
 import { ScaffoldToken } from "~~/types/ScaffoldToken";
 

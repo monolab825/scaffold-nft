@@ -1,13 +1,13 @@
 "use client";
 
 import { ComponentType } from "react";
+import { Style, styleMap } from "../../types/Types";
 import { AddressCard } from "../AddressCard";
 import { AddressCardProps } from "../AddressCard";
 import { CollectionNameCard } from "../CollectionNameCard";
 import { CollectionNameCardProps } from "../CollectionNameCard";
 import { CollectionSymbolCard } from "../CollectionSymbolCard";
 import { CollectionSymbolCardProps } from "../CollectionSymbolCard";
-import { Style, styleMap } from "../Types";
 import { ScaffoldToken } from "~~/types/ScaffoldToken";
 
 export type CollectionDetailsProps = {
