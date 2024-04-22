@@ -106,7 +106,5 @@ export const CollectionDetails = ({
     output = component;
   }
 
-  console.log(style);
-
   return <div className={`bg-base-200 ${styleMap[style]} p-2 m-2 max-w-3xl`}>{output}</div>;
 };

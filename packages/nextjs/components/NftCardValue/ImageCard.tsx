@@ -24,10 +24,6 @@ export const ImageCard = ({
   style = "rounded",
   showDescriptor = false,
 }: ImageCardProps) => {
-  console.log(style);
-
-  console.log(styleMap[style]);
-
   const component = <img src={value} alt={alt} className={`bg-base-300 ${sizeMap[size]} ${styleMap[style]}`} />;
 
   let output;
