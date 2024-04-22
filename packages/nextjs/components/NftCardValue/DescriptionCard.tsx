@@ -1,14 +1,13 @@
 "use client";
 
+import { Style, styleMap } from "./Types";
+
 export type DescriptionCardProps = {
   value?: string;
   prettyLoad?: boolean;
-  style?: "rounded";
-  showDescriptor?: boolean;
-};
+  style?: Style;
 
-const styleMap = {
-  rounded: "rounded-lg",
+  showDescriptor?: boolean;
 };
 
 export const DescriptionCard = ({

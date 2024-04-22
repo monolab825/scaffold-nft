@@ -7,13 +7,14 @@ import { CollectionNameCard } from "./NftCardValue/CollectionNameCard";
 import { CollectionNameCardProps } from "./NftCardValue/CollectionNameCard";
 import { CollectionSymbolCard } from "./NftCardValue/CollectionSymbolCard";
 import { CollectionSymbolCardProps } from "./NftCardValue/CollectionSymbolCard";
+import { Style, styleMap } from "./NftCardValue/Types";
 import { ScaffoldToken } from "~~/types/ScaffoldToken";
 
 export type CollectionDetailsProps = {
   token?: ScaffoldToken;
   value?: string;
   prettyLoad?: boolean;
-  style?: "rounded";
+  style?: Style;
   showDescriptor?: boolean;
   renderOrder?: ("Address" | "CollectionName" | "CollectionSymbol")[];
   AddressCard?: ComponentType<AddressCardProps>;
@@ -28,10 +29,6 @@ export type CollectionDetailsProps = {
       collectionSymbol?: boolean;
     };
   };
-};
-
-const styleMap = {
-  rounded: "rounded-lg",
 };
 
 const AddressCardComponent = (props: AddressCardProps) => {
@@ -50,7 +47,6 @@ export const CollectionDetails = ({
   token,
   prettyLoad,
   style = "rounded",
-  showDescriptors,
   showDescriptor,
 
   renderOrder = ["Address", "CollectionName", "CollectionSymbol"],
@@ -58,17 +54,17 @@ export const CollectionDetails = ({
   CollectionNameCard = CollectionNameCardComponent,
   CollectionSymbolCard = CollectionSymbolCardComponent,
 }: CollectionDetailsProps) => {
-  console.log(token);
   const renderedComponents: any = [];
 
   for (let i = 0; i < renderOrder.length; i++) {
     if (renderOrder[i] === "Address") {
       renderedComponents.push(
-        <AddressCard value={token?.contract?.address} showDescriptor={true} bgColor="bg-base-100" />,
+        <AddressCard key={i} value={token?.contract?.address} showDescriptor={true} bgColor="bg-base-100" />,
       );
     } else if (renderOrder[i] === "CollectionName") {
       renderedComponents.push(
         <CollectionNameCard
+          key={i}
           value={token?.collectionName}
           showDescriptor={true}
           bgColor="bg-base-100"
@@ -78,6 +74,7 @@ export const CollectionDetails = ({
     } else if (renderOrder[i] === "CollectionSymbol") {
       renderedComponents.push(
         <CollectionSymbolCard
+          key={i}
           value={token?.collectionSymbol}
           showDescriptor={true}
           bgColor="bg-base-100"
@@ -109,7 +106,7 @@ export const CollectionDetails = ({
     output = component;
   }
 
-  console.log(showDescriptors);
+  console.log(style);
 
   return <div className={`bg-base-200 ${styleMap[style]} p-2 m-2 max-w-3xl`}>{output}</div>;
 };

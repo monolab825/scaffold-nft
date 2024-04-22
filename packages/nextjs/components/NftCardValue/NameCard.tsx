@@ -1,14 +1,12 @@
 "use client";
 
+import { Style, styleMap } from "./Types";
+
 export type NameCardProps = {
   value?: string;
   prettyLoad?: boolean;
-  style?: "rounded";
+  style?: Style;
   showDescriptor?: boolean;
-};
-
-const styleMap = {
-  rounded: "rounded-lg",
 };
 
 export const NameCard = ({ value, prettyLoad, showDescriptor, style = "rounded" }: NameCardProps) => {

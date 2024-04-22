@@ -1,20 +1,17 @@
 "use client";
 
+import { Style, styleMap } from "./Types";
+
 export type IdCardProps = {
   value?: bigint;
   uri?: string;
   prettyLoad?: boolean;
-  style?: "rounded";
+  style?: Style;
+
   showDescriptor?: boolean;
 };
 
-const styleMap = {
-  rounded: "rounded-lg",
-};
-
 export const IdCard = ({ value, uri, prettyLoad = false, style = "rounded", showDescriptor }: IdCardProps) => {
-  console.log(uri);
-
   const component = (
     <a href={uri} target="#">
       <p className={`text-4xl text-center`}>{value?.toString()}</p>

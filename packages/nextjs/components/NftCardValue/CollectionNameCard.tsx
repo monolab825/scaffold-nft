@@ -1,16 +1,15 @@
 "use client";
 
+import { Style, styleMap } from "./Types";
+
 export type CollectionNameCardProps = {
   value?: string;
   prettyLoad?: boolean;
-  style?: "rounded";
+  style?: Style;
+
   showDescriptor?: boolean;
   descriptorText?: string;
   bgColor?: string;
-};
-
-const styleMap = {
-  rounded: "rounded-lg",
 };
 
 export const CollectionNameCard = ({

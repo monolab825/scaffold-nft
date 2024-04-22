@@ -1,17 +1,14 @@
 "use client";
 
 import { Address } from "../scaffold-eth";
+import { Style, styleMap } from "./Types";
 
 export type AddressCardProps = {
   value?: string;
-  style?: "rounded";
+  style?: Style;
   showDescriptor?: boolean;
   descriptorText?: string;
   bgColor?: string;
-};
-
-const styleMap = {
-  rounded: "rounded-lg",
 };
 
 export const AddressCard = ({

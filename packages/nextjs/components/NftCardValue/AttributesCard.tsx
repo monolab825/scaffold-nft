@@ -1,15 +1,24 @@
 "use client";
 
+import { Style, styleMap } from "./Types";
+
 export type AttributesCardProps = {
   value?: { trait_type: string; value: string }[];
+  style?: Style;
+
   prettyLoad?: boolean;
   showDescriptor?: boolean;
 };
 
-export const AttributesCard = ({ value, prettyLoad = false, showDescriptor }: AttributesCardProps) => {
+export const AttributesCard = ({
+  value,
+  prettyLoad = false,
+  showDescriptor,
+  style = "rounded",
+}: AttributesCardProps) => {
   const components = value?.map((attribute: any, index: number) => {
     return (
-      <div key={index} className="bg-base-100 w-[115px] text-center m-2 rounded-lg">
+      <div key={index} className={`bg-base-100 w-[115px] text-center m-2 ${styleMap[style]}`}>
         <p className="text-sm">{attribute["trait_type"]}</p>
         <p className="text-lg">{attribute["value"]}</p>
       </div>
@@ -25,7 +34,7 @@ export const AttributesCard = ({ value, prettyLoad = false, showDescriptor }: At
   }
 
   return (
-    <div className={`m-2 bg-base-200 rounded-lg p-2 max-w-3xl`}>
+    <div className={`m-2 bg-base-200 p-2 max-w-3xl ${styleMap[style]}`}>
       {showDescriptor ? <p className="text-center">Attributes</p> : <></>}
       <div className="flex flex-wrap justify-center">{output}</div>
     </div>
