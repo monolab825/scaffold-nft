@@ -52,47 +52,6 @@ type Props = {
   size?: "base";
   prettyLoad?: boolean;
   style?: "rounded" | "straight";
-  // components?: {
-  //   value?: any;
-  //   prettyLoad?: any;
-  //   showDescriptor?: any;
-  // }[];
-
-  // prettyLoad?: {
-  //   card?: boolean;
-  //   values?: {
-  //     name?: boolean;
-  //     description?: boolean;
-  //     image?: boolean;
-  //     attributes?: boolean;
-  //     collectionName?: boolean;
-  //     collectionSymbol?: boolean;
-  //     collectionDetails?: boolean;
-  //     id?: boolean;
-  //   };
-  // };
-  // nameCard?: ReactElement<NameCardProps>;
-
-  // Imae
-
-  // showComponentDescriptors?: {
-  //   image?: boolean;
-  //   name?: boolean;
-  //   description?: boolean;
-  //   attributes?: boolean;
-  //   address?: boolean;
-  //   collectionName?: boolean;
-  //   collectionSymbol?: boolean;
-  //   collectionDetails?: {
-  //     detailsDescriptor?: boolean;
-  //     componentsDescriptor?: {
-  //       address?: boolean;
-  //       collectionName?: boolean;
-  //       collectionSymbol?: boolean;
-  //     };
-  //   };
-  //   id?: boolean;
-  // };
 };
 
 // const sizeMap = {
@@ -151,51 +110,13 @@ export const NftCard = ({
   prettyLoad = true,
   size = "base",
   style = "rounded",
-}: // components = [
-//   {
-//     value: token?.metadata?.name,
-//     prettyLoad: true,
-//     showDescriptor: true,
-//   },
-//   {
-//     value: token?.metadata?.description,
-//     prettyLoad: true,
-//     showDescriptor: true,
-//   },
-//   {
-//     value: token?.metadata?.image,
-//     prettyLoad: true,
-//     showDescriptor: false,
-//   },
-// ],
-// prettyLoad,
-// showComponentDescriptors = {
-//   image: false,
-//   name: true,
-//   description: true,
-//   attributes: true,
-//   address: true,
-//   collectionName: true,
-//   collectionSymbol: true,
-//   collectionDetails: {
-//     detailsDescriptor: true,
-//     componentsDescriptor: {
-//       address: true,
-//       collectionName: true,
-//       collectionSymbol: true,
-//     },
-//   },
-//   id: true,
-// },
-Props) => {
+}: Props) => {
   const renderedComponents: any = [];
   const collectionComponents: any = [];
 
-  //   renderedComponents.push(<div key={99}>{nameCard}</div>);
-
   for (let i = 0; i < renderOrder.length; i++) {
     if (renderOrder[i] === "Image") {
-      renderedComponents.push(<ImageCard key={i} value={token?.metadata?.image} showDescriptor={true} />);
+      renderedComponents.push(<ImageCard key={i} value={token?.metadata?.image} showDescriptor={false} />);
     }
 
     if (renderOrder[i] === "Name") {
@@ -222,7 +143,20 @@ Props) => {
   if (collectionComponents.length > 0) {
     if (collectionDataLoadType === "Together") {
       renderedComponents.push(
-        <CollectionDetailsCard token={token} showDescriptor={true} renderOrder={collectionComponents} />,
+        <CollectionDetailsCard
+          token={token}
+          showDescriptor={true}
+          renderOrder={collectionComponents}
+          AddressCard={props => {
+            return <AddressCard {...props} value={token?.contract?.address} showDescriptor={true} />;
+          }}
+          CollectionNameCard={props => {
+            return <CollectionNameCard {...props} value={token?.collectionName} showDescriptor={true} />;
+          }}
+          CollectionSymbolCard={props => {
+            return <CollectionSymbolCard {...props} value={token?.collectionSymbol} showDescriptor={true} />;
+          }}
+        />,
       );
     } else if (collectionDataLoadType === "Individual") {
       for (let i = 0; i < collectionComponents.length; i++) {
@@ -239,17 +173,6 @@ Props) => {
       }
     }
   }
-
-  // const componentsOutput = (
-  //   <>
-  //     <NameCard value={token?.metadata?.name} showDescriptor={true} />
-  //     <ImageCard value={token?.metadata?.image} showDescriptor={true} />
-  //     <DescriptionCard value={token?.metadata?.description} showDescriptor={true} />
-  //     <AttributesCard value={token?.metadata?.attributes} showDescriptor={true} />
-  //     <IdCard value={token?.id} showDescriptor={true} />
-  //     {collectionOutput}
-  //   </>
-  // );
 
   let cardContent: any;
 
@@ -273,12 +196,4 @@ Props) => {
   }
 
   return <div className={`flex flex-col items-center bg-base-300 m-4 ${styleMap[style]}`}>{cardContent}</div>;
-
-  //   return (
-  //     <div
-  //       className={`flex flex-col items-center align-top justify-center rounded-2xl bg-base-300 ${/*sizeMap[size]*/ ""}`}
-  //     >
-  //       {cardContent}
-  //     </div>
-  //   );
 };

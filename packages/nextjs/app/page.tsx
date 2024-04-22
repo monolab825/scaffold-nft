@@ -7,7 +7,7 @@ import { NameCard, NameCardProps } from "~~/components/NftCardValue/NameCard";
 import { useToken } from "~~/hooks/useToken";
 
 const NameCardComponent = (props: NameCardProps) => {
-  return <NameCard {...props} prettyLoad={true} />;
+  return <NameCard {...props} />;
 };
 
 const Home: NextPage = () => {
