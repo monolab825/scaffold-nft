@@ -1,6 +1,6 @@
 "use client";
 
-type Props = {
+export type ImageCardProps = {
   value?: string;
   alt?: string;
   prettyLoad?: boolean;
@@ -18,7 +18,7 @@ export const ImageCard = ({
   prettyLoad = false,
   size = "base",
   showDescriptor = false,
-}: Props) => {
+}: ImageCardProps) => {
   const component = <img src={value} alt={alt} className={`bg-base-300 ${sizeMap[size]}`} />;
 
   let output;

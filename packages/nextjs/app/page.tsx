@@ -18,7 +18,6 @@ const Home: NextPage = () => {
         token={token}
         // NameCard2={NameCard2}
         prettyLoad={{
-          card: false,
           values: {
             image: true,
             name: true,
@@ -26,7 +25,6 @@ const Home: NextPage = () => {
             attributes: true,
             collectionName: true,
             collectionSymbol: true,
-            collectionDetails: { card: true },
             id: true,
           },
         }}

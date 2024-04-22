@@ -1,14 +1,14 @@
 "use client";
 
-import { ComponentType, ReactElement } from "react";
-import { CollectionDetails } from "./CollectionDetails";
-import { AddressCard } from "./NftCardValue/AddressCard";
-import { AttributesCard } from "./NftCardValue/AttributesCard";
-import { CollectionNameCard } from "./NftCardValue/CollectionNameCard";
-import { CollectionSymbolCard } from "./NftCardValue/CollectionSymbolCard";
-import { DescriptionCard } from "./NftCardValue/DescriptionCard";
-import { IdCard } from "./NftCardValue/IdCard";
-import { ImageCard } from "./NftCardValue/ImageCard";
+import { ComponentType } from "react";
+import { CollectionDetails, CollectionDetailsProps } from "./CollectionDetails";
+import { AddressCard, AddressCardProps } from "./NftCardValue/AddressCard";
+import { AttributesCard, AttributesCardProps } from "./NftCardValue/AttributesCard";
+import { CollectionNameCard, CollectionNameCardProps } from "./NftCardValue/CollectionNameCard";
+import { CollectionSymbolCard, CollectionSymbolCardProps } from "./NftCardValue/CollectionSymbolCard";
+import { DescriptionCard, DescriptionCardProps } from "./NftCardValue/DescriptionCard";
+import { IdCard, IdCardProps } from "./NftCardValue/IdCard";
+import { ImageCard, ImageCardProps } from "./NftCardValue/ImageCard";
 import { NameCard, NameCardProps } from "./NftCardValue/NameCard";
 import { ScaffoldToken } from "~~/types/ScaffoldToken";
 
@@ -29,19 +29,22 @@ type Props = {
       attributes?: boolean;
       collectionName?: boolean;
       collectionSymbol?: boolean;
-      collectionDetails?: {
-        card?: boolean;
-        components?: {
-          collectionName?: boolean;
-          collectionSymbol?: boolean;
-        };
-      };
+      collectionDetails?: boolean;
       id?: boolean;
     };
   };
-  nameCard?: ReactElement<NameCardProps>;
-  NameCard2?: ComponentType<NameCardProps>;
+  // nameCard?: ReactElement<NameCardProps>;
+  NameCard?: ComponentType<NameCardProps>;
+  ImageCard?: ComponentType<ImageCardProps>;
+  DescriptionCard?: ComponentType<DescriptionCardProps>;
+  AttributesCard?: ComponentType<AttributesCardProps>;
+  AddressCard?: ComponentType<AddressCardProps>;
+  CollectionNameCard?: ComponentType<CollectionNameCardProps>;
+  CollectionSymbolCard?: ComponentType<CollectionSymbolCardProps>;
+  IdCard?: ComponentType<IdCardProps>;
+  CollectionDetailsCard?: ComponentType<CollectionDetailsProps>;
 
+  // Imae
   renderOrder?: (
     | "Image"
     | "Name"
@@ -82,14 +85,54 @@ const loadingSizeMap = {
 //   base: "w-[700px] h-[700px]",
 // };
 
-const NameCard3 = (props: NameCardProps) => {
+const NameCardComponent = (props: NameCardProps) => {
   return <NameCard {...props} prettyLoad={true} />;
+};
+
+const ImageCardComponent = (props: ImageCardProps) => {
+  return <ImageCard {...props} prettyLoad={true} />;
+};
+
+const DescriptionCardComponent = (props: DescriptionCardProps) => {
+  return <DescriptionCard {...props} prettyLoad={true} />;
+};
+
+const AttributesCardComponent = (props: AttributesCardProps) => {
+  return <AttributesCard {...props} prettyLoad={true} />;
+};
+
+const AddressCardComponent = (props: AddressCardProps) => {
+  return <AddressCard {...props} prettyLoad={true} />;
+};
+
+const CollectionNameCardComponent = (props: CollectionNameCardProps) => {
+  return <CollectionNameCard {...props} prettyLoad={true} />;
+};
+
+const CollectionSymbolCardComponent = (props: CollectionSymbolCardProps) => {
+  return <CollectionSymbolCard {...props} prettyLoad={true} />;
+};
+
+const IdCardComponent = (props: IdCardProps) => {
+  return <IdCard {...props} prettyLoad={true} />;
+};
+
+const CollectionDetailsCardComponent = (props: CollectionDetailsProps) => {
+  return <CollectionDetails {...props} prettyLoad={true} />;
 };
 
 export const NftCard = ({
   token,
-  nameCard = <NameCard value={token?.metadata?.name} prettyLoad={true} style="rounded" />,
-  NameCard2 = NameCard3,
+  // nameCard = <NameCard value={token?.metadata?.name} prettyLoad={true} style="rounded" />,
+  NameCard = NameCardComponent,
+  ImageCard = ImageCardComponent,
+  DescriptionCard = DescriptionCardComponent,
+  AttributesCard = AttributesCardComponent,
+  AddressCard = AddressCardComponent,
+  CollectionNameCard = CollectionNameCardComponent,
+  CollectionSymbolCard = CollectionSymbolCardComponent,
+  IdCard = IdCardComponent,
+  CollectionDetailsCard = CollectionDetailsCardComponent,
   // components = [
   //   {
   //     value: token?.metadata?.name,
@@ -263,8 +306,16 @@ export const NftCard = ({
 
   return (
     <div className="flex flex-col items-center bg-base-300">
-      {nameCard}
-      {NameCard2 ? <NameCard2 value={token?.metadata?.name} /> : <></>}
+      {/* {nameCard} */}
+      <NameCard value={token?.metadata?.name} />
+      <ImageCard value={token?.metadata?.image} />
+      <DescriptionCard value={token?.metadata?.description} />
+      <AttributesCard value={token?.metadata?.attributes} />
+      <AddressCard value={token?.contract?.address} />
+      <CollectionNameCard value={token?.collectionName} />
+      <CollectionSymbolCard value={token?.collectionSymbol} />
+      <IdCard value={token?.id} />
+      <CollectionDetailsCard token={token} />
       {cardContent}
     </div>
   );

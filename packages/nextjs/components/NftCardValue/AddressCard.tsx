@@ -2,7 +2,7 @@
 
 import { Address } from "../scaffold-eth";
 
-type Props = {
+export type AddressCardProps = {
   value?: string;
   prettyLoad?: boolean;
   style?: "rounded";
@@ -21,7 +21,7 @@ export const AddressCard = ({
   showDescriptor,
   descriptorText = "Contract Address",
   bgColor = "bg-base-200",
-}: Props) => {
+}: AddressCardProps) => {
   const component = <Address address={value} />;
 
   return (

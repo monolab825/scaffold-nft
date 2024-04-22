@@ -1,6 +1,6 @@
 "use client";
 
-type Props = {
+export type CollectionSymbolCardProps = {
   value?: string;
   prettyLoad?: boolean;
   style?: "rounded";
@@ -20,7 +20,7 @@ export const CollectionSymbolCard = ({
   showDescriptor,
   descriptorText = "Collection Symbol",
   bgColor = "bg-base-200",
-}: Props) => {
+}: CollectionSymbolCardProps) => {
   const component = <p className={`text-4xl text-center`}>{value}</p>;
 
   let output;

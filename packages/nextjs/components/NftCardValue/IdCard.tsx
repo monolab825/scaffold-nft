@@ -1,6 +1,6 @@
 "use client";
 
-type Props = {
+export type IdCardProps = {
   value?: bigint;
   uri?: string;
   prettyLoad?: boolean;
@@ -12,7 +12,7 @@ const styleMap = {
   rounded: "rounded-lg",
 };
 
-export const IdCard = ({ value, uri, prettyLoad = false, style = "rounded", showDescriptor }: Props) => {
+export const IdCard = ({ value, uri, prettyLoad = false, style = "rounded", showDescriptor }: IdCardProps) => {
   console.log(uri);
 
   const component = (

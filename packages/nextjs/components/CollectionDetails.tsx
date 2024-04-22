@@ -5,16 +5,10 @@ import { CollectionNameCard } from "./NftCardValue/CollectionNameCard";
 import { CollectionSymbolCard } from "./NftCardValue/CollectionSymbolCard";
 import { ScaffoldToken } from "~~/types/ScaffoldToken";
 
-type Props = {
+export type CollectionDetailsProps = {
   token?: ScaffoldToken;
   value?: string;
-  prettyLoad?: {
-    collection?: boolean;
-    components?: {
-      collectionName?: boolean;
-      collectionSymbol?: boolean;
-    };
-  };
+  prettyLoad?: boolean;
   style?: "rounded";
   showDescriptors?: {
     detailsDescriptor?: boolean;
@@ -30,7 +24,12 @@ const styleMap = {
   rounded: "rounded-lg",
 };
 
-export const CollectionDetails = ({ token, prettyLoad, style = "rounded", showDescriptors }: Props) => {
+export const CollectionDetails = ({
+  token,
+  prettyLoad,
+  style = "rounded",
+  showDescriptors,
+}: CollectionDetailsProps) => {
   const component = (
     <>
       {showDescriptors?.detailsDescriptor ? <p className="text-center">Collection Details</p> : <></>}
@@ -43,14 +42,14 @@ export const CollectionDetails = ({ token, prettyLoad, style = "rounded", showDe
         />
         <CollectionNameCard
           value={token?.collectionName}
-          prettyLoad={prettyLoad?.components?.collectionName}
+          // prettyLoad={prettyLoad?.components?.collectionName}
           showDescriptor={showDescriptors?.componentsDescriptor?.collectionName}
           descriptorText="Name"
           bgColor="bg-base-100"
         />
         <CollectionSymbolCard
           value={token?.collectionSymbol}
-          prettyLoad={prettyLoad?.components?.collectionSymbol}
+          // prettyLoad={prettyLoad?.components?.collectionSymbol}
           showDescriptor={showDescriptors?.componentsDescriptor?.collectionSymbol}
           descriptorText="Symbol"
           bgColor="bg-base-100"

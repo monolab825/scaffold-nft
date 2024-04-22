@@ -1,6 +1,6 @@
 "use client";
 
-type Props = {
+export type DescriptionCardProps = {
   value?: string;
   prettyLoad?: boolean;
   style?: "rounded";
@@ -11,7 +11,12 @@ const styleMap = {
   rounded: "rounded-lg",
 };
 
-export const DescriptionCard = ({ value, prettyLoad = false, style = "rounded", showDescriptor }: Props) => {
+export const DescriptionCard = ({
+  value,
+  prettyLoad = false,
+  style = "rounded",
+  showDescriptor,
+}: DescriptionCardProps) => {
   const component = <p className={`text-2xl text-center`}>{value}</p>;
 
   let output;

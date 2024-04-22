@@ -1,12 +1,12 @@
 "use client";
 
-type Props = {
+export type AttributesCardProps = {
   value?: { trait_type: string; value: string }[];
   prettyLoad?: boolean;
   showDescriptor?: boolean;
 };
 
-export const AttributesCard = ({ value, prettyLoad = false, showDescriptor }: Props) => {
+export const AttributesCard = ({ value, prettyLoad = false, showDescriptor }: AttributesCardProps) => {
   const components = value?.map((attribute: any, index: number) => {
     return (
       <div key={index} className="bg-base-100 w-[115px] text-center m-2 rounded-lg">
