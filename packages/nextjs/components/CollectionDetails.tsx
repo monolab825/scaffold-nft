@@ -1,8 +1,12 @@
 "use client";
 
+import { ComponentType } from "react";
 import { AddressCard } from "./NftCardValue/AddressCard";
+import { AddressCardProps } from "./NftCardValue/AddressCard";
 import { CollectionNameCard } from "./NftCardValue/CollectionNameCard";
+import { CollectionNameCardProps } from "./NftCardValue/CollectionNameCard";
 import { CollectionSymbolCard } from "./NftCardValue/CollectionSymbolCard";
+import { CollectionSymbolCardProps } from "./NftCardValue/CollectionSymbolCard";
 import { ScaffoldToken } from "~~/types/ScaffoldToken";
 
 export type CollectionDetailsProps = {
@@ -10,6 +14,12 @@ export type CollectionDetailsProps = {
   value?: string;
   prettyLoad?: boolean;
   style?: "rounded";
+  showDescriptor?: boolean;
+
+  AddressCard?: ComponentType<AddressCardProps>;
+  CollectionNameCard?: ComponentType<CollectionNameCardProps>;
+  CollectionSymbolCard?: ComponentType<CollectionSymbolCardProps>;
+
   showDescriptors?: {
     detailsDescriptor?: boolean;
     componentsDescriptor?: {
@@ -24,15 +34,31 @@ const styleMap = {
   rounded: "rounded-lg",
 };
 
+const AddressCardComponent = (props: AddressCardProps) => {
+  return <AddressCard {...props} showDescriptor={true} bgColor="bg-base-100" />;
+};
+
+const CollectionNameCardComponent = (props: CollectionNameCardProps) => {
+  return <CollectionNameCard {...props} showDescriptor={true} bgColor="bg-base-100" descriptorText="Name" />;
+};
+
+const CollectionSymbolCardComponent = (props: CollectionSymbolCardProps) => {
+  return <CollectionSymbolCard {...props} showDescriptor={true} bgColor="bg-base-100" descriptorText="Symbol" />;
+};
+
 export const CollectionDetails = ({
   token,
   prettyLoad,
   style = "rounded",
   showDescriptors,
+  showDescriptor = true,
+  AddressCard = AddressCardComponent,
+  CollectionNameCard = CollectionNameCardComponent,
+  CollectionSymbolCard = CollectionSymbolCardComponent,
 }: CollectionDetailsProps) => {
   const component = (
     <>
-      {showDescriptors?.detailsDescriptor ? <p className="text-center">Collection Details</p> : <></>}
+      {showDescriptor ? <p className="text-center">Collection Details</p> : <></>}
 
       <div className="flex flex-wrap justify-center">
         <AddressCard
@@ -54,7 +80,6 @@ export const CollectionDetails = ({
           descriptorText="Symbol"
           bgColor="bg-base-100"
         />
-        <CollectionSymbolCard />
       </div>
     </>
   );

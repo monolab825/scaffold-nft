@@ -1,13 +1,9 @@
 "use client";
 
 import type { NextPage } from "next";
-import { NftCard } from "~~/components/NftCard";
+import { CollectionLoadType, NftCard } from "~~/components/NftCard";
 // import { NameCard, NameCardProps } from "~~/components/NftCardValue/NameCard";
 import { useToken } from "~~/hooks/useToken";
-
-// const NameCard2 = (props: NameCardProps) => {
-//   return <NameCard {...props} prettyLoad={false} />;
-// };
 
 const Home: NextPage = () => {
   const token = useToken(BigInt(4), "nftstorage");
@@ -16,31 +12,31 @@ const Home: NextPage = () => {
     <>
       <NftCard
         token={token}
-        // NameCard2={NameCard2}
-        prettyLoad={{
-          values: {
-            image: true,
-            name: true,
-            description: true,
-            attributes: true,
-            collectionName: true,
-            collectionSymbol: true,
-            id: true,
-          },
-        }}
-        renderOrder={
-          [
-            // "Image",
-            // "Name",
-            // "Description",
-            // "Attributes",
-            // "Id",
-            // "CollectionName",
-            // "CollectionSymbol",
-            // "CollectionDetails",
-            // "Address",
-          ]
-        }
+        collectionDataLoadType={CollectionLoadType.Together}
+        // prettyLoad={{
+        //   values: {
+        //     image: true,
+        //     name: true,
+        //     description: true,
+        //     attributes: true,
+        //     collectionName: true,
+        //     collectionSymbol: true,
+        //     id: true,
+        //   },
+        // }}
+        // renderOrder={
+        //   [
+        //     // "Image",
+        //     // "Name",
+        //     // "Description",
+        //     // "Attributes",
+        //     // "Id",
+        //     // "CollectionName",
+        //     // "CollectionSymbol",
+        //     // "CollectionDetails",
+        //     // "Address",
+        //   ]
+        // }
       />
 
       {/* <button
