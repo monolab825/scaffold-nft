@@ -22,6 +22,8 @@ const loadingSizeMap = {
   base: "text-8xl",
 };
 
+type PrettyLoadType = "animated" | "text";
+
 type Props = {
   token?: ScaffoldToken;
   NameCard?: ComponentType<NameCardProps>;
@@ -47,6 +49,7 @@ type Props = {
   collectionDataLoadType?: "Together" | "Individual";
   size?: "base";
   prettyLoad?: boolean;
+  prettyLoadType?: PrettyLoadType;
   style?: Style;
 };
 
@@ -104,9 +107,21 @@ export const NftCard = ({
   collectionDataLoadType = "Together",
   renderOrder = ["Image", "Name", "Description", "Attributes", "Address", "CollectionName", "CollectionSymbol", "Id"],
   prettyLoad = true,
+  prettyLoadType = "animated",
   size = "base",
   style = "rounded",
 }: Props) => {
+  const prettyLoadMap = {
+    animated: (
+      <div className="animate-pulse flex space-x-4">
+        <div className="flex items-center space-y-6">
+          <div className="h-64 w-96 bg-slate-300 rounded"></div>
+        </div>
+      </div>
+    ),
+    text: <p className={`text-center ${loadingSizeMap[size]}`}>Loading NFT...</p>,
+  };
+
   const renderedComponents: any = [];
   const collectionComponents: any = [];
 
@@ -197,7 +212,7 @@ export const NftCard = ({
       token?.contract === undefined ||
       token?.id === undefined
     ) {
-      cardContent = <p className={`text-center ${loadingSizeMap[size]}`}>Loading NFT...</p>;
+      cardContent = prettyLoadMap[prettyLoadType];
     } else {
       cardContent = renderedComponents;
     }

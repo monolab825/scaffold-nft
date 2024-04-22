@@ -10,19 +10,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <NftCard
-        token={token}
-        renderOrder={[
-          "Image",
-          "Name",
-          "Description",
-          "Attributes",
-          "Address",
-          "CollectionName",
-          "CollectionSymbol",
-          "Id",
-        ]}
-      />
+      <NftCard token={token} />
       {/* <button
         onClick={async () => {
           await writeErc721Async({
