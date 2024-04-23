@@ -1,7 +1,7 @@
 "use client";
 
 import { ComponentType } from "react";
-import { Style, styleMap } from "../../types/Types";
+import { Size, Style, styleMap } from "../../types/Types";
 import { AddressCard } from "../AddressCard";
 import { AddressCardProps } from "../AddressCard";
 import { CollectionNameCard } from "../CollectionNameCard";
@@ -15,6 +15,8 @@ export type CollectionDetailsProps = {
   value?: string;
   prettyLoad?: boolean;
   style?: Style;
+  size?: Size;
+
   showDescriptor?: boolean;
   renderOrder?: ("Address" | "CollectionName" | "CollectionSymbol")[];
   AddressCard?: ComponentType<AddressCardProps>;
@@ -48,7 +50,7 @@ export const CollectionDetails = ({
   prettyLoad,
   style = "rounded",
   showDescriptor,
-
+  // size = "base",
   renderOrder = ["Address", "CollectionName", "CollectionSymbol"],
   AddressCard = AddressCardComponent,
   CollectionNameCard = CollectionNameCardComponent,

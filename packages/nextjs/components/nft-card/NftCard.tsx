@@ -1,7 +1,7 @@
 "use client";
 
 import { ComponentType } from "react";
-import { Style, styleMap } from "./types/Types";
+import { Size, Style, styleMap } from "./types/Types";
 import { AddressCard, AddressCardProps } from "./values/AddressCard";
 import { AttributesCard, AttributesCardProps } from "./values/AttributesCard";
 import { CollectionNameCard, CollectionNameCardProps } from "./values/CollectionNameCard";
@@ -42,15 +42,11 @@ type Props = {
     | "Id"
   )[];
   collectionDataLoadType?: "Together" | "Individual";
-  size?: "base";
   prettyLoad?: boolean;
   prettyLoadType?: PrettyLoadType;
+  size?: Size;
   style?: Style;
 };
-
-// const sizeMap = {
-//   base: "w-[700px] h-[700px]",
-// };
 
 const NameCardComponent = (props: NameCardProps) => {
   return <NameCard {...props} />;
@@ -106,6 +102,10 @@ export const NftCard = ({
   size = "base",
   style = "rounded",
 }: Props) => {
+  const sizeMap = {
+    base: "max-w-96 lg:max-w-max",
+  };
+
   const prettyLoadMap = {
     animated: (
       <div className="animate-pulse flex space-x-4">
@@ -215,5 +215,9 @@ export const NftCard = ({
     cardContent = renderedComponents;
   }
 
-  return <div className={`flex flex-col items-center bg-base-300 m-4 ${styleMap[style]}`}>{cardContent}</div>;
+  return (
+    <div className={`flex flex-col items-center bg-base-300 m-4 ${sizeMap[size]} ${styleMap[style]}`}>
+      {cardContent}
+    </div>
+  );
 };

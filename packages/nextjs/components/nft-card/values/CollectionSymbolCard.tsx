@@ -1,11 +1,12 @@
 "use client";
 
-import { Style, styleMap } from "../types/Types";
+import { Size, Style, styleMap } from "../types/Types";
 
 export type CollectionSymbolCardProps = {
   value?: string;
   prettyLoad?: boolean;
   style?: Style;
+  size?: Size;
 
   showDescriptor?: boolean;
   descriptorText?: string;
@@ -17,6 +18,7 @@ export const CollectionSymbolCard = ({
   value,
   prettyLoad = false,
   style = "rounded",
+  // size = "base",
   showDescriptor,
   descriptorText = "Collection Symbol",
   bgColor = "bg-base-200",

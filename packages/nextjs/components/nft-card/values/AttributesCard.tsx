@@ -1,10 +1,11 @@
 "use client";
 
-import { Style, styleMap } from "../types/Types";
+import { Size, Style, styleMap } from "../types/Types";
 
 export type AttributesCardProps = {
   value?: { trait_type: string; value: string }[];
   style?: Style;
+  size?: Size;
 
   prettyLoad?: boolean;
   showDescriptor?: boolean;
@@ -15,7 +16,8 @@ export const AttributesCard = ({
   prettyLoad = false,
   showDescriptor,
   style = "rounded",
-}: AttributesCardProps) => {
+}: // size = "base",
+AttributesCardProps) => {
   const components = value?.map((attribute: any, index: number) => {
     return (
       <div key={index} className={`bg-base-100 w-[115px] text-center m-2 ${styleMap[style]}`}>

@@ -1,17 +1,25 @@
 "use client";
 
-import { Style, styleMap } from "../types/Types";
+import { Size, Style, styleMap } from "../types/Types";
 
 export type IdCardProps = {
   value?: bigint;
   uri?: string;
   prettyLoad?: boolean;
   style?: Style;
+  size?: Size;
 
   showDescriptor?: boolean;
 };
 
-export const IdCard = ({ value, uri, prettyLoad = false, style = "rounded", showDescriptor }: IdCardProps) => {
+export const IdCard = ({
+  value,
+  uri,
+  prettyLoad = false,
+  style = "rounded",
+  showDescriptor,
+}: // size = "base",
+IdCardProps) => {
   const component = (
     <a href={uri} target="#">
       <p className={`text-4xl text-center`}>{value?.toString()}</p>

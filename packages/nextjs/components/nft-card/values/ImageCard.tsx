@@ -1,12 +1,12 @@
 "use client";
 
-import { Style, styleMap } from "../types/Types";
+import { Size, Style, styleMap } from "../types/Types";
 
 export type ImageCardProps = {
   value?: string;
   alt?: string;
   prettyLoad?: boolean;
-  size?: "base";
+  size?: Size;
   style?: Style;
 
   showDescriptor?: boolean;

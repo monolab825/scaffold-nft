@@ -1,15 +1,22 @@
 "use client";
 
-import { Style, styleMap } from "../types/Types";
+import { Size, Style, styleMap } from "../types/Types";
 
 export type NameCardProps = {
   value?: string;
   prettyLoad?: boolean;
   style?: Style;
   showDescriptor?: boolean;
+  size?: Size;
 };
 
-export const NameCard = ({ value, prettyLoad, showDescriptor, style = "rounded" }: NameCardProps) => {
+export const NameCard = ({
+  value,
+  prettyLoad,
+  showDescriptor,
+  style = "rounded",
+}: //,size = "base"
+NameCardProps) => {
   const component = <p className={`text-4xl text-center`}>{value}</p>;
 
   let output;

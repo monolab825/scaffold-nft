@@ -9,8 +9,9 @@ const Home: NextPage = () => {
   const token = useToken(BigInt(4), "nftstorage");
 
   return (
-    <>
+    <div className="flex justify-center">
       <NftCard token={token} />
+
       {/* <button
         onClick={async () => {
           await writeErc721Async({
@@ -21,7 +22,7 @@ const Home: NextPage = () => {
       >
         Mint
       </button> */}
-    </>
+    </div>
   );
 };
 

@@ -4,3 +4,5 @@ export const styleMap = {
 };
 
 export type Style = "rounded" | "straight";
+
+export type Size = "base";
