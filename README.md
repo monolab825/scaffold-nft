@@ -1,7 +1,7 @@
 # 🏗 Scaffold-NFT
 
 <h4 align="center">
-  <a href="https://hotmanics.github.io/scaffold-nft-documentation/">Documentation</a> |
+  <a href="https://hotmanics.github.io/scaffold-nft-documentation/">Documentation</a>
 </h4>
 
 🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain which specialize in NFTs. It's designed to make it easier for developers to create and deploy NFT smart contracts and build user interfaces that interact with those contracts.
