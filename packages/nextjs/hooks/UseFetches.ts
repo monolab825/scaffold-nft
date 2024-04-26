@@ -6,10 +6,7 @@ export function useFetches(uris: string[]) {
   const refetch = useCallback(async () => {
     const arr = [];
     for (let i = 0; i < uris.length; i++) {
-      console.log(uris[i]);
       const response = await fetch(uris[i]);
-      console.log("End");
-
       const responseJson = await response.json();
       arr.push(responseJson);
     }

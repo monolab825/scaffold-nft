@@ -14,7 +14,7 @@ contract ScaffoldERC721 is ERC721 {
     uint256 immutable s_mintEndTimestamp;
     uint256 immutable s_mintPrice;
 
-    uint256 s_mintCount;
+    uint256 s_mintIndex;
 
     constructor(
         string memory name,
@@ -22,12 +22,14 @@ contract ScaffoldERC721 is ERC721 {
         string memory baseURI,
         uint256 mintStartTimestamp,
         uint256 mintEndTimestamp,
-        uint256 mintPrice
+        uint256 mintPrice,
+        uint256 s_mintStartIndex
     ) ERC721(name, symbol) {
         s_baseURI = baseURI;
         s_mintStartTimestamp = mintStartTimestamp;
         s_mintEndTimestamp = mintEndTimestamp;
         s_mintPrice = mintPrice;
+        s_mintIndex = s_mintStartIndex;
     }
 
     function batchMint(address recipient, uint256 amount) public payable {
@@ -57,18 +59,14 @@ contract ScaffoldERC721 is ERC721 {
             revert ScaffoldERC721__MintNotWithinTimeframe();
         }
 
-        super._mint(recipient, s_mintCount);
-        s_mintCount++;
+        super._mint(recipient, s_mintIndex);
+        s_mintIndex++;
     }
 
     function isWithinConstraints() public view returns (bool isWithin) {
         isWithin = Constraints.isWithin(
             block.timestamp, getMintStartTimestamp(), getMintEndTimestamp()
         );
-    }
-
-    function getMintCount() external view returns (uint256) {
-        return s_mintCount;
     }
 
     function getMintStartTimestamp() public view returns (uint256) {

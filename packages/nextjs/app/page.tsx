@@ -6,7 +6,7 @@ import { NftCard } from "~~/components/nft-card/NftCard";
 // import { NameCard, NameCardProps } from "~~/components/NftCardValue/NameCard";
 import { useToken, useTokens } from "~~/hooks/useToken";
 
-const test: any[] = [
+const inputOptions: any[] = [
   "Image",
   "Name",
   "Description",
@@ -28,7 +28,7 @@ const Home: NextPage = () => {
     setCheckeds([...temp]);
   };
 
-  const inputComponents = test.map((inputName, index) => {
+  const inputComponents = inputOptions.map((inputName, index) => {
     return (
       <div key={index + "-input"}>
         <label className="m-1">
@@ -46,14 +46,14 @@ const Home: NextPage = () => {
     );
   });
 
+  const componentsToRender: any = [];
+  for (let i = 0; i < checkeds.length; i++) {
+    if (checkeds[i]) componentsToRender.push(inputOptions[i]);
+  }
+
   const token = useToken(BigInt(4), "nftstorage");
 
   const tokens = useTokens([BigInt(1), BigInt(2), BigInt(3), BigInt(4)], "nftstorage");
-
-  const componentsToRender: any = [];
-  for (let i = 0; i < checkeds.length; i++) {
-    if (checkeds[i]) componentsToRender.push(test[i]);
-  }
 
   const tokensComponents = tokens.map((token, index) => {
     return <NftCard key={index} token={token} renderOrder={componentsToRender} />;

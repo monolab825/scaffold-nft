@@ -21,7 +21,8 @@ contract DeployScript is ScaffoldETHDeploy {
             "ipfs://bafybeicpvzgkhgyhwggrtctzvztuk2mftmt56xogv6pi7mx2v42go35ltu/",
             0,
             0,
-            0
+            0,
+            1
         );
 
         console.logString(
