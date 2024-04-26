@@ -1,6 +1,6 @@
 "use client";
 
-export default function NftCollection({ params }: { params: { id: string } }) {
+export default function Collection({ params }: { params: { id: string } }) {
   console.log(params);
 
   return (
