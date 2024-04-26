@@ -12,6 +12,18 @@ export type AddressCardProps = {
   bgColor?: string;
 };
 
+const containerStyleMap = {
+  base: "m-1 p-1",
+};
+
+const descriptorStyleMap = {
+  base: "p-0 m-0 text-xs",
+};
+
+const valueStyleMap = {
+  base: "xs",
+} as any;
+
 export const AddressCard = ({
   value,
   style = "rounded",
@@ -20,16 +32,11 @@ export const AddressCard = ({
   descriptorText = "Contract Address",
   bgColor = "bg-base-200",
 }: AddressCardProps) => {
-  const sizeMap = {
-    sm: "",
-    base: "max-w-3xl",
-  };
-
-  const component = <Address address={value} />;
+  const component = <Address address={value} size={valueStyleMap[size]} />;
 
   return (
-    <div className={`${bgColor} ${beautyStyleMap[style]} p-2 m-2 ${sizeMap[size]}`}>
-      {showDescriptor ? <p className="text-center">{descriptorText}</p> : <></>}
+    <div className={`${bgColor} ${beautyStyleMap[style]} ${containerStyleMap[size]}`}>
+      {showDescriptor ? <p className={`text-center ${descriptorStyleMap[size]}`}>{descriptorText}</p> : <></>}
       {component}
     </div>
   );

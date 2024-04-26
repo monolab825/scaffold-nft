@@ -175,14 +175,36 @@ export const NftCard = ({
           style={style}
           renderOrder={collectionComponents}
           AddressCard={props => {
-            return <AddressCard {...props} value={token?.contract?.address} showDescriptor={true} style={style} />;
+            return (
+              <AddressCard
+                {...props}
+                value={token?.contract?.address}
+                showDescriptor={true}
+                style={style}
+                size={size}
+              />
+            );
           }}
           CollectionNameCard={props => {
-            return <CollectionNameCard {...props} value={token?.collectionName} showDescriptor={true} style={style} />;
+            return (
+              <CollectionNameCard
+                {...props}
+                value={token?.collectionName}
+                showDescriptor={true}
+                style={style}
+                size={size}
+              />
+            );
           }}
           CollectionSymbolCard={props => {
             return (
-              <CollectionSymbolCard {...props} value={token?.collectionSymbol} showDescriptor={true} style={style} />
+              <CollectionSymbolCard
+                {...props}
+                value={token?.collectionSymbol}
+                showDescriptor={true}
+                style={style}
+                size={size}
+              />
             );
           }}
         />,
@@ -190,17 +212,37 @@ export const NftCard = ({
     } else if (collectionDataLoadType === "Individual") {
       for (let i = 0; i < collectionComponents.length; i++) {
         if (collectionComponents[i] === "Address") {
-          renderedComponents.push(<AddressCard value={token?.contract?.address} showDescriptor={true} style={style} />);
+          renderedComponents.push(
+            <AddressCard
+              key={renderedComponents.length}
+              value={token?.contract?.address}
+              showDescriptor={true}
+              style={style}
+              size={size}
+            />,
+          );
         }
 
         if (collectionComponents[i] === "CollectionName") {
           renderedComponents.push(
-            <CollectionNameCard value={token?.collectionName} showDescriptor={true} style={style} />,
+            <CollectionNameCard
+              key={renderedComponents.length}
+              value={token?.collectionName}
+              showDescriptor={true}
+              style={style}
+              size={size}
+            />,
           );
         }
         if (collectionComponents[i] === "CollectionSymbol") {
           renderedComponents.push(
-            <CollectionSymbolCard value={token?.collectionSymbol} showDescriptor={true} style={style} />,
+            <CollectionSymbolCard
+              key={renderedComponents.length}
+              value={token?.collectionSymbol}
+              showDescriptor={true}
+              style={style}
+              size={size}
+            />,
           );
         }
       }
