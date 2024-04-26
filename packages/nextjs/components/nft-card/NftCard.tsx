@@ -157,7 +157,7 @@ export const NftCard = ({
     }
 
     if (renderOrder[i] === "Id") {
-      renderedComponents.push(<IdCard key={i} value={token?.id} showDescriptor={true} style={style} />);
+      renderedComponents.push(<IdCard key={i} value={token?.id} showDescriptor={true} style={style} size={size} />);
     }
 
     if (renderOrder[i] === "Address" || renderOrder[i] === "CollectionName" || renderOrder[i] === "CollectionSymbol") {
