@@ -10,14 +10,22 @@ export type NameCardProps = {
   size?: Size;
 };
 
-export const NameCard = ({
-  value,
-  prettyLoad,
-  showDescriptor,
-  style = "rounded",
-}: //,size = "base"
-NameCardProps) => {
-  const component = <p className={`text-4xl text-center`}>{value}</p>;
+const sizeMap = {
+  sm: "max-w-3xl p-2 m-2",
+  base: "max-w-3xl p-2 m-2",
+};
+
+const descriptorMap = {
+  sm: "p-0 m-0",
+  base: "",
+};
+
+const nameMap = {
+  sm: "text-xl m-0",
+  base: "text-4xl",
+};
+export const NameCard = ({ value, prettyLoad, showDescriptor, style = "rounded", size = "base" }: NameCardProps) => {
+  const component = <p className={`text-center ${nameMap[size]}`}>{value}</p>;
 
   let output;
 
@@ -28,8 +36,8 @@ NameCardProps) => {
   }
 
   return (
-    <div className={`bg-base-200 ${styleMap[style]} p-2 m-2 max-w-3xl`}>
-      {showDescriptor ? <p className="text-center">Name</p> : <></>}
+    <div className={`bg-base-200 ${styleMap[style]} ${sizeMap[size]}`}>
+      {showDescriptor ? <p className={`text-center ${descriptorMap[size]}`}>Name</p> : <></>}
       {output}
     </div>
   );

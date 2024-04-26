@@ -21,6 +21,7 @@ export const AddressCard = ({
   bgColor = "bg-base-200",
 }: AddressCardProps) => {
   const sizeMap = {
+    sm: "",
     base: "max-w-3xl",
   };
 

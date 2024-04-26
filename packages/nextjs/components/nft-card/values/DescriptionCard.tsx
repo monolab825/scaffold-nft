@@ -19,6 +19,7 @@ export const DescriptionCard = ({
   showDescriptor,
 }: DescriptionCardProps) => {
   const sizeMap = {
+    sm: "",
     base: "max-w-3xl",
   };
 

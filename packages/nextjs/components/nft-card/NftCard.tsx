@@ -15,6 +15,7 @@ import { ScaffoldToken } from "~~/types/ScaffoldToken";
 
 const loadingSizeMap = {
   base: "text-8xl",
+  sm: "text-4xl",
 };
 
 type PrettyLoadType = "animated" | "text";
@@ -103,7 +104,8 @@ export const NftCard = ({
   style = "rounded",
 }: Props) => {
   const sizeMap = {
-    base: "max-w-96 lg:max-w-max",
+    sm: "max-w-64 m-0.5 lg:max-w-96 lg:m-3",
+    base: "max-w-96 lg:max-w-max m-4",
   };
 
   const prettyLoadMap = {
@@ -123,12 +125,14 @@ export const NftCard = ({
   for (let i = 0; i < renderOrder.length; i++) {
     if (renderOrder[i] === "Image") {
       renderedComponents.push(
-        <ImageCard key={i} value={token?.metadata?.image} showDescriptor={false} style={style} />,
+        <ImageCard key={i} value={token?.metadata?.image} showDescriptor={false} style={style} size={size} />,
       );
     }
 
     if (renderOrder[i] === "Name") {
-      renderedComponents.push(<NameCard key={i} value={token?.metadata?.name} showDescriptor={true} style={style} />);
+      renderedComponents.push(
+        <NameCard key={i} value={token?.metadata?.name} showDescriptor={true} style={style} size={size} />,
+      );
     }
 
     if (renderOrder[i] === "Description") {
@@ -215,9 +219,5 @@ export const NftCard = ({
     cardContent = renderedComponents;
   }
 
-  return (
-    <div className={`flex flex-col items-center bg-base-300 m-4 ${sizeMap[size]} ${styleMap[style]}`}>
-      {cardContent}
-    </div>
-  );
+  return <div className={`flex flex-col bg-base-300  ${sizeMap[size]} ${styleMap[style]}`}>{cardContent}</div>;
 };

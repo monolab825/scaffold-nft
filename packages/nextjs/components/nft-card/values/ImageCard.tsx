@@ -8,12 +8,12 @@ export type ImageCardProps = {
   prettyLoad?: boolean;
   size?: Size;
   style?: Style;
-
   showDescriptor?: boolean;
 };
 
 const sizeMap = {
-  base: "w-96",
+  sm: "w-28 m-2 p-1 lg:w-64 lg:m-2 lg:p-2",
+  base: "w-96 p-2 m-2",
 };
 
 export const ImageCard = ({
@@ -24,7 +24,7 @@ export const ImageCard = ({
   style = "rounded",
   showDescriptor = false,
 }: ImageCardProps) => {
-  const component = <img src={value} alt={alt} className={`bg-base-300 ${sizeMap[size]} ${styleMap[style]}`} />;
+  const component = <img src={value} alt={alt} className={`bg-base-300 ${styleMap[style]}`} />;
 
   let output;
 
@@ -35,7 +35,7 @@ export const ImageCard = ({
   }
 
   return (
-    <div className={`p-2 bg-base-200 m-2 ${styleMap[style]}`}>
+    <div className={`bg-base-200 ${sizeMap[size]} ${styleMap[style]}`}>
       {showDescriptor ? <p className="text-center">Image</p> : <></>}
 
       {output}

@@ -17,6 +17,8 @@ export const useToken = (tokenId: bigint, replacementType: "ipfs" | "nftstorage"
     args: [tokenId],
   });
 
+  console.log(tokenURI);
+
   const { data: collectionName } = useScaffoldReadContract({
     contractName: "ScaffoldERC721",
     functionName: "name",
@@ -40,5 +42,6 @@ export const useToken = (tokenId: bigint, replacementType: "ipfs" | "nftstorage"
   token.uri = formattedURI;
   token.collectionName = collectionName;
   token.collectionSymbol = collectionSymbol;
+
   return token;
 };
