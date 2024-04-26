@@ -56,7 +56,7 @@ const Home: NextPage = () => {
   const tokens = useTokens([BigInt(1), BigInt(2), BigInt(3), BigInt(4)], "nftstorage");
 
   const tokensComponents = tokens.map((token, index) => {
-    return <NftCard key={index} token={token} renderOrder={componentsToRender} />;
+    return <NftCard key={index} token={token} renderOrder={componentsToRender} collectionDataLoadType="Individual" />;
   });
 
   return (

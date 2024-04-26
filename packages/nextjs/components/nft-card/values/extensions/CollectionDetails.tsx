@@ -8,6 +8,7 @@ import { CollectionNameCard } from "../CollectionNameCard";
 import { CollectionNameCardProps } from "../CollectionNameCard";
 import { CollectionSymbolCard } from "../CollectionSymbolCard";
 import { CollectionSymbolCardProps } from "../CollectionSymbolCard";
+import { v4 as uuidv4 } from "uuid";
 import { ScaffoldToken } from "~~/types/ScaffoldToken";
 
 export type CollectionDetailsProps = {
@@ -54,7 +55,8 @@ const descriptorStyleMap = {
 };
 
 const valueStyleMap = {
-  base: "text-md m-0",
+  base: "flex-col m-0",
+  //large: flex-wrap
 };
 
 export const CollectionDetails = ({
@@ -73,26 +75,34 @@ export const CollectionDetails = ({
   for (let i = 0; i < renderOrder.length; i++) {
     if (renderOrder[i] === "Address") {
       renderedComponents.push(
-        <AddressCard key={i} value={token?.contract?.address} showDescriptor={true} bgColor="bg-base-100" />,
+        <AddressCard
+          key={uuidv4()}
+          value={token?.contract?.address}
+          showDescriptor={true}
+          bgColor="bg-base-100"
+          size={size}
+        />,
       );
     } else if (renderOrder[i] === "CollectionName") {
       renderedComponents.push(
         <CollectionNameCard
-          key={i}
+          key={uuidv4()}
           value={token?.collectionName}
           showDescriptor={true}
           bgColor="bg-base-100"
           descriptorText="Name"
+          size={size}
         />,
       );
     } else if (renderOrder[i] === "CollectionSymbol") {
       renderedComponents.push(
         <CollectionSymbolCard
-          key={i}
+          key={uuidv4()}
           value={token?.collectionSymbol}
           showDescriptor={true}
           bgColor="bg-base-100"
           descriptorText="Symbol"
+          size={size}
         />,
       );
     }
@@ -101,7 +111,7 @@ export const CollectionDetails = ({
   const component = (
     <>
       {showDescriptor ? <p className={`text-center ${descriptorStyleMap[size]}`}>Collection Details</p> : <></>}
-      <div className={`flex flex-wrap justify-center ${valueStyleMap}`}>{renderedComponents}</div>
+      <div className={`flex justify-center ${valueStyleMap[size]}`}>{renderedComponents}</div>
     </>
   );
 

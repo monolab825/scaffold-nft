@@ -17,6 +17,10 @@ type AddressProps = {
   disableAddressLink?: boolean;
   format?: "short" | "long";
   size?: "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl";
+  renderDirection?: "horizontal" | "vertical";
+  renderIcon?: boolean;
+  renderAddress?: boolean;
+  renderCopy?: boolean;
 };
 
 const blockieSizeMap = {
@@ -32,7 +36,16 @@ const blockieSizeMap = {
 /**
  * Displays an address (or ENS) with a Blockie image and option to copy address.
  */
-export const Address = ({ address, disableAddressLink, format, size = "base" }: AddressProps) => {
+export const Address = ({
+  address,
+  disableAddressLink,
+  format,
+  size = "base",
+  renderDirection = "horizontal",
+  renderIcon = true,
+  renderAddress = true,
+  renderCopy = true,
+}: AddressProps) => {
   const [ens, setEns] = useState<string | null>();
   const [ensAvatar, setEnsAvatar] = useState<string | null>();
   const [addressCopied, setAddressCopied] = useState(false);
@@ -90,8 +103,15 @@ export const Address = ({ address, disableAddressLink, format, size = "base" }: 
     displayAddress = checkSumAddress;
   }
 
-  return (
-    <div className="flex items-center">
+  let renderedDirection;
+  if (renderDirection === "vertical") {
+    renderedDirection = "flex-col";
+  }
+
+  let iconOutput;
+
+  if (renderIcon) {
+    iconOutput = (
       <div className="flex-shrink-0">
         <BlockieAvatar
           address={checkSumAddress}
@@ -99,43 +119,58 @@ export const Address = ({ address, disableAddressLink, format, size = "base" }: 
           size={(blockieSizeMap[size] * 24) / blockieSizeMap["base"]}
         />
       </div>
-      {disableAddressLink ? (
-        <span className={`ml-1.5 text-${size} font-normal`}>{displayAddress}</span>
-      ) : targetNetwork.id === hardhat.id ? (
-        <span className={`ml-1.5 text-${size} font-normal`}>
-          <Link href={blockExplorerAddressLink}>{displayAddress}</Link>
-        </span>
-      ) : (
-        <a
-          className={`ml-1.5 text-${size} font-normal`}
-          target="_blank"
-          href={blockExplorerAddressLink}
-          rel="noopener noreferrer"
-        >
-          {displayAddress}
-        </a>
-      )}
-      {addressCopied ? (
-        <CheckCircleIcon
+    );
+  }
+
+  let addressOutput;
+
+  if (renderAddress) {
+    addressOutput = disableAddressLink ? (
+      <span className={`ml-1.5 text-${size} font-normal truncate`}>{displayAddress}</span>
+    ) : targetNetwork.id === hardhat.id ? (
+      <span className={`ml-1.5 text-${size} font-normal truncate`}>
+        <Link href={blockExplorerAddressLink}>{displayAddress}</Link>
+      </span>
+    ) : (
+      <a
+        className={`ml-1.5 text-${size} font-normal`}
+        target="_blank"
+        href={blockExplorerAddressLink}
+        rel="noopener noreferrer"
+      >
+        {displayAddress}
+      </a>
+    );
+  }
+
+  let copyOutput;
+
+  if (renderCopy) {
+    copyOutput = addressCopied ? (
+      <CheckCircleIcon className="ml-1.5 text-xl font-normal text-sky-600 h-5 w-5 cursor-pointer" aria-hidden="true" />
+    ) : (
+      <CopyToClipboard
+        text={checkSumAddress}
+        onCopy={() => {
+          setAddressCopied(true);
+          setTimeout(() => {
+            setAddressCopied(false);
+          }, 800);
+        }}
+      >
+        <DocumentDuplicateIcon
           className="ml-1.5 text-xl font-normal text-sky-600 h-5 w-5 cursor-pointer"
           aria-hidden="true"
         />
-      ) : (
-        <CopyToClipboard
-          text={checkSumAddress}
-          onCopy={() => {
-            setAddressCopied(true);
-            setTimeout(() => {
-              setAddressCopied(false);
-            }, 800);
-          }}
-        >
-          <DocumentDuplicateIcon
-            className="ml-1.5 text-xl font-normal text-sky-600 h-5 w-5 cursor-pointer"
-            aria-hidden="true"
-          />
-        </CopyToClipboard>
-      )}
+      </CopyToClipboard>
+    );
+  }
+
+  return (
+    <div className={`flex ${renderedDirection} items-center`}>
+      {iconOutput}
+      {addressOutput}
+      {copyOutput}
     </div>
   );
 };

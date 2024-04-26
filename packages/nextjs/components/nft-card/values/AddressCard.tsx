@@ -13,7 +13,7 @@ export type AddressCardProps = {
 };
 
 const containerStyleMap = {
-  base: "m-1 p-1",
+  base: "my-1 mx-1 p-1",
 };
 
 const descriptorStyleMap = {

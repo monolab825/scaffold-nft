@@ -11,6 +11,7 @@ import { IdCard, IdCardProps } from "./values/IdCard";
 import { ImageCard, ImageCardProps } from "./values/ImageCard";
 import { NameCard, NameCardProps } from "./values/NameCard";
 import { CollectionDetails, CollectionDetailsProps } from "./values/extensions/CollectionDetails";
+import { v4 as uuidv4 } from "uuid";
 import { ScaffoldToken } from "~~/types/ScaffoldToken";
 
 type PrettyLoadType = "animated" | "text";
@@ -128,20 +129,20 @@ export const NftCard = ({
   for (let i = 0; i < renderOrder.length; i++) {
     if (renderOrder[i] === "Image") {
       renderedComponents.push(
-        <ImageCard key={i} value={token?.metadata?.image} showDescriptor={false} style={style} size={size} />,
+        <ImageCard key={uuidv4()} value={token?.metadata?.image} showDescriptor={false} style={style} size={size} />,
       );
     }
 
     if (renderOrder[i] === "Name") {
       renderedComponents.push(
-        <NameCard key={i} value={token?.metadata?.name} showDescriptor={true} style={style} size={size} />,
+        <NameCard key={uuidv4()} value={token?.metadata?.name} showDescriptor={true} style={style} size={size} />,
       );
     }
 
     if (renderOrder[i] === "Description") {
       renderedComponents.push(
         <DescriptionCard
-          key={i}
+          key={uuidv4()}
           value={token?.metadata?.description}
           showDescriptor={true}
           style={style}
@@ -152,12 +153,14 @@ export const NftCard = ({
 
     if (renderOrder[i] === "Attributes") {
       renderedComponents.push(
-        <AttributesCard key={i} value={token?.metadata?.attributes} showDescriptor={true} style={style} />,
+        <AttributesCard key={uuidv4()} value={token?.metadata?.attributes} showDescriptor={true} style={style} />,
       );
     }
 
     if (renderOrder[i] === "Id") {
-      renderedComponents.push(<IdCard key={i} value={token?.id} showDescriptor={true} style={style} size={size} />);
+      renderedComponents.push(
+        <IdCard key={uuidv4()} value={token?.id} showDescriptor={true} style={style} size={size} />,
+      );
     }
 
     if (renderOrder[i] === "Address" || renderOrder[i] === "CollectionName" || renderOrder[i] === "CollectionSymbol") {
@@ -169,7 +172,7 @@ export const NftCard = ({
     if (collectionDataLoadType === "Together") {
       renderedComponents.push(
         <CollectionDetailsCard
-          key={renderedComponents.length}
+          key={uuidv4()}
           token={token}
           showDescriptor={true}
           style={style}
@@ -214,7 +217,7 @@ export const NftCard = ({
         if (collectionComponents[i] === "Address") {
           renderedComponents.push(
             <AddressCard
-              key={renderedComponents.length}
+              key={uuidv4()}
               value={token?.contract?.address}
               showDescriptor={true}
               style={style}
@@ -226,7 +229,7 @@ export const NftCard = ({
         if (collectionComponents[i] === "CollectionName") {
           renderedComponents.push(
             <CollectionNameCard
-              key={renderedComponents.length}
+              key={uuidv4()}
               value={token?.collectionName}
               showDescriptor={true}
               style={style}
@@ -237,7 +240,7 @@ export const NftCard = ({
         if (collectionComponents[i] === "CollectionSymbol") {
           renderedComponents.push(
             <CollectionSymbolCard
-              key={renderedComponents.length}
+              key={uuidv4()}
               value={token?.collectionSymbol}
               showDescriptor={true}
               style={style}
