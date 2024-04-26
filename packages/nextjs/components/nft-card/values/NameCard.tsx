@@ -15,11 +15,11 @@ const containerStyleMap = {
 };
 
 const descriptorStyleMap = {
-  base: "p-0 m-0 text-sm",
+  base: "p-0 m-0 text-xs",
 };
 
 const valueStyleMap = {
-  base: "text-lg m-0",
+  base: "text-lg m-0 font-bold",
 };
 
 export const NameCard = ({ value, prettyLoad, showDescriptor, style = "rounded", size = "base" }: NameCardProps) => {

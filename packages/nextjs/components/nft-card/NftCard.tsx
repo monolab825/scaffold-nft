@@ -99,12 +99,12 @@ export const NftCard = ({
   style = "rounded",
 }: Props) => {
   const sizeMap = {
-    base: "w-32 m-0.5 lg:max-w-64 lg:m-3",
+    base: "w-32 m-0.5",
     // base: "max-w-96 lg:max-w-max m-4",
   };
 
   const animatedLoadingSizeMap = {
-    base: "h-64 w-32",
+    base: "h-80 w-32",
   };
 
   const textLoadingSizeMap = {
@@ -228,5 +228,5 @@ export const NftCard = ({
     cardContent = renderedComponents;
   }
 
-  return <div className={`flex flex-col bg-base-300  ${sizeMap[size]} ${beautyStyleMap[style]}`}>{cardContent}</div>;
+  return <div className={`flex flex-col bg-base-300 ${sizeMap[size]} ${beautyStyleMap[style]}`}>{cardContent}</div>;
 };

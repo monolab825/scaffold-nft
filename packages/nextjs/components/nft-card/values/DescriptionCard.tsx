@@ -15,7 +15,7 @@ const containerStyleMap = {
 };
 
 const descriptorStyleMap = {
-  base: "p-0 m-0 text-sm",
+  base: "p-0 m-0 text-xs",
 };
 
 const valueStyleMap = {
