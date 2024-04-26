@@ -10,6 +10,18 @@ export type DescriptionCardProps = {
   showDescriptor?: boolean;
 };
 
+const containerStyleMap = {
+  base: "p-1 m-1",
+};
+
+const descriptorStyleMap = {
+  base: "p-0 m-0 text-sm",
+};
+
+const valueStyleMap = {
+  base: "text-md m-0",
+};
+
 export const DescriptionCard = ({
   value,
   prettyLoad = false,
@@ -18,12 +30,12 @@ export const DescriptionCard = ({
 
   showDescriptor,
 }: DescriptionCardProps) => {
-  const sizeMap = {
-    sm: "",
-    base: "max-w-3xl",
-  };
+  // const sizeMap = {
+  //   sm: "",
+  //   base: "max-w-3xl",
+  // };
 
-  const component = <p className={`text-2xl text-center`}>{value}</p>;
+  const component = <p className={`text-center ${valueStyleMap[size]}`}>{value}</p>;
 
   let output;
 
@@ -34,8 +46,8 @@ export const DescriptionCard = ({
   }
 
   return (
-    <div className={`m-2 bg-base-200 ${beautyStyleMap[style]} p-2 ${sizeMap[size]}`}>
-      {showDescriptor ? <p className="text-center">Description</p> : <></>}
+    <div className={`bg-base-200 ${beautyStyleMap[style]} ${containerStyleMap[size]}`}>
+      {showDescriptor ? <p className={`text-center ${descriptorStyleMap[size]}`}>Description</p> : <></>}
       {output}
     </div>
   );

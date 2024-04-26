@@ -5,4 +5,4 @@ export const beautyStyleMap = {
 
 export type Style = "rounded" | "straight";
 
-export type Size = "base" | "sm";
+export type Size = "base";

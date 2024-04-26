@@ -11,19 +11,17 @@ export type NameCardProps = {
 };
 
 const containerStyleMap = {
-  sm: "max-w-3xl p-1 m-1",
-  base: "max-w-3xl p-2 m-2",
+  base: "p-1 m-1",
 };
 
 const descriptorStyleMap = {
-  sm: "p-0 m-0",
-  base: "",
+  base: "p-0 m-0 text-sm",
 };
 
 const valueStyleMap = {
-  sm: "text-lg m-0",
-  base: "text-4xl",
+  base: "text-lg m-0",
 };
+
 export const NameCard = ({ value, prettyLoad, showDescriptor, style = "rounded", size = "base" }: NameCardProps) => {
   const component = <p className={`text-center ${valueStyleMap[size]}`}>{value}</p>;
 

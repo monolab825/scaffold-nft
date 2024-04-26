@@ -13,11 +13,6 @@ import { NameCard, NameCardProps } from "./values/NameCard";
 import { CollectionDetails, CollectionDetailsProps } from "./values/extensions/CollectionDetails";
 import { ScaffoldToken } from "~~/types/ScaffoldToken";
 
-const loadingSizeMap = {
-  base: "text-8xl",
-  sm: "text-4xl",
-};
-
 type PrettyLoadType = "animated" | "text";
 
 type Props = {
@@ -104,19 +99,27 @@ export const NftCard = ({
   style = "rounded",
 }: Props) => {
   const sizeMap = {
-    sm: "max-w-64 m-0.5 lg:max-w-96 lg:m-3",
-    base: "max-w-96 lg:max-w-max m-4",
+    base: "w-32 m-0.5 lg:max-w-64 lg:m-3",
+    // base: "max-w-96 lg:max-w-max m-4",
+  };
+
+  const animatedLoadingSizeMap = {
+    base: "h-64 w-32",
+  };
+
+  const textLoadingSizeMap = {
+    base: "text-4xl",
   };
 
   const prettyLoadMap = {
     animated: (
       <div className="animate-pulse flex space-x-4">
         <div className="flex items-center space-y-6">
-          <div className="h-64 w-96 bg-slate-300 rounded"></div>
+          <div className={`bg-slate-300 ${animatedLoadingSizeMap[size]}  ${beautyStyleMap[style]}`}></div>
         </div>
       </div>
     ),
-    text: <p className={`text-center ${loadingSizeMap[size]}`}>Loading NFT...</p>,
+    text: <p className={`text-center ${textLoadingSizeMap[size]}`}>Loading NFT...</p>,
   };
 
   const renderedComponents: any = [];
@@ -137,7 +140,13 @@ export const NftCard = ({
 
     if (renderOrder[i] === "Description") {
       renderedComponents.push(
-        <DescriptionCard key={i} value={token?.metadata?.description} showDescriptor={true} style={style} />,
+        <DescriptionCard
+          key={i}
+          value={token?.metadata?.description}
+          showDescriptor={true}
+          style={style}
+          size={size}
+        />,
       );
     }
 
