@@ -11,8 +11,8 @@ export type ImageCardProps = {
   showDescriptor?: boolean;
 };
 
-const sizeMap = {
-  sm: "w-28 m-2 p-1 lg:w-64 lg:m-2 lg:p-2",
+const containerSizeMap = {
+  sm: "w-[120px] m-1 p-1 lg:w-64 lg:m-2 lg:p-2",
   base: "w-96 p-2 m-2",
 };
 
@@ -35,7 +35,7 @@ export const ImageCard = ({
   }
 
   return (
-    <div className={`bg-base-200 ${sizeMap[size]} ${beautyStyleMap[style]}`}>
+    <div className={`bg-base-200 ${containerSizeMap[size]} ${beautyStyleMap[style]}`}>
       {showDescriptor ? <p className="text-center">Image</p> : <></>}
 
       {output}

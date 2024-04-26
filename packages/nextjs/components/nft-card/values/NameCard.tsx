@@ -11,7 +11,7 @@ export type NameCardProps = {
 };
 
 const containerStyleMap = {
-  sm: "max-w-3xl p-2 m-2",
+  sm: "max-w-3xl p-1 m-1",
   base: "max-w-3xl p-2 m-2",
 };
 
@@ -21,7 +21,7 @@ const descriptorStyleMap = {
 };
 
 const valueStyleMap = {
-  sm: "text-xl m-0",
+  sm: "text-lg m-0",
   base: "text-4xl",
 };
 export const NameCard = ({ value, prettyLoad, showDescriptor, style = "rounded", size = "base" }: NameCardProps) => {
