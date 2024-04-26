@@ -16,11 +16,13 @@ const Home: NextPage = () => {
       </div> */}
 
       <div className="flex flex-wrap justify-center m-1 p-1 bg-base-100 rounded">
-        <NftCard token={token} renderOrder={["Image", "Name", "Description", "Attributes"]} />
-        <NftCard token={token} renderOrder={["Image", "Name", "Id", "CollectionName", "CollectionSymbol", "Address"]} />
-        <NftCard token={token} renderOrder={["Image", "Name"]} />
-        <NftCard token={token} renderOrder={["Image"]} />
-        <NftCard token={token} renderOrder={["Image"]} />
+        <NftCard token={token} />
+        <NftCard token={token} />
+        <NftCard token={token} />
+        <NftCard token={token} />
+        <NftCard token={token} />
+        <NftCard token={token} />
+        <NftCard token={token} />
       </div>
 
       {/* <div className="flex justify-center">
