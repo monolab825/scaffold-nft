@@ -45,12 +45,24 @@ const CollectionSymbolCardComponent = (props: CollectionSymbolCardProps) => {
   return <CollectionSymbolCard {...props} />;
 };
 
+const containerStyleMap = {
+  base: "m-1 p-1",
+};
+
+const descriptorStyleMap = {
+  base: "p-0 m-0 text-xs",
+};
+
+const valueStyleMap = {
+  base: "text-md m-0",
+};
+
 export const CollectionDetails = ({
   token,
   prettyLoad,
   style = "rounded",
   showDescriptor,
-  // size = "base",
+  size = "base",
   renderOrder = ["Address", "CollectionName", "CollectionSymbol"],
   AddressCard = AddressCardComponent,
   CollectionNameCard = CollectionNameCardComponent,
@@ -88,8 +100,8 @@ export const CollectionDetails = ({
 
   const component = (
     <>
-      {showDescriptor ? <p className="text-center">Collection Details</p> : <></>}
-      <div className="flex flex-wrap justify-center">{renderedComponents}</div>
+      {showDescriptor ? <p className={`text-center ${descriptorStyleMap[size]}`}>Collection Details</p> : <></>}
+      <div className={`flex flex-wrap justify-center ${valueStyleMap}`}>{renderedComponents}</div>
     </>
   );
 
@@ -108,5 +120,5 @@ export const CollectionDetails = ({
     output = component;
   }
 
-  return <div className={`bg-base-200 ${beautyStyleMap[style]} p-2 m-2 max-w-3xl`}>{output}</div>;
+  return <div className={`bg-base-200 ${beautyStyleMap[style]} ${containerStyleMap[size]}`}>{output}</div>;
 };

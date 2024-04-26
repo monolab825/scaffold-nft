@@ -36,11 +36,11 @@ export const AttributesCard = ({
   };
 
   const attributeTraitTypeStyleMap = {
-    base: "m-0",
+    base: "m-0 text-sm",
   };
 
   const attributeValueStyleMap = {
-    base: "m-0",
+    base: "m-0 text-md",
   };
 
   const components = value?.map((attribute: any, index: number) => {
@@ -49,8 +49,8 @@ export const AttributesCard = ({
         key={index}
         className={`bg-base-100 text-center ${attributeContainerStyleMap[size]} ${beautyStyleMap[style]}`}
       >
-        <p className={`text-sm ${attributeTraitTypeStyleMap[size]}`}>{attribute["trait_type"]}</p>
-        <p className={`text-lg ${attributeValueStyleMap[size]}`}>{attribute["value"]}</p>
+        <p className={`${attributeTraitTypeStyleMap[size]}`}>{attribute["trait_type"]}</p>
+        <p className={`${attributeValueStyleMap[size]}`}>{attribute["value"]}</p>
       </div>
     );
   });
