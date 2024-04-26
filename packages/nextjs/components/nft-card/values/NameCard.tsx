@@ -1,6 +1,6 @@
 "use client";
 
-import { Size, Style, styleMap } from "../types/Types";
+import { Size, Style, beautyStyleMap } from "../types/Types";
 
 export type NameCardProps = {
   value?: string;
@@ -10,22 +10,22 @@ export type NameCardProps = {
   size?: Size;
 };
 
-const sizeMap = {
+const containerStyleMap = {
   sm: "max-w-3xl p-2 m-2",
   base: "max-w-3xl p-2 m-2",
 };
 
-const descriptorMap = {
+const descriptorStyleMap = {
   sm: "p-0 m-0",
   base: "",
 };
 
-const nameMap = {
+const valueStyleMap = {
   sm: "text-xl m-0",
   base: "text-4xl",
 };
 export const NameCard = ({ value, prettyLoad, showDescriptor, style = "rounded", size = "base" }: NameCardProps) => {
-  const component = <p className={`text-center ${nameMap[size]}`}>{value}</p>;
+  const component = <p className={`text-center ${valueStyleMap[size]}`}>{value}</p>;
 
   let output;
 
@@ -36,8 +36,8 @@ export const NameCard = ({ value, prettyLoad, showDescriptor, style = "rounded",
   }
 
   return (
-    <div className={`bg-base-200 ${styleMap[style]} ${sizeMap[size]}`}>
-      {showDescriptor ? <p className={`text-center ${descriptorMap[size]}`}>Name</p> : <></>}
+    <div className={`bg-base-200 ${beautyStyleMap[style]} ${containerStyleMap[size]}`}>
+      {showDescriptor ? <p className={`text-center ${descriptorStyleMap[size]}`}>Name</p> : <></>}
       {output}
     </div>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { Size, Style, styleMap } from "../types/Types";
+import { Size, Style, beautyStyleMap } from "../types/Types";
 
 export type DescriptionCardProps = {
   value?: string;
@@ -34,7 +34,7 @@ export const DescriptionCard = ({
   }
 
   return (
-    <div className={`m-2 bg-base-200 ${styleMap[style]} p-2 ${sizeMap[size]}`}>
+    <div className={`m-2 bg-base-200 ${beautyStyleMap[style]} p-2 ${sizeMap[size]}`}>
       {showDescriptor ? <p className="text-center">Description</p> : <></>}
       {output}
     </div>

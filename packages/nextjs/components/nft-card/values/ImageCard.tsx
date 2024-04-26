@@ -1,6 +1,6 @@
 "use client";
 
-import { Size, Style, styleMap } from "../types/Types";
+import { Size, Style, beautyStyleMap } from "../types/Types";
 
 export type ImageCardProps = {
   value?: string;
@@ -24,7 +24,7 @@ export const ImageCard = ({
   style = "rounded",
   showDescriptor = false,
 }: ImageCardProps) => {
-  const component = <img src={value} alt={alt} className={`bg-base-300 ${styleMap[style]}`} />;
+  const component = <img src={value} alt={alt} className={`bg-base-300 ${beautyStyleMap[style]}`} />;
 
   let output;
 
@@ -35,7 +35,7 @@ export const ImageCard = ({
   }
 
   return (
-    <div className={`bg-base-200 ${sizeMap[size]} ${styleMap[style]}`}>
+    <div className={`bg-base-200 ${sizeMap[size]} ${beautyStyleMap[style]}`}>
       {showDescriptor ? <p className="text-center">Image</p> : <></>}
 
       {output}

@@ -1,4 +1,4 @@
-export const styleMap = {
+export const beautyStyleMap = {
   rounded: "rounded-lg",
   straight: "",
 };

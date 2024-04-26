@@ -1,7 +1,7 @@
 "use client";
 
 import { Address } from "../../scaffold-eth";
-import { Size, Style, styleMap } from "../types/Types";
+import { Size, Style, beautyStyleMap } from "../types/Types";
 
 export type AddressCardProps = {
   value?: string;
@@ -28,7 +28,7 @@ export const AddressCard = ({
   const component = <Address address={value} />;
 
   return (
-    <div className={`${bgColor} ${styleMap[style]} p-2 m-2 ${sizeMap[size]}`}>
+    <div className={`${bgColor} ${beautyStyleMap[style]} p-2 m-2 ${sizeMap[size]}`}>
       {showDescriptor ? <p className="text-center">{descriptorText}</p> : <></>}
       {component}
     </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Size, Style, styleMap } from "../types/Types";
+import { Size, Style, beautyStyleMap } from "../types/Types";
 
 export type IdCardProps = {
   value?: bigint;
@@ -35,7 +35,7 @@ IdCardProps) => {
   }
 
   return (
-    <div className={`bg-base-200 ${styleMap[style]} p-2 m-2 max-w-3xl`}>
+    <div className={`bg-base-200 ${beautyStyleMap[style]} p-2 m-2 max-w-3xl`}>
       {showDescriptor ? <p className="text-center">Token Id</p> : <></>}
       {output}
     </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { ComponentType } from "react";
-import { Size, Style, styleMap } from "./types/Types";
+import { Size, Style, beautyStyleMap } from "./types/Types";
 import { AddressCard, AddressCardProps } from "./values/AddressCard";
 import { AttributesCard, AttributesCardProps } from "./values/AttributesCard";
 import { CollectionNameCard, CollectionNameCardProps } from "./values/CollectionNameCard";
@@ -219,5 +219,5 @@ export const NftCard = ({
     cardContent = renderedComponents;
   }
 
-  return <div className={`flex flex-col bg-base-300  ${sizeMap[size]} ${styleMap[style]}`}>{cardContent}</div>;
+  return <div className={`flex flex-col bg-base-300  ${sizeMap[size]} ${beautyStyleMap[style]}`}>{cardContent}</div>;
 };

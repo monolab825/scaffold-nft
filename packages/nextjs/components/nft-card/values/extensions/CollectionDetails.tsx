@@ -1,7 +1,7 @@
 "use client";
 
 import { ComponentType } from "react";
-import { Size, Style, styleMap } from "../../types/Types";
+import { Size, Style, beautyStyleMap } from "../../types/Types";
 import { AddressCard } from "../AddressCard";
 import { AddressCardProps } from "../AddressCard";
 import { CollectionNameCard } from "../CollectionNameCard";
@@ -108,5 +108,5 @@ export const CollectionDetails = ({
     output = component;
   }
 
-  return <div className={`bg-base-200 ${styleMap[style]} p-2 m-2 max-w-3xl`}>{output}</div>;
+  return <div className={`bg-base-200 ${beautyStyleMap[style]} p-2 m-2 max-w-3xl`}>{output}</div>;
 };

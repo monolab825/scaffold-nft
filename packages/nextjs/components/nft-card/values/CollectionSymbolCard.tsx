@@ -1,6 +1,6 @@
 "use client";
 
-import { Size, Style, styleMap } from "../types/Types";
+import { Size, Style, beautyStyleMap } from "../types/Types";
 
 export type CollectionSymbolCardProps = {
   value?: string;
@@ -34,7 +34,7 @@ export const CollectionSymbolCard = ({
   }
 
   return (
-    <div className={`${bgColor} ${styleMap[style]} p-2 m-2 max-w-3xl`}>
+    <div className={`${bgColor} ${beautyStyleMap[style]} p-2 m-2 max-w-3xl`}>
       {showDescriptor ? <p className="text-center">{descriptorText}</p> : <></>}
 
       {output}
