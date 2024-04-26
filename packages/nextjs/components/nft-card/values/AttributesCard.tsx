@@ -16,13 +16,41 @@ export const AttributesCard = ({
   prettyLoad = false,
   showDescriptor,
   style = "rounded",
-}: // size = "base",
-AttributesCardProps) => {
+  size = "base",
+}: AttributesCardProps) => {
+  const containerStyleMap = {
+    base: "m-1 p-1",
+  };
+
+  const descriptorStyleMap = {
+    base: "p-0 m-0 text-xs",
+  };
+
+  const attributesContainerStyleMap = {
+    base: "flex-col",
+    //large: flex-wrap
+  };
+
+  const attributeContainerStyleMap = {
+    base: "my-1",
+  };
+
+  const attributeTraitTypeStyleMap = {
+    base: "m-0",
+  };
+
+  const attributeValueStyleMap = {
+    base: "m-0",
+  };
+
   const components = value?.map((attribute: any, index: number) => {
     return (
-      <div key={index} className={`bg-base-100 w-[115px] text-center m-2 ${beautyStyleMap[style]}`}>
-        <p className="text-sm">{attribute["trait_type"]}</p>
-        <p className="text-lg">{attribute["value"]}</p>
+      <div
+        key={index}
+        className={`bg-base-100 text-center ${attributeContainerStyleMap[size]} ${beautyStyleMap[style]}`}
+      >
+        <p className={`text-sm ${attributeTraitTypeStyleMap[size]}`}>{attribute["trait_type"]}</p>
+        <p className={`text-lg ${attributeValueStyleMap[size]}`}>{attribute["value"]}</p>
       </div>
     );
   });
@@ -36,9 +64,9 @@ AttributesCardProps) => {
   }
 
   return (
-    <div className={`m-2 bg-base-200 p-2 max-w-3xl ${beautyStyleMap[style]}`}>
-      {showDescriptor ? <p className="text-center">Attributes</p> : <></>}
-      <div className="flex flex-wrap justify-center">{output}</div>
+    <div className={`bg-base-200 ${containerStyleMap[size]} ${beautyStyleMap[style]}`}>
+      {showDescriptor ? <p className={`text-center ${descriptorStyleMap[size]}`}>Attributes</p> : <></>}
+      <div className={`flex ${attributesContainerStyleMap[size]} justify-center`}>{output}</div>
     </div>
   );
 };

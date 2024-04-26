@@ -11,7 +11,7 @@ export type NameCardProps = {
 };
 
 const containerStyleMap = {
-  base: "p-1 m-1",
+  base: "m-1 p-1",
 };
 
 const descriptorStyleMap = {
