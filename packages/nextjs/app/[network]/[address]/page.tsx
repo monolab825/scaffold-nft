@@ -58,7 +58,7 @@ export default function Collection({ params }: { params: { network: string; addr
   );
 
   const tokensComponents = tokens.map((token, index) => {
-    return <NftCard key={index} token={token} renderOrder={componentsToRender} collectionDataLoadType="Individual" />;
+    return <NftCard key={index} token={token} renderOrder={componentsToRender} />;
   });
 
   return (
