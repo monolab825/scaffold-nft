@@ -34,7 +34,7 @@ export const CollectionNameCard = ({
   descriptorText = "Collection Name",
   bgColor = "bg-base-200",
 }: CollectionNameCardProps) => {
-  const component = <p className={`text-center ${valueStyleMap[size]}`}>{value}</p>;
+  const component = <p className={`text-center break-words hyphens-auto ${valueStyleMap[size]}`}>{value}</p>;
 
   let output;
 
