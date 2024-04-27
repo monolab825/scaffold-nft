@@ -7,12 +7,13 @@ import { useTokens } from "~~/hooks/useTokens2";
 const inputOptions: any[] = [
   "Image",
   "Name",
+
+  "Id",
   "Description",
   "Attributes",
   "Address",
   "CollectionName",
   "CollectionSymbol",
-  "Id",
 ];
 
 export default function Collection({ params }: { params: { network: string; address: string } }) {
