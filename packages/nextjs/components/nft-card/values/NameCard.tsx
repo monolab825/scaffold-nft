@@ -23,7 +23,11 @@ const valueStyleMap = {
 };
 
 export const NameCard = ({ value, prettyLoad, showDescriptor, style = "rounded", size = "base" }: NameCardProps) => {
-  const component = <p className={`text-center ${valueStyleMap[size]}`}>{value}</p>;
+  const component = value ? (
+    <p className={`text-center ${valueStyleMap[size]}`}>{value}</p>
+  ) : (
+    <p className={`text-center text-base-100 ${valueStyleMap[size]}`}>{"None"}</p>
+  );
 
   let output;
 

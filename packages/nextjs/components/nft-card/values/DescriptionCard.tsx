@@ -35,7 +35,13 @@ export const DescriptionCard = ({
   //   base: "max-w-3xl",
   // };
 
-  const component = <p className={`text-center ${valueStyleMap[size]}`}>{value}</p>;
+  // const component = <p className={`text-center ${valueStyleMap[size]}`}>{value}</p>;
+
+  const component = value ? (
+    <p className={`text-center ${valueStyleMap[size]}`}>{value}</p>
+  ) : (
+    <p className={`text-center text-base-100 ${valueStyleMap[size]}`}>{"None"}</p>
+  );
 
   let output;
 
