@@ -17,6 +17,7 @@ export type CollectionDetailsProps = {
   prettyLoad?: boolean;
   style?: Style;
   size?: Size;
+  bgColor?: string;
 
   showDescriptor?: boolean;
   renderOrder?: ("Address" | "CollectionName" | "CollectionSymbol")[];
@@ -65,6 +66,7 @@ export const CollectionDetails = ({
   style = "rounded",
   showDescriptor,
   size = "base",
+  bgColor = "bg-base-200",
   renderOrder = ["Address", "CollectionName", "CollectionSymbol"],
   AddressCard = AddressCardComponent,
   CollectionNameCard = CollectionNameCardComponent,
@@ -122,5 +124,5 @@ export const CollectionDetails = ({
     output = component;
   }
 
-  return <div className={`bg-base-200 ${beautyStyleMap[style]} ${containerStyleMap[size]}`}>{output}</div>;
+  return <div className={`${bgColor} ${beautyStyleMap[style]} ${containerStyleMap[size]}`}>{output}</div>;
 };

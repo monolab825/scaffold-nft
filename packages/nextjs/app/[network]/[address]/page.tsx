@@ -2,7 +2,23 @@
 
 import { useState } from "react";
 import { NftCard } from "~~/components/nft-card/NftCard";
+import { AddressCard, AddressCardProps } from "~~/components/nft-card/values/AddressCard";
+import { CollectionNameCard, CollectionNameCardProps } from "~~/components/nft-card/values/CollectionNameCard";
+import { CollectionSymbolCard, CollectionSymbolCardProps } from "~~/components/nft-card/values/CollectionSymbolCard";
+import { CollectionDetails } from "~~/components/nft-card/values/extensions/CollectionDetails";
 import { useTokens } from "~~/hooks/useTokens2";
+
+const AddressCardComponent = (props: AddressCardProps) => {
+  return <AddressCard {...props} bgColor="bg-base-300" />;
+};
+
+const CollectionNameCardComponent = (props: CollectionNameCardProps) => {
+  return <CollectionNameCard {...props} bgColor="bg-base-300" />;
+};
+
+const CollectionSymbolCardComponent = (props: CollectionSymbolCardProps) => {
+  return <CollectionSymbolCard {...props} bgColor="bg-base-300" />;
+};
 
 const inputOptions: any[] = [
   "Image",
@@ -16,7 +32,7 @@ const inputOptions: any[] = [
 ];
 
 export default function Collection({ params }: { params: { network: string; address: string } }) {
-  const [checkeds, setCheckeds] = useState<boolean[]>([true, true, true, true, true, true, true, true]);
+  const [checkeds, setCheckeds] = useState<boolean[]>([true, true, true, true, true, false, false, false]);
 
   const handleChange = (index: number) => {
     const temp: boolean[] = checkeds;
@@ -52,7 +68,7 @@ export default function Collection({ params }: { params: { network: string; addr
   const tokens = useTokens(
     params["network"],
     params["address"],
-    [BigInt(1), BigInt(2), BigInt(3), BigInt(4)],
+    [BigInt(1), BigInt(2), BigInt(3), BigInt(4), BigInt(5), BigInt(6), BigInt(7), BigInt(8), BigInt(9), BigInt(10)],
     "nftstorage",
   );
 
@@ -63,6 +79,17 @@ export default function Collection({ params }: { params: { network: string; addr
   return (
     <div>
       <div className="flex flex-wrap">{inputComponents}</div>
+      <div>
+        <CollectionDetails
+          token={tokens[0]}
+          showDescriptor={true}
+          bgColor="bg-base-100"
+          AddressCard={AddressCardComponent}
+          CollectionNameCard={CollectionNameCardComponent}
+          CollectionSymbolCard={CollectionSymbolCardComponent}
+        />
+      </div>
+      <div></div>
       <div className="flex flex-wrap justify-center m-1 p-1 bg-base-100 rounded">{tokensComponents}</div>{" "}
     </div>
   );

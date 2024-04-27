@@ -73,12 +73,12 @@ const CollectionSymbolCardComponent = (props: CollectionSymbolCardProps) => {
   return <CollectionSymbolCard {...props} />;
 };
 
-const IdCardComponent = (props: IdCardProps) => {
-  return <IdCard {...props} />;
-};
-
 const CollectionDetailsCardComponent = (props: CollectionDetailsProps) => {
   return <CollectionDetails {...props} />;
+};
+
+const IdCardComponent = (props: IdCardProps) => {
+  return <IdCard {...props} />;
 };
 
 export const NftCard = ({

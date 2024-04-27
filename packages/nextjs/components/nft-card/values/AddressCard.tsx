@@ -32,7 +32,11 @@ export const AddressCard = ({
   descriptorText = "Contract Address",
   bgColor = "bg-base-200",
 }: AddressCardProps) => {
-  const component = <Address address={value} size={valueStyleMap[size]} />;
+  const component = (
+    <div className="flex justify-center">
+      <Address address={value} size={valueStyleMap[size]} />
+    </div>
+  );
 
   return (
     <div className={`${bgColor} ${beautyStyleMap[style]} ${containerStyleMap[size]}`}>
