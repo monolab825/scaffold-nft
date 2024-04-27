@@ -1,5 +1,5 @@
 export type ScaffoldToken = {
-  contract?: any;
+  address?: string;
   collectionName?: string;
   collectionSymbol?: string;
   id?: bigint;

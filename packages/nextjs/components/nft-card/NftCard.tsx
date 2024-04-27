@@ -178,15 +178,7 @@ export const NftCard = ({
           style={style}
           renderOrder={collectionComponents}
           AddressCard={props => {
-            return (
-              <AddressCard
-                {...props}
-                value={token?.contract?.address}
-                showDescriptor={true}
-                style={style}
-                size={size}
-              />
-            );
+            return <AddressCard {...props} value={token?.address} showDescriptor={true} style={style} size={size} />;
           }}
           CollectionNameCard={props => {
             return (
@@ -216,13 +208,7 @@ export const NftCard = ({
       for (let i = 0; i < collectionComponents.length; i++) {
         if (collectionComponents[i] === "Address") {
           renderedComponents.push(
-            <AddressCard
-              key={uuidv4()}
-              value={token?.contract?.address}
-              showDescriptor={true}
-              style={style}
-              size={size}
-            />,
+            <AddressCard key={uuidv4()} value={token?.address} showDescriptor={true} style={style} size={size} />,
           );
         }
 
@@ -256,13 +242,10 @@ export const NftCard = ({
 
   if (prettyLoad) {
     if (
-      token?.metadata?.image === undefined ||
-      token?.metadata?.name === undefined ||
-      token?.metadata?.description === undefined ||
-      token?.metadata?.attributes === undefined ||
+      token?.metadata === undefined ||
       token?.collectionName === undefined ||
       token?.collectionSymbol === undefined ||
-      token?.contract === undefined ||
+      token?.address === undefined ||
       token?.id === undefined
     ) {
       cardContent = prettyLoadMap[prettyLoadType];

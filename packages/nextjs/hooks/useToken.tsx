@@ -36,7 +36,7 @@ export const useTokens = (tokenIds: bigint[], replacementType: "ipfs" | "nftstor
     responses[i] ? (responses[i].image = responses[i].image.replace("ipfs://", replacement[replacementType])) : <></>;
 
     const token = {} as any;
-    token.contract = scaffoldErc721;
+    token.address = scaffoldErc721?.address;
     token.metadata = responses[i];
     token.id = tokenIds[i];
     token.uri = uris[i];
@@ -74,7 +74,7 @@ export const useToken = (tokenId: bigint, replacementType: "ipfs" | "nftstorage"
   result ? (result.image = result?.image?.replace("ipfs://", replacement[replacementType])) : <></>;
 
   const token = {} as any;
-  token.contract = scaffoldErc721;
+  token.address = scaffoldErc721?.address;
   token.metadata = result;
   token.id = tokenId;
   token.uri = formattedURI;

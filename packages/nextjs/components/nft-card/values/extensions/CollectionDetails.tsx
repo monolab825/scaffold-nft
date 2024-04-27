@@ -75,13 +75,7 @@ export const CollectionDetails = ({
   for (let i = 0; i < renderOrder.length; i++) {
     if (renderOrder[i] === "Address") {
       renderedComponents.push(
-        <AddressCard
-          key={uuidv4()}
-          value={token?.contract?.address}
-          showDescriptor={true}
-          bgColor="bg-base-100"
-          size={size}
-        />,
+        <AddressCard key={uuidv4()} value={token?.address} showDescriptor={true} bgColor="bg-base-100" size={size} />,
       );
     } else if (renderOrder[i] === "CollectionName") {
       renderedComponents.push(
@@ -119,9 +113,7 @@ export const CollectionDetails = ({
 
   if (prettyLoad) {
     output =
-      token?.collectionName !== undefined &&
-      token?.collectionSymbol !== undefined &&
-      token?.contract?.address !== undefined ? (
+      token?.collectionName !== undefined && token?.collectionSymbol !== undefined && token?.address !== undefined ? (
         component
       ) : (
         <p>Loading...</p>
