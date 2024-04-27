@@ -30,8 +30,8 @@ type Props = {
 
   renderOrder?: (
     | "Image"
-    | "Name"
     | "Id"
+    | "Name"
     | "Description"
     | "Attributes"
     | "Address"
@@ -93,7 +93,7 @@ export const NftCard = ({
   IdCard = IdCardComponent,
   CollectionDetailsCard = CollectionDetailsCardComponent,
   collectionDataLoadType = "Together",
-  renderOrder = ["Image", "Name", "Id", "Description", "Attributes", "Address", "CollectionName", "CollectionSymbol"],
+  renderOrder = ["Image", "Id", "Name", "Description", "Attributes", "Address", "CollectionName", "CollectionSymbol"],
   prettyLoad = true,
   prettyLoadType = "animated",
   size = "base",

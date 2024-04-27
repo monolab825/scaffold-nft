@@ -6,9 +6,8 @@ import { useTokens } from "~~/hooks/useTokens2";
 
 const inputOptions: any[] = [
   "Image",
-  "Name",
-
   "Id",
+  "Name",
   "Description",
   "Attributes",
   "Address",
