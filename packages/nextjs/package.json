@@ -21,6 +21,7 @@
     "@tanstack/react-query": "~5.28.6",
     "@uniswap/sdk-core": "~4.0.1",
     "@uniswap/v2-sdk": "~3.0.1",
+    "@w3ui/react": "^2.2.1",
     "@web3-storage/w3up-client": "^12.5.3",
     "blo": "~1.0.1",
     "daisyui": "4.5.0",
