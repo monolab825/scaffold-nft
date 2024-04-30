@@ -14,7 +14,7 @@ const NftStoragePage: NextPage = () => {
         <Authenticator>
           <AuthenticationEnsurer>
             <Identity />
-            <SpaceEnsurer>
+            <SpaceEnsurer did="did:key:z6MkhCcXJFhNaNTcjQ1ZVRdccBH61PBuUb1AZ1xK4GgyeGPe">
               <MyUploader />
             </SpaceEnsurer>
           </AuthenticationEnsurer>
