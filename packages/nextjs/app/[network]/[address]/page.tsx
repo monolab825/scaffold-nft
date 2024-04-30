@@ -1,6 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import React from "react";
+import "react-dropdown/style.css";
+import Select from "react-select";
 import { NftCard } from "~~/components/nft-card/NftCard";
 import { AddressCard, AddressCardProps } from "~~/components/nft-card/values/AddressCard";
 import { CollectionNameCard, CollectionNameCardProps } from "~~/components/nft-card/values/CollectionNameCard";
@@ -65,12 +68,29 @@ export default function Collection({ params }: { params: { network: string; addr
     if (checkeds[i]) componentsToRender.push(inputOptions[i]);
   }
 
-  const tokens = useTokens(
+  const options = [
+    { value: "ipfs", label: "IPFS" },
+    { value: "nftstorage", label: "NFT Storage" },
+    { value: "w3s", label: "web3.storage" },
+  ];
+
+  const [selectedDropdownOption, setSelectedDropdownOption] = useState<"ipfs" | "nftstorage" | "w3s">(
+    options[1].value as "ipfs" | "nftstorage" | "w3s",
+  );
+
+  async function onChange2(event: any) {
+    setSelectedDropdownOption(event.value);
+    await refetch();
+  }
+
+  const { tokens, refetch } = useTokens(
     params["network"],
     params["address"],
     [BigInt(1), BigInt(2), BigInt(3), BigInt(4), BigInt(5), BigInt(6), BigInt(7), BigInt(8), BigInt(9), BigInt(10)],
-    "nftstorage",
+    selectedDropdownOption,
   );
+
+  console.log(tokens);
 
   const tokensComponents = tokens.map((token, index) => {
     return <NftCard key={index} token={token} renderOrder={componentsToRender} />;
@@ -79,6 +99,10 @@ export default function Collection({ params }: { params: { network: string; addr
   return (
     <div className="flex flex-col items-center justify-center">
       <div className="flex flex-wrap">{inputComponents}</div>
+      <div className="bg-base-100 rounded p-1">
+        <p className="text-center m-0">Metadata Load Type</p>
+        <Select options={options} className="text-black w-64" onChange={onChange2} defaultValue={options[1]} />
+      </div>
       <div className="w-full">
         <CollectionDetails
           token={tokens[0]}

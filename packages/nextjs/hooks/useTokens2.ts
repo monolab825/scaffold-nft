@@ -33,8 +33,6 @@ export const useTokens = (
   // configuredChainName = toTitleCase(configuredChainName);
   const selectedChain = chain; //chains.find(i => i.name === configuredChainName);
 
-  console.log(selectedChain);
-
   const { data: collectionName } = useReadContract({
     abi: erc721Abi,
     address,
@@ -51,13 +49,13 @@ export const useTokens = (
 
   const publicClient = usePublicClient({ chainId: selectedChain?.id });
 
-  const { uris } = useTokenURIs(publicClient, address, tokenIds);
+  const { uris, refetch: refetchTokenURIs } = useTokenURIs(publicClient, address, tokenIds);
 
   for (let i = 0; i < uris.length; i++) {
     uris[i] = uris[i].replace("ipfs://", replacement[replacementType]);
   }
 
-  const { responses } = useFetches(uris);
+  const { responses, refetch: refetchFetches } = useFetches(uris);
 
   const tokens: any[] = [];
   for (let i = 0; i < responses.length; i++) {
@@ -75,5 +73,10 @@ export const useTokens = (
     tokens.push(token);
   }
 
-  return tokens;
+  async function refetch() {
+    await refetchTokenURIs();
+    await refetchFetches();
+  }
+
+  return { tokens, refetch: refetch };
 };
