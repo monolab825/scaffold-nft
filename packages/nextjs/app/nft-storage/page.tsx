@@ -1,11 +1,111 @@
 "use client";
 
+import { useState } from "react";
 import { AuthenticationEnsurer } from "./_components/Authenticator";
 import { SpaceEnsurer } from "./_components/SpaceEnsurer";
-import { UploaderForm } from "./_components/Uploader";
-import { Authenticator, Provider, Uploader, useW3 } from "@w3ui/react";
+// import { UploaderForm } from "./_components/Uploader";
+import { Authenticator, Provider, useW3 } from "@w3ui/react";
 // import { create } from "@web3-storage/w3up-client";
 import type { NextPage } from "next";
+
+function MyUploader() {
+  const [{ client }] = useW3();
+
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+
+  const onSubmit = async (event: any) => {
+    event.preventDefault();
+    if (selectedImage === null) return;
+
+    const nameInput = event.target["0"] as any;
+    const fileInput = event.target["1"] as any;
+    const descriptionInput = event.target["2"] as any;
+    console.log(nameInput.value);
+    console.log(fileInput.value);
+    console.log(descriptionInput.value);
+
+    const result = await client?.uploadFile(selectedImage);
+    console.log(result);
+    console.log("Image CID: ", result?.toString());
+
+    const obj = { name: nameInput.value, image: "ipfs://" + result?.toString(), description: descriptionInput.value };
+    const blob = new Blob([JSON.stringify(obj)], { type: "application/json" });
+
+    const nftFile = new File([blob], "nft.json");
+
+    const result2 = await client?.uploadFile(nftFile);
+
+    console.log("Json CID: ", result2?.toString());
+  };
+  return (
+    <>
+      <h1>{`Upload and Display Image using React Hook's`}</h1>
+
+      <form onSubmit={onSubmit}>
+        <label>
+          {" "}
+          Name: <input name="name" type="text" />{" "}
+        </label>
+        <label>
+          {" "}
+          Image:{" "}
+          {selectedImage && (
+            <div>
+              <img alt="not found" width={"256px"} src={URL.createObjectURL(selectedImage)} />
+            </div>
+          )}
+          <input
+            name="file"
+            type="file"
+            onChange={(event: any) => {
+              setSelectedImage(event.target.files[0]);
+            }}
+          />{" "}
+        </label>
+
+        <div className="flex flex-col bg-red-500">
+          <label> Description:</label>
+          <textarea className="m-1" name="description" />{" "}
+        </div>
+
+        <div>
+          <button type="submit">Store</button>
+        </div>
+      </form>
+
+      {/* <form onSubmit={onSubmit}>
+        <input
+          type="text"
+          name="myName"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="John"
+          required
+        />
+        {selectedImage && (
+          <div>
+            <img alt="not found" width={"256px"} src={URL.createObjectURL(selectedImage)} />
+            <br />
+            <button onClick={() => setSelectedImage(null)}>Remove</button>
+            <button onClick={async () => await upload()}>Upload</button>
+          </div>
+        )}
+
+        <br />
+        <br />
+
+        <input
+          type="file"
+          name="myImage"
+          onChange={(event: any) => {
+            console.log(event.target.files[0]);
+            setSelectedImage(event.target.files[0]);
+          }}
+        />
+        <button type="submit">Upload</button>
+      </form> */}
+    </>
+  );
+}
 
 function Identity() {
   const [{ client, accounts }, { logout }] = useW3();
@@ -118,9 +218,10 @@ const NftStoragePage: NextPage = () => {
           <AuthenticationEnsurer>
             <Identity />
             <SpaceEnsurer>
-              <Uploader>
+              <MyUploader />
+              {/* <Uploader>
                 <UploaderForm />
-              </Uploader>
+              </Uploader> */}
             </SpaceEnsurer>
           </AuthenticationEnsurer>
         </Authenticator>

@@ -132,6 +132,7 @@ export function UploaderForm({ multiple, allowDirectory }: UploaderFormProps): R
         <label className={`${hasFile ? "hidden" : "block h-px w-px overflow-hidden absolute whitespace-nowrap"}`}>
           File:
         </label>
+
         <Uploader.Input
           multiple={multiple}
           allowDirectory={allowDirectory}
