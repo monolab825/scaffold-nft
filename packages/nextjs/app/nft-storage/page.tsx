@@ -38,109 +38,167 @@ function MyUploader() {
     console.log("Json CID: ", result2?.toString());
   };
   return (
-    <>
-      <h1>{`Upload and Display Image using React Hook's`}</h1>
-
-      <form onSubmit={onSubmit}>
-        <label>
-          {" "}
-          Name: <input name="name" type="text" />{" "}
-        </label>
-        <label>
-          {" "}
-          Image:{" "}
-          {selectedImage && (
-            <div>
-              <img alt="not found" width={"256px"} src={URL.createObjectURL(selectedImage)} />
-            </div>
-          )}
+    <div className="w-96 justify-center bg-secondary rounded-lg">
+      <p className="text-xl text-center">NFT</p>
+      <form onSubmit={onSubmit} className="space-y-5 m-1 flex flex-col items-center">
+        <div className="w-full">
+          <label htmlFor="first_name" className="text-center block text-sm font-medium text-gray-900 dark:text-white">
+            Name
+          </label>
           <input
-            name="file"
-            type="file"
-            onChange={(event: any) => {
-              setSelectedImage(event.target.files[0]);
-            }}
-          />{" "}
-        </label>
-
-        <div className="flex flex-col bg-red-500">
-          <label> Description:</label>
-          <textarea className="m-1" name="description" />{" "}
+            type="text"
+            id="first_name"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Scaffold NFT"
+            required
+          />
         </div>
-
-        <div>
-          <button type="submit">Store</button>
+        <div className="w-full">
+          <label htmlFor="first_name" className="text-center block text-sm font-medium text-gray-900 dark:text-white">
+            Description
+          </label>
+          <textarea
+            id="first_name"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Scaffold NFTs are great! Get up and running in minutes and deploy your own collection or view any other collection on a variety of chains!"
+            required
+          />
         </div>
+        <div className="flex items-center justify-center w-full">
+          <label
+            htmlFor="dropzone-file"
+            className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+          >
+            Image
+            <div className="flex flex-col items-center justify-center pt-5 pb-6">
+              <svg
+                className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 16"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                />
+              </svg>
+              <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                <span className="font-semibold">Click to upload</span> or drag and drop
+              </p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+            </div>
+            <input
+              id="dropzone-file"
+              type="file"
+              className="hidden"
+              onChange={(event: any) => {
+                setSelectedImage(event.target.files[0]);
+              }}
+            />
+          </label>
+        </div>
+        <button type="submit" className="btn btn-primary m-1">
+          Upload
+        </button>
       </form>
-
-      {/* <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          name="myName"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="John"
-          required
-        />
-        {selectedImage && (
-          <div>
-            <img alt="not found" width={"256px"} src={URL.createObjectURL(selectedImage)} />
-            <br />
-            <button onClick={() => setSelectedImage(null)}>Remove</button>
-            <button onClick={async () => await upload()}>Upload</button>
-          </div>
-        )}
-
-        <br />
-        <br />
-
-        <input
-          type="file"
-          name="myImage"
-          onChange={(event: any) => {
-            console.log(event.target.files[0]);
-            setSelectedImage(event.target.files[0]);
-          }}
-        />
-        <button type="submit">Upload</button>
-      </form> */}
-    </>
+    </div>
+    // <div className="w-96 bg-red-200 justify-center">
+    //   <form onSubmit={onSubmit}>
+    //     <div className="flex flex-col">
+    //       <label> Name:</label>
+    //       <input name="name" type="text" />{" "}
+    //       <label>
+    //         {" "}
+    //         Image:{" "}
+    //         {selectedImage && (
+    //           <div>
+    //             <img alt="not found" width={"256px"} src={URL.createObjectURL(selectedImage)} />
+    //           </div>
+    //         )}
+    //         <input
+    //           name="file"
+    //           type="file"
+    //           className="cursor-pointer relative block opacity-0 w-full h-full p-20 z-50"
+    //           onChange={(event: any) => {
+    //             setSelectedImage(event.target.files[0]);
+    //           }}
+    //         />
+    //       </label>
+    //       <div className="flex items-center justify-center w-full">
+    //         <label
+    //           htmlFor="dropzone-file"
+    //           className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+    //         >
+    //           <div className="flex flex-col items-center justify-center pt-5 pb-6">
+    //             <svg
+    //               className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+    //               aria-hidden="true"
+    //               xmlns="http://www.w3.org/2000/svg"
+    //               fill="none"
+    //               viewBox="0 0 20 16"
+    //             >
+    //               <path
+    //                 stroke="currentColor"
+    //                 stroke-linecap="round"
+    //                 stroke-linejoin="round"
+    //                 stroke-width="2"
+    //                 d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+    //               />
+    //             </svg>
+    //             <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+    //               <span className="font-semibold">Click to upload</span> or drag and drop
+    //             </p>
+    //             <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+    //           </div>
+    //           <input
+    //             name="file"
+    //             type="file"
+    //             className="hidden"
+    //             onChange={(event: any) => {
+    //               setSelectedImage(event.target.files[0]);
+    //             }}
+    //           />
+    //         </label>
+    //       </div>
+    //       <div className="flex flex-col bg-red-500">
+    //         <label> Description:</label>
+    //         <textarea className="m-1" name="description" />{" "}
+    //       </div>
+    //       <div>
+    //         <button type="submit">Store</button>
+    //       </div>
+    //     </div>
+    //   </form>
+    // </div>
   );
 }
 
 function Identity() {
-  const [{ client, accounts }, { logout }] = useW3();
-
-  async function setCurrentSpace() {
-    const result = await client?.setCurrentSpace(`did:key:z6MkhCcXJFhNaNTcjQ1ZVRdccBH61PBuUb1AZ1xK4GgyeGPe`);
-
-    console.log(result);
-  }
+  const [{ accounts }, { logout }] = useW3();
 
   return (
     <>
       {
-        <div className="m-12">
-          <button
-            onClick={async () => {
-              await setCurrentSpace();
-            }}
-          >
-            Set
-          </button>
-          ;
-          <button
-            onClick={async () => {
-              await logout();
-            }}
-            className="inline-block bg-zinc-950 hover:outline text-white font-bold text-sm px-6 py-2 rounded-full whitespace-nowrap"
-          >
-            Logout
-          </button>
-          <p className="mb-6">
-            {`You're signed in as`} <b>{accounts[0].toEmail()}</b>.
-          </p>
-          <p>{`Your local agent's DID is`}</p>
-          <p className="max-w-xl overflow-hidden text-ellipsis">{client?.agent.did()}</p>
+        <div className="m-1">
+          <div className="flex flex-col justify-left items-left">
+            <button
+              onClick={async () => {
+                await logout();
+              }}
+              className="btn btn-primary m-1"
+            >
+              Logout
+            </button>
+            <p className="">
+              {`You're signed in as`} <b>{accounts[0].toEmail()}</b>.
+            </p>
+          </div>
+
+          {/* <p className="max-w-96 overflow-hidden text-ellipsis">{`Your local agent's DID is ${client?.agent.did()}`}</p> */}
         </div>
       }
     </>
@@ -211,7 +269,7 @@ const NftStoragePage: NextPage = () => {
   // console.log(client);
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center">
       {/* {output} */}
       <Provider>
         <Authenticator>
