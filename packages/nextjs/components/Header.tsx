@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useChainId } from "wagmi";
 import { Bars3Icon, BugAntIcon, CogIcon } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
@@ -31,7 +32,11 @@ export const menuLinks: HeaderMenuLink[] = [
   },
 ];
 
-export const HeaderMenuLinks = () => {
+type Props = {
+  menuLinks: HeaderMenuLink[];
+};
+
+export const HeaderMenuLinks = ({ menuLinks }: Props) => {
   const pathname = usePathname();
 
   return (
@@ -61,6 +66,25 @@ export const HeaderMenuLinks = () => {
  * Site header
  */
 export const Header = () => {
+  const [instancedHeaderLinks, setInstancedHeaderLinks] = useState(menuLinks);
+
+  const chainId = useChainId();
+  console.log(chainId);
+
+  useEffect(() => {
+    if (chainId === 31337) {
+      setInstancedHeaderLinks([
+        ...instancedHeaderLinks,
+        {
+          label: "Testing Grounds",
+          href: "/testing-grounds",
+        },
+      ]);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chainId]);
+
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const burgerMenuRef = useRef<HTMLDivElement>(null);
   useOutsideClick(
@@ -89,7 +113,7 @@ export const Header = () => {
                 setIsDrawerOpen(false);
               }}
             >
-              <HeaderMenuLinks />
+              <HeaderMenuLinks menuLinks={instancedHeaderLinks} />
             </ul>
           )}
         </div>
@@ -103,7 +127,7 @@ export const Header = () => {
           </div>
         </Link>
         <ul className="hidden lg:flex lg:flex-nowrap menu menu-horizontal px-1 gap-2">
-          <HeaderMenuLinks />
+          <HeaderMenuLinks menuLinks={instancedHeaderLinks} />
         </ul>
       </div>
       <div className="navbar-end flex-grow mr-4">
