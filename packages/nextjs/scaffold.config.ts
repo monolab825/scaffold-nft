@@ -35,5 +35,4 @@ const scaffoldConfig = {
   did: process.env.DID || `did:key:z6MkhCcXJFhNaNTcjQ1ZVRdccBH61PBuUb1AZ1xK4GgyeGPe`,
 } as const satisfies ScaffoldConfig;
 
-console.log(scaffoldConfig.did);
 export default scaffoldConfig;

@@ -9,7 +9,6 @@ import type { NextPage } from "next";
 import scaffoldConfig from "~~/scaffold.config";
 
 const NftStoragePage: NextPage = () => {
-  console.log(scaffoldConfig);
   return (
     <div className="flex flex-col items-center justify-center">
       <Provider>
