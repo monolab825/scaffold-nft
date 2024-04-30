@@ -11,6 +11,7 @@ export function MyUploader() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [jsonCID, setJsonCID] = useState<string>();
+  const [dirCID, setDirCID] = useState<string>();
   const [imageCID, setImageCID] = useState<string>();
 
   const [toggleAdvanced, setToggledAdvanced] = useState(false);
@@ -31,10 +32,15 @@ export function MyUploader() {
     const obj = { name: selectedName, image: "ipfs://" + imageCID?.toString(), description: selectedDescription };
     const blob = new Blob([JSON.stringify(obj)], { type: "application/json" });
 
-    const nftFile = new File([blob], "nft.json");
+    const nftFile = new File([blob], "1");
 
     const jsonCID = await client?.uploadFile(nftFile);
 
+    const files = [nftFile];
+
+    const dirCID = await client?.uploadDirectory(files);
+
+    setDirCID(dirCID?.toString() + "/");
     setJsonCID(jsonCID?.toString());
     setIsLoading(false);
   };
@@ -74,12 +80,16 @@ export function MyUploader() {
           {toggleAdvanced ? (
             <div>
               <CIDDisplayer cid={jsonCID} showAdvanced={toggleAdvanced} />
+              <p className="text-center text-2xl">Directory</p>
+              <CIDDisplayer cid={dirCID} showAdvanced={toggleAdvanced} />
               <p className="text-center text-2xl">Image</p>
               <CIDDisplayer cid={imageCID} showAdvanced={toggleAdvanced} />
             </div>
           ) : (
             <div>
               <CIDDisplayer cid={jsonCID} showAdvanced={toggleAdvanced} />
+              <p className="text-center text-2xl">Directory</p>
+              <CIDDisplayer cid={dirCID} showAdvanced={toggleAdvanced} />
             </div>
           )}
 

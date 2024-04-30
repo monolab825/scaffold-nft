@@ -8,9 +8,10 @@ import { useScaffoldContract, useScaffoldReadContract } from "~~/hooks/scaffold-
 const replacement = {
   ipfs: "https://ipfs.io/ipfs/",
   nftstorage: "https://nftstorage.link/ipfs/",
+  w3s: "https://w3s.link/ipfs/",
 };
 
-export const useTokens = (tokenIds: bigint[], replacementType: "ipfs" | "nftstorage" = "ipfs") => {
+export const useTokens = (tokenIds: bigint[], replacementType: "ipfs" | "nftstorage" | "w3s" = "ipfs") => {
   const { data: scaffoldErc721 } = useScaffoldContract({ contractName: "ScaffoldERC721" });
 
   const { data: collectionName } = useScaffoldReadContract({
@@ -48,7 +49,7 @@ export const useTokens = (tokenIds: bigint[], replacementType: "ipfs" | "nftstor
   return tokens;
 };
 
-export const useToken = (tokenId: bigint, replacementType: "ipfs" | "nftstorage" = "ipfs") => {
+export const useToken = (tokenId: bigint, replacementType: "ipfs" | "nftstorage" | "w3s" = "ipfs") => {
   const { data: scaffoldErc721 } = useScaffoldContract({ contractName: "ScaffoldERC721" });
 
   const { data: tokenURI } = useScaffoldReadContract({
