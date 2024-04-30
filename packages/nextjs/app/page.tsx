@@ -4,7 +4,8 @@ import Link from "next/link";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
 import {
-  BeakerIcon, // BugAntIcon, MagnifyingGlassIcon
+  BeakerIcon,
+  CogIcon, // BugAntIcon, MagnifyingGlassIcon
 } from "@heroicons/react/24/outline";
 import { Address } from "~~/components/scaffold-eth";
 
@@ -70,6 +71,17 @@ const Home: NextPage = () => {
                 Test your local deployments at the{" "}
                 <Link href="/testing-grounds" passHref className="link">
                   Testing Grounds
+                </Link>{" "}
+                tab.
+              </p>
+            </div>
+
+            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
+              <CogIcon className="h-8 w-8 fill-secondary" />
+              <p>
+                Upload NFT Metadata by using the{" "}
+                <Link href="/nft-storage" passHref className="link">
+                  Metadata Uploader
                 </Link>{" "}
                 tab.
               </p>

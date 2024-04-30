@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useChainId } from "wagmi";
-import { Bars3Icon, BugAntIcon, CogIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, BeakerIcon, BugAntIcon, CogIcon } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
 
@@ -26,7 +26,7 @@ export const menuLinks: HeaderMenuLink[] = [
     icon: <BugAntIcon className="h-4 w-4" />,
   },
   {
-    label: "IPFS Upload",
+    label: "Metadata Upload",
     href: "/nft-storage",
     icon: <CogIcon className="h-4 w-4" />,
   },
@@ -78,6 +78,7 @@ export const Header = () => {
         {
           label: "Testing Grounds",
           href: "/testing-grounds",
+          icon: <BeakerIcon className="h-4 w-4" />,
         },
       ]);
     }
