@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Size, Style, beautyStyleMap } from "../types/Types";
 
 export type AttributesCardProps = {
@@ -26,13 +27,28 @@ export const AttributesCard = ({
     base: "p-0 m-0 text-xs",
   };
 
+  const [sizeLayout, setSizeLayout] = useState(window.innerWidth < 720 ? "flex-col" : "flex-wrap");
+
+  const handleResize = () => {
+    if (window.innerWidth < 720) {
+      setSizeLayout("flex-col");
+    } else {
+      setSizeLayout("flex-wrap");
+    }
+  };
+
+  // create an event listener
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+  });
+
   const attributesContainerStyleMap = {
-    base: "flex-col",
+    base: `${sizeLayout}`,
     //large: flex-wrap
   };
 
   const attributeContainerStyleMap = {
-    base: "my-1",
+    base: "my-1 lg:mx-4 lg:p-4 lg:w-[150px]",
   };
 
   const attributeTraitTypeStyleMap = {

@@ -100,7 +100,7 @@ export const NftCard = ({
   style = "rounded",
 }: Props) => {
   const sizeMap = {
-    base: "w-32 m-0.5",
+    base: "w-32 lg:w-96 m-0.5 lg:m-4",
     // base: "max-w-96 lg:max-w-max m-4",
   };
 

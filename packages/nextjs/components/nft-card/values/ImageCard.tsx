@@ -12,7 +12,7 @@ export type ImageCardProps = {
 };
 
 const containerSizeMap = {
-  base: "m-1 p-1",
+  base: "m-1 p-1 lg:m-4 lg:p-4",
 };
 
 export const ImageCard = ({

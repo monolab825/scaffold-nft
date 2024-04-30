@@ -4,17 +4,17 @@ import { useState } from "react";
 import type { NextPage } from "next";
 import { NftCard } from "~~/components/nft-card/NftCard";
 // import { NameCard, NameCardProps } from "~~/components/NftCardValue/NameCard";
-import { useToken, useTokens } from "~~/hooks/useToken";
+import { useTokens } from "~~/hooks/useToken";
 
 const inputOptions: any[] = [
   "Image",
+  "Id",
   "Name",
   "Description",
   "Attributes",
   "Address",
   "CollectionName",
   "CollectionSymbol",
-  "Id",
 ];
 
 const TestingGrounds: NextPage = () => {
@@ -51,20 +51,24 @@ const TestingGrounds: NextPage = () => {
     if (checkeds[i]) componentsToRender.push(inputOptions[i]);
   }
 
-  const token = useToken(BigInt(1), "w3s");
+  // const token = useToken(BigInt(1), "w3s");
 
-  const tokens = useTokens([BigInt(1)], "w3s");
+  const arr = [];
+  for (let i = 1; i <= 4; i++) {
+    arr.push(BigInt(i));
+  }
+  const tokens = useTokens(arr, "w3s");
 
   const tokensComponents = tokens.map((token, index) => {
-    return <NftCard key={index} token={token} renderOrder={componentsToRender} collectionDataLoadType="Individual" />;
+    return <NftCard key={index} token={token} renderOrder={componentsToRender} />;
   });
 
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center">
       <div className="flex flex-wrap">{inputComponents}</div>
-      <div className="flex flex-wrap justify-center m-1 p-1 bg-base-100 rounded">
+      <div className="flex flex-wrap justify-center m-1 p-1 bg-base-100 rounded lg:max-w-[1300px]">
         {tokensComponents}
-        <NftCard token={token} />
+        {/* <NftCard token={token} /> */}
       </div>
     </div>
   );

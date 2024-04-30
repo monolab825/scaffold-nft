@@ -69,7 +69,6 @@ export const Header = () => {
   const [instancedHeaderLinks, setInstancedHeaderLinks] = useState(menuLinks);
 
   const chainId = useChainId();
-  console.log(chainId);
 
   useEffect(() => {
     if (chainId === 31337) {

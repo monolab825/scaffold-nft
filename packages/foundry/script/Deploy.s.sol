@@ -18,8 +18,8 @@ contract DeployScript is ScaffoldETHDeploy {
         ScaffoldERC721 yourContract = new ScaffoldERC721(
             "Test",
             "T",
-            "ipfs://bafybeicilmsvboiccw7tba3knvxiokuxysqxwgycmr3vwfisypefcmxxwu/",
-            // "ipfs://bafybeicpvzgkhgyhwggrtctzvztuk2mftmt56xogv6pi7mx2v42go35ltu/",
+            // "ipfs://bafybeicilmsvboiccw7tba3knvxiokuxysqxwgycmr3vwfisypefcmxxwu/",
+            "ipfs://bafybeicpvzgkhgyhwggrtctzvztuk2mftmt56xogv6pi7mx2v42go35ltu/",
             0,
             0,
             0,

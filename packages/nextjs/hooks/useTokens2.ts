@@ -1,30 +1,39 @@
 import { useFetches } from "./UseFetches";
 import { useTokenURIs } from "./useTokenURIs2";
 import { erc721Abi } from "viem";
-import { useChains, usePublicClient, useReadContract } from "wagmi";
+import * as allChains from "viem/chains";
+import { usePublicClient, useReadContract } from "wagmi";
 
 const replacement = {
   ipfs: "https://ipfs.io/ipfs/",
   nftstorage: "https://nftstorage.link/ipfs/",
+  w3s: "https://w3s.link/ipfs/",
 };
 
-function toTitleCase(str: string) {
-  return str.replace(/\w\S*/g, function (txt) {
-    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-  });
-}
+// function toTitleCase(str: string) {
+//   return str.replace(/\w\S*/g, function (txt) {
+//     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+//   });
+// }
+
 export const useTokens = (
   chainName: string,
   address: string,
   tokenIds: bigint[],
-  replacementType: "ipfs" | "nftstorage" = "ipfs",
+  replacementType: "ipfs" | "nftstorage" | "w3s" = "ipfs",
 ) => {
-  const chains = useChains();
+  const chain = allChains[chainName as keyof typeof allChains];
 
-  let configuredChainName = chainName;
-  configuredChainName = chainName.replaceAll("-", " ");
-  configuredChainName = toTitleCase(configuredChainName);
-  const selectedChain = chains.find(i => i.name === configuredChainName);
+  // const chains = useChains();
+
+  // console.log(chains);
+
+  // let configuredChainName = chainName;
+  // configuredChainName = chainName.replaceAll("-", " ");
+  // configuredChainName = toTitleCase(configuredChainName);
+  const selectedChain = chain; //chains.find(i => i.name === configuredChainName);
+
+  console.log(selectedChain);
 
   const { data: collectionName } = useReadContract({
     abi: erc721Abi,

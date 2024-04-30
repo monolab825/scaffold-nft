@@ -77,9 +77,9 @@ export default function Collection({ params }: { params: { network: string; addr
   });
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center">
       <div className="flex flex-wrap">{inputComponents}</div>
-      <div>
+      <div className="w-full">
         <CollectionDetails
           token={tokens[0]}
           showDescriptor={true}
@@ -89,8 +89,9 @@ export default function Collection({ params }: { params: { network: string; addr
           CollectionSymbolCard={CollectionSymbolCardComponent}
         />
       </div>
-      <div></div>
-      <div className="flex flex-wrap justify-center m-1 p-1 bg-base-100 rounded">{tokensComponents}</div>{" "}
+      <div className="flex flex-wrap justify-center m-1 p-1 bg-base-100 rounded lg:max-w-[1300px]">
+        {tokensComponents}
+      </div>{" "}
     </div>
   );
 }
