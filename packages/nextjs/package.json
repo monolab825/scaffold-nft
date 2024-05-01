@@ -42,7 +42,8 @@
     "uuid": "^9.0.1",
     "viem": "2.8.16",
     "wagmi": "2.5.12",
-    "zustand": "~4.1.2"
+    "zustand": "~4.1.2",
+    "burner-connector": "^0.0.3"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "~4.1.1",
