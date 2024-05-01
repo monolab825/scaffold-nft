@@ -2166,6 +2166,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rainbow-me/rainbowkit@npm:2.0.2":
+  version: 2.0.2
+  resolution: "@rainbow-me/rainbowkit@npm:2.0.2"
+  dependencies:
+    "@vanilla-extract/css": 1.14.0
+    "@vanilla-extract/dynamic": 2.1.0
+    "@vanilla-extract/sprinkles": 1.6.1
+    clsx: 2.1.0
+    qrcode: 1.5.3
+    react-remove-scroll: 2.5.7
+    ua-parser-js: ^1.0.37
+  peerDependencies:
+    react: ">=17"
+    react-dom: ">=17"
+    viem: 2.x
+    wagmi: 2.x
+  checksum: ece6ce515431e4dc33ecb3e1cc2d5f76d0f2dbeaaeae882a3369c881f100f6564da25a50c40f624cddf73aaa4e34caac23198d4b90750807c83228e908fda742
+  languageName: node
+  linkType: hard
+
 "@rainbow-me/rainbowkit@npm:~2.0.2":
   version: 2.0.6
   resolution: "@rainbow-me/rainbowkit@npm:2.0.6"
@@ -2339,6 +2359,7 @@ __metadata:
     abitype: 1.0.2
     autoprefixer: ~10.4.12
     blo: ~1.0.1
+    burner-connector: ^0.0.3
     daisyui: 4.5.0
     eslint: ~8.24.0
     eslint-config-next: ~14.0.4
@@ -5063,6 +5084,17 @@ __metadata:
     node-gyp: latest
     node-gyp-build: ^4.3.0
   checksum: 7e9a46f1867dca72fda350966eb468eca77f4d623407b0650913fadf73d5750d883147d6e5e21c56f9d3b0bdc35d5474e80a600b9f31ec781315b4d2469ef087
+  languageName: node
+  linkType: hard
+
+"burner-connector@npm:^0.0.3":
+  version: 0.0.3
+  resolution: "burner-connector@npm:0.0.3"
+  dependencies:
+    "@rainbow-me/rainbowkit": 2.0.2
+    "@wagmi/core": 2.6.9
+    viem: 2.8.16
+  checksum: 6041e4aab56af02a01ab211cf278d8babd047db43f4ab43fdb7b9dfd8704d35cbb7da2af240de8b9c782b805031ef43c5788bd0594191b2508f2679dd3ff5041
   languageName: node
   linkType: hard
 

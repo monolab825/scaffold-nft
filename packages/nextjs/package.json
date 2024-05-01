@@ -24,6 +24,7 @@
     "@w3ui/react": "^2.2.1",
     "@web3-storage/w3up-client": "^12.5.3",
     "blo": "~1.0.1",
+    "burner-connector": "^0.0.3",
     "daisyui": "4.5.0",
     "next": "~14.0.4",
     "next-themes": "~0.2.1",
@@ -42,8 +43,7 @@
     "uuid": "^9.0.1",
     "viem": "2.8.16",
     "wagmi": "2.5.12",
-    "zustand": "~4.1.2",
-    "burner-connector": "^0.0.3"
+    "zustand": "~4.1.2"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "~4.1.1",
