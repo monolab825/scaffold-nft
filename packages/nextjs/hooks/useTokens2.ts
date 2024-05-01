@@ -1,20 +1,14 @@
-import { useFetches } from "./UseFetches";
-import { useTokenURIs } from "./useTokenURIs2";
+import { useEffect } from "react";
+import { useState } from "react";
 import { erc721Abi } from "viem";
 import * as allChains from "viem/chains";
-import { usePublicClient, useReadContract } from "wagmi";
+import { usePublicClient } from "wagmi";
 
 const replacement = {
   ipfs: "https://ipfs.io/ipfs/",
   nftstorage: "https://nftstorage.link/ipfs/",
   w3s: "https://w3s.link/ipfs/",
 };
-
-// function toTitleCase(str: string) {
-//   return str.replace(/\w\S*/g, function (txt) {
-//     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-//   });
-// }
 
 export const useTokens = (
   chainName: string,
@@ -23,60 +17,64 @@ export const useTokens = (
   replacementType: "ipfs" | "nftstorage" | "w3s" = "ipfs",
 ) => {
   const chain = allChains[chainName as keyof typeof allChains];
-
-  // const chains = useChains();
-
-  // console.log(chains);
-
-  // let configuredChainName = chainName;
-  // configuredChainName = chainName.replaceAll("-", " ");
-  // configuredChainName = toTitleCase(configuredChainName);
-  const selectedChain = chain; //chains.find(i => i.name === configuredChainName);
-
-  const { data: collectionName } = useReadContract({
-    abi: erc721Abi,
-    address,
-    functionName: "name",
-    chainId: selectedChain?.id,
-  });
-
-  const { data: collectionSymbol } = useReadContract({
-    abi: erc721Abi,
-    address,
-    functionName: "symbol",
-    chainId: selectedChain?.id,
-  });
-
+  const selectedChain = chain;
   const publicClient = usePublicClient({ chainId: selectedChain?.id });
 
-  const { uris, refetch: refetchTokenURIs } = useTokenURIs(publicClient, address, tokenIds);
+  const [isLoading, setIsLoading] = useState(false);
 
-  for (let i = 0; i < uris.length; i++) {
-    uris[i] = uris[i].replace("ipfs://", replacement[replacementType]);
-  }
+  const [tokens, setTokens] = useState<any[]>([]);
 
-  const { responses, refetch: refetchFetches } = useFetches(uris);
+  useEffect(() => {
+    async function get() {
+      setIsLoading(true);
 
-  const tokens: any[] = [];
-  for (let i = 0; i < responses.length; i++) {
-    responses[i]
-      ? (responses[i].image = responses[i].image.replace("ipfs://", replacement[replacementType]))
-      : undefined;
+      try {
+        const collectionName = await publicClient?.readContract({
+          address,
+          abi: erc721Abi,
+          functionName: "name",
+        });
 
-    const token = {} as any;
-    token.address = address;
-    token.metadata = responses[i];
-    token.id = tokenIds[i];
-    token.uri = uris[i];
-    token.collectionName = collectionName;
-    token.collectionSymbol = collectionSymbol;
-    tokens.push(token);
-  }
+        const collectionSymbol = await publicClient?.readContract({
+          address,
+          abi: erc721Abi,
+          functionName: "symbol",
+        });
 
-  async function refetch() {
-    await refetchTokenURIs();
-    await refetchFetches();
-  }
+        const arr = [];
 
-  return { tokens, refetch: refetch };
+        for (let i = 0; i < tokenIds.length; i++) {
+          const tokenURI = await publicClient?.readContract({
+            address,
+            abi: erc721Abi,
+            functionName: "tokenURI",
+            args: [tokenIds[i]],
+          });
+
+          const tokenURIFormatted = tokenURI?.replace("ipfs://", replacement[replacementType]);
+          const metadata = await fetch(tokenURIFormatted!);
+          const metadataJson = await metadata.json();
+          metadataJson.image = metadataJson.image.replace("ipfs://", replacement[replacementType]);
+
+          const token = {} as any;
+          token.address = address;
+          token.metadata = metadataJson;
+          token.id = tokenIds[i];
+          token.uri = tokenURIFormatted;
+          token.collectionName = collectionName;
+          token.collectionSymbol = collectionSymbol;
+          arr.push(token);
+        }
+
+        setTokens([...arr]);
+      } catch (e) {
+        console.log(e);
+      }
+
+      setIsLoading(false);
+    }
+    get();
+  }, [publicClient?.account, tokenIds]);
+
+  return { tokens, isLoading };
 };
