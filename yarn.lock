@@ -1569,16 +1569,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/core-downloads-tracker@npm:^5.15.15":
-  version: 5.15.15
-  resolution: "@mui/core-downloads-tracker@npm:5.15.15"
-  checksum: 3e99a04e03f66d5fa5f0c23cdce0f9fa2331ba08c99a75dc2347ccaa1c6ed520153e04aaeb0d613c9dca099a3e6242558a6284c33d93f95cc65e3243b17860bc
+"@mui/core-downloads-tracker@npm:^5.15.16":
+  version: 5.15.16
+  resolution: "@mui/core-downloads-tracker@npm:5.15.16"
+  checksum: 161ef72ea930bc5831d1b7699e048644da397cc585cde33535296037b0e9a09093c50585ee7e5913e62b7f15a6cc13400f97e443ee85ea242cb087c55f7d88e3
   languageName: node
   linkType: hard
 
 "@mui/icons-material@npm:^5.15.15":
-  version: 5.15.15
-  resolution: "@mui/icons-material@npm:5.15.15"
+  version: 5.15.16
+  resolution: "@mui/icons-material@npm:5.15.16"
   dependencies:
     "@babel/runtime": ^7.23.9
   peerDependencies:
@@ -1588,17 +1588,17 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 42d62fc94be25a361034a8974b1860608e866c155ff2eea7dc18f10a4acc71dbe2f48af3f0309a345ff6fb16be30c6fbc1d8a0a447c828aa1380a49e176a8803
+  checksum: 5342889e358d3acb22c1ca5d5500a1b2226068bf641caaa82f44dc32465cf12964cce8ce174c5eb8a3fa81e11eeb8a5c379835534ed8d444feb75ff1d8eb75fc
   languageName: node
   linkType: hard
 
 "@mui/material@npm:^5.15.15":
-  version: 5.15.15
-  resolution: "@mui/material@npm:5.15.15"
+  version: 5.15.16
+  resolution: "@mui/material@npm:5.15.16"
   dependencies:
     "@babel/runtime": ^7.23.9
     "@mui/base": 5.0.0-beta.40
-    "@mui/core-downloads-tracker": ^5.15.15
+    "@mui/core-downloads-tracker": ^5.15.16
     "@mui/system": ^5.15.15
     "@mui/types": ^7.2.14
     "@mui/utils": ^5.15.14
@@ -1621,7 +1621,7 @@ __metadata:
       optional: true
     "@types/react":
       optional: true
-  checksum: ee0dc22fc4d617f7cf69f2451b6d5139978e6c5319e3056e7719159aff786ee3b80abd07691e230371811d9b5b574aef4559d7855bfe2f8493d596d960a91ab7
+  checksum: 360c8f5701df72617c4cec716eabfb1ff63fa2a5ad13745908feeac1474797d331436a2fe1d0fce8eb5af69edee9158d2081f0459f41798034ff7be97359b5f0
   languageName: node
   linkType: hard
 
@@ -6592,7 +6592,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"escalade@npm:^3.1.1":
+"escalade@npm:^3.1.1, escalade@npm:^3.1.2":
   version: 3.1.2
   resolution: "escalade@npm:3.1.2"
   checksum: 1ec0977aa2772075493002bdbd549d595ff6e9393b1cb0d7d6fcaf78c750da0c158f180938365486f75cb69fba20294351caddfce1b46552a7b6c3cde52eaa02
@@ -9808,14 +9808,14 @@ __metadata:
   linkType: hard
 
 "mlly@npm:^1.6.1":
-  version: 1.6.1
-  resolution: "mlly@npm:1.6.1"
+  version: 1.7.0
+  resolution: "mlly@npm:1.7.0"
   dependencies:
     acorn: ^8.11.3
     pathe: ^1.1.2
-    pkg-types: ^1.0.3
-    ufo: ^1.3.2
-  checksum: c40a547dba8f6b2a5a840899d49f4c9550c233d47fd7bd75f4ac27f388047bad655ad86684329809c1640df4373b45bec77304f73530ca4354bc1199700e2a46
+    pkg-types: ^1.1.0
+    ufo: ^1.5.3
+  checksum: c1548f4dd0e31ce15d293ebb7c61778bd28c405573dc43dcf799eaeb8f6b776d7dadd95e957d6631b9cc4bb963cd01079d58b7e2290ed540aa460e061bdbd1fa
   languageName: node
   linkType: hard
 
@@ -10877,7 +10877,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pkg-types@npm:^1.0.3":
+"pkg-types@npm:^1.1.0":
   version: 1.1.0
   resolution: "pkg-types@npm:1.1.0"
   dependencies:
@@ -13136,9 +13136,9 @@ __metadata:
   linkType: hard
 
 "type-fest@npm:^4.9.0":
-  version: 4.18.0
-  resolution: "type-fest@npm:4.18.0"
-  checksum: 137655855a452966ad2f1669bdd620774c586897e931989490fba31a5cd5eee2617b4ff44fbc45fd6b72752b7d271562ebd7da0416545091c33ce2ae4f406d70
+  version: 4.18.1
+  resolution: "type-fest@npm:4.18.1"
+  checksum: 7aec1907b289540093e93fced3a6d7f2ab743c2cdf7e58702e41b3095a06e5aa7abdf48881370053f9aac1b688e6d144bf89a107a3749ea9bb9e14b2af13d1a2
   languageName: node
   linkType: hard
 
@@ -13248,7 +13248,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ufo@npm:^1.3.2, ufo@npm:^1.4.0, ufo@npm:^1.5.3":
+"ufo@npm:^1.4.0, ufo@npm:^1.5.3":
   version: 1.5.3
   resolution: "ufo@npm:1.5.3"
   checksum: 2f54fa543b2e689cc4ab341fe2194937afe37c5ee43cd782e6ecc184e36859e84d4197a43ae4cd6e9a56f793ca7c5b950dfff3f16fadaeef9b6b88b05c88c8ef
@@ -13456,16 +13456,16 @@ __metadata:
   linkType: hard
 
 "update-browserslist-db@npm:^1.0.13":
-  version: 1.0.13
-  resolution: "update-browserslist-db@npm:1.0.13"
+  version: 1.0.14
+  resolution: "update-browserslist-db@npm:1.0.14"
   dependencies:
-    escalade: ^3.1.1
+    escalade: ^3.1.2
     picocolors: ^1.0.0
   peerDependencies:
     browserslist: ">= 4.21.0"
   bin:
     update-browserslist-db: cli.js
-  checksum: 1e47d80182ab6e4ad35396ad8b61008ae2a1330221175d0abd37689658bdb61af9b705bfc41057fd16682474d79944fb2d86767c5ed5ae34b6276b9bed353322
+  checksum: 039e581d5647467dc4706360f929885bd5df5a03fc7a851eaa7413e7adf64b22ea64def060b3a6c6be73d3619392cf31504a24e863b358d4953eac36013ad161
   languageName: node
   linkType: hard
 
