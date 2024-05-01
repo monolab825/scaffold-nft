@@ -186,7 +186,7 @@ export default function Collection({ params }: { params: { network: string; addr
             </div>
             <p className="text-center m-0">Metadata Load Type</p>
             <div className="w-64">
-              <Select options={options} className="text-black bg-base-100" onChange={onChange2} values={options} />
+              <Select options={options} className="text-black bg-base-100" onChange={onChange2} values={[options[2]]} />
             </div>
 
             <button type="submit" className="btn btn-sm btn-primary">
