@@ -7,6 +7,7 @@ export function ImageInputWithPreview({ onChange }: any) {
   if (selectedImage) {
     output = (
       <div className="flex flex-col items-center">
+        {/* eslint-disable-next-line*/}
         <img alt="not found" width={"256px"} src={URL.createObjectURL(selectedImage)} />
         <button
           className="btn btn-primary btn-sm font-light hover:border-transparent"
