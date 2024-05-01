@@ -23,9 +23,7 @@ export const ImageCard = ({
   style = "rounded",
   showDescriptor = false,
 }: ImageCardProps) => {
-  {
-    /* eslint-disable-next-line*/
-  }
+  /* eslint-disable-next-line*/
   const component = <img src={value} alt={alt} className={`bg-base-300 ${beautyStyleMap[style]}`} />;
 
   let output;
