@@ -2,6 +2,7 @@
 pragma solidity ^0.8.19;
 
 import {ScaffoldERC721} from "../contracts/ScaffoldERC721.sol";
+
 import "./DeployHelpers.s.sol";
 
 contract DeployScript is ScaffoldETHDeploy {
@@ -26,11 +27,22 @@ contract DeployScript is ScaffoldETHDeploy {
             1
         );
 
-        console.logString(
-            string.concat(
-                "YourContract deployed at: ", vm.toString(address(yourContract))
-            )
-        );
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
 
         vm.stopBroadcast();
 

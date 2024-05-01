@@ -28,6 +28,7 @@ jobs:
           node-version: ${{ matrix.node }}
           cache : yarn
 
+
       - name: Install dependencies
         run: yarn install --immutable
 
@@ -43,9 +44,9 @@ jobs:
       - name: Run tests
         run: yarn test -vvv
 
+
       - name: Run nextjs lint
         run: yarn next:lint --max-warnings=0
 
       - name: Check typings on nextjs
         run: yarn next:check-types
-      
