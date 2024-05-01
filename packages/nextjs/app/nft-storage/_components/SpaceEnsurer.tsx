@@ -22,6 +22,7 @@ export function SpaceEnsurer({ did, children }: { did: `did:${string}:${string}`
       }
       void ensureCurrentSpace();
     },
+    /* eslint-disable-next-line*/
     [client],
   );
 
