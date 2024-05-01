@@ -75,15 +75,11 @@ export default function Collection({ params }: { params: { network: string; addr
     { value: "w3s", label: "web3.storage" },
   ];
 
-  const [selectedDropdownOption, setSelectedDropdownOption] = useState<"ipfs" | "nftstorage" | "w3s">(
-    options[1].value as "ipfs" | "nftstorage" | "w3s",
-  );
+  const defaultOption = options[1];
 
-  const [backEndOption, setBackendOption] = useState<"ipfs" | "nftstorage" | "w3s">();
+  const [selectedDropdownOption, setSelectedDropdownOption] = useState(defaultOption.value);
 
-  async function onChange2(event: any) {
-    setSelectedDropdownOption(event.value);
-  }
+  const [backEndOption, setBackendOption] = useState(defaultOption.value);
 
   const [renderedTokenIds, setRenderedTokenIds] = useState<bigint[]>([
     BigInt(1),
@@ -98,26 +94,19 @@ export default function Collection({ params }: { params: { network: string; addr
     BigInt(10),
   ]);
 
-  const { tokens, isLoading } = useTokens(params["network"], params["address"], renderedTokenIds, backEndOption);
+  const { tokens, isLoading, isError } = useTokens(
+    params["network"],
+    params["address"],
+    renderedTokenIds,
+    backEndOption as "ipfs" | "nftstorage" | "w3s",
+  );
 
   const tokensComponents = tokens.map((token, index) => {
     return <NftCard key={index} token={token} renderOrder={componentsToRender} />;
   });
 
-  // const [startIndex, setStartIndex] = useState(1);
-
-  // const [numToRender, setNumToRender] = useState(10);
-
   async function onSubmit(event: any) {
     event.preventDefault();
-    // console.log("Submitted");
-    // console.log(event);
-    // console.log(event.target[0].value); // number to render
-
-    // setNumToRender(event.target[0].value);
-    // console.log(event.target[1].value); // start index
-    // setStartIndex(event.target[1].value);
-    // console.log(event); //load type
 
     setBackendOption(selectedDropdownOption);
 
@@ -127,22 +116,7 @@ export default function Collection({ params }: { params: { network: string; addr
       tempArr.push(BigInt(i));
     }
 
-    console.log(tempArr);
-
     setRenderedTokenIds([...tempArr]);
-
-    // if (event.target[1].value == 0) {
-    //   for (let i = 0; i < event.target[0].value; i++) {
-    //     tempArr.push(BigInt(i));
-    //   }
-    // } else {
-    //   for (let i = event.target[1].value; i <= event.target[0].value; i++) {
-    //     tempArr.push(BigInt(i));
-    //   }
-    // }
-
-    // console.log(tempArr);
-    // setRenderedTokenIds([...tempArr]);
   }
 
   const [isShowingAdvancedSettings, setIsShowingAdvancedSettings] = useState(false);
@@ -164,10 +138,7 @@ export default function Collection({ params }: { params: { network: string; addr
               <input
                 className="input input-ghost focus-within:border-transparent focus:outline-none focus:bg-transparent focus:text-gray-400 h-[2.2rem] min-h-[2.2rem] px-4 border w-full font-medium placeholder:text-accent/50 text-gray-400"
                 placeholder={"1"}
-                defaultValue={5}
-                // onChange={(event: any) => {
-                //   setNumToRender(event.target.value);
-                // }}
+                defaultValue={10}
               />
               <br />
             </div>
@@ -179,14 +150,18 @@ export default function Collection({ params }: { params: { network: string; addr
                 className="input input-ghost focus-within:border-transparent focus:outline-none focus:bg-transparent focus:text-gray-400 h-[2.2rem] min-h-[2.2rem] px-4 border w-full font-medium placeholder:text-accent/50 text-gray-400"
                 placeholder={"1"}
                 defaultValue={1}
-                // onChange={(event: any) => {
-                //   setStartIndex(event.target.value);
-                // }}
               />
             </div>
             <p className="text-center m-0">Metadata Load Type</p>
             <div className="w-64">
-              <Select options={options} className="text-black bg-base-100" onChange={onChange2} values={[options[2]]} />
+              <Select
+                options={options}
+                className="text-black bg-base-100"
+                onChange={(event: any) => {
+                  setSelectedDropdownOption(event[0].value);
+                }}
+                values={[defaultOption]}
+              />
             </div>
 
             <button type="submit" className="btn btn-sm btn-primary">
@@ -200,6 +175,16 @@ export default function Collection({ params }: { params: { network: string; addr
     advancedOutput = <></>;
   }
 
+  let mainContent;
+  if (isLoading) {
+    mainContent = <p>Loading...</p>;
+  } else {
+    if (isError) {
+      mainContent = <p>There was an error. Please try changing the advanced settings.</p>;
+    } else {
+      mainContent = tokensComponents;
+    }
+  }
   return (
     <div className="flex flex-col items-center justify-center">
       <button
@@ -221,10 +206,7 @@ export default function Collection({ params }: { params: { network: string; addr
           CollectionSymbolCard={CollectionSymbolCardComponent}
         />
       </div>
-      <div className="flex flex-wrap justify-center m-1 p-1 bg-base-100 rounded lg:max-w-[1300px]">
-        {isLoading ? <p>Loading...</p> : tokensComponents}
-        {/* {tokensComponents} */}
-      </div>{" "}
+      <div className="flex flex-wrap justify-center m-1 p-1 bg-base-100 rounded lg:max-w-[1300px]">{mainContent}</div>{" "}
     </div>
   );
 }

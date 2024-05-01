@@ -21,12 +21,16 @@ export const useTokens = (
   const publicClient = usePublicClient({ chainId: selectedChain?.id });
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const [tokens, setTokens] = useState<any[]>([]);
 
   useEffect(() => {
     async function get() {
+      console.log(replacementType);
+
       setIsLoading(true);
+      setIsError(false);
 
       try {
         const collectionName = await publicClient?.readContract({
@@ -52,6 +56,7 @@ export const useTokens = (
           });
 
           const tokenURIFormatted = tokenURI?.replace("ipfs://", replacement[replacementType]);
+
           const metadata = await fetch(tokenURIFormatted!);
           const metadataJson = await metadata.json();
           metadataJson.image = metadataJson.image.replace("ipfs://", replacement[replacementType]);
@@ -69,6 +74,7 @@ export const useTokens = (
         setTokens([...arr]);
       } catch (e) {
         console.log(e);
+        setIsError(true);
       }
 
       setIsLoading(false);
@@ -76,5 +82,5 @@ export const useTokens = (
     get();
   }, [publicClient?.account, tokenIds]);
 
-  return { tokens, isLoading };
+  return { tokens, isLoading, isError };
 };
