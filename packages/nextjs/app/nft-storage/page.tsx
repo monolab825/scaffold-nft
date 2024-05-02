@@ -14,7 +14,7 @@ import { connect } from "@ucanto/client";
 import { CAR, HTTP } from "@ucanto/transport";
 import { StoreIndexedDB } from "@web3-storage/access/stores/store-indexeddb";
 // import scaffoldConfig from "~~/scaffold.config";
-// import { create } from "@web3-storage/w3up-client";
+import { create } from "@web3-storage/w3up-client";
 // import { useDatamodel } from "./MyProvider";
 // import { createClient } from "@w3ui/core";
 import type { NextPage } from "next";
@@ -71,14 +71,13 @@ function createServiceConf({ servicePrincipal, connection }: any = {}) {
   const dbName = `${DB_NAME}${options?.servicePrincipal != null ? "@" + options?.servicePrincipal.did() : ""}`;
   const events = options?.events ?? new EventTarget();
   const store = new IndexedDBEventDispatcherStore(dbName, events);
-  //const serviceConf =
-  createServiceConf(options);
-  // const client = await create({
-  //   store,
-  //   serviceConf,
-  // });
+  const serviceConf = createServiceConf(options);
+  const client = await create({
+    store,
+    serviceConf,
+  });
   return {
-    // client,
+    client,
     events,
     store,
   };
