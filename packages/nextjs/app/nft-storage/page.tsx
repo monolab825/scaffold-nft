@@ -15,9 +15,8 @@ import type { NextPage } from "next";
 
 const NftStoragePage: NextPage = () => {
   // const { client, accounts, spaces, logout } = useProvider({});
-  const { client } = useDatamodel({});
+  useDatamodel({});
 
-  console.log(client);
   // console.log(accounts);
   // console.log(spaces);
   // console.log(logout);

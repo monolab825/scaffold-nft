@@ -1,32 +1,33 @@
 import {
   useCallback, //   useEffect,
-  useState, //Fragment, createContext,  useContext,  useMemo
+  //   useState, //Fragment, createContext,  useContext,  useMemo
 } from "react";
-import {
-  //STORE_SAVE_EVENT,
-  createClient,
-} from "@w3ui/core";
+
+// import {
+//   //STORE_SAVE_EVENT,
+//   createClient,
+// } from "@w3ui/core";
 
 // import { createComponent, createElement } from "ariakit-react-utils";
 
 // export * from "@w3ui/core";
 
 export function useDatamodel({ servicePrincipal, connection }: any) {
-  const [client, setClient] = useState<any>();
+  //   const [client, setClient] = useState<any>();
   //   const [events, setEvents] = useState<any>();
   //   const [accounts, setAccounts] = useState<any>([]);
   //   const [spaces, setSpaces] = useState<any>([]);
   // update this function any time servicePrincipal or connection change
   //const setupClient =
   useCallback(async () => {
-    const {
-      client,
-      //, events
-    } = await createClient({
-      servicePrincipal,
-      connection,
-    });
-    setClient(client);
+    // const {
+    //   client,
+    //   //, events
+    // } = await createClient({
+    //   servicePrincipal,
+    //   connection,
+    // });
+    // setClient(client);
     // setEvents(events);
     // setAccounts(Object.values(client.accounts()));
     // setSpaces(client.spaces());
@@ -65,7 +66,7 @@ export function useDatamodel({ servicePrincipal, connection }: any) {
   //     await setupClient();
   //   };
   return {
-    client,
+    // client,
     // accounts,
     // spaces,
     // logout,
