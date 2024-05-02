@@ -2354,6 +2354,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ~5.40.0
     "@uniswap/sdk-core": ~4.0.1
     "@uniswap/v2-sdk": ~3.0.1
+    "@w3ui/core": ^2.1.0
     "@w3ui/react": ^2.2.1
     "@web3-storage/w3up-client": ^12.5.3
     abitype: 1.0.2
