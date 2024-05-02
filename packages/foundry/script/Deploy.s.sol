@@ -1,7 +1,8 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import "../contracts/YourContract.sol";
+import {ScaffoldERC721} from "../contracts/ScaffoldERC721.sol";
+
 import "./DeployHelpers.s.sol";
 
 contract DeployScript is ScaffoldETHDeploy {
@@ -15,13 +16,34 @@ contract DeployScript is ScaffoldETHDeploy {
             );
         }
         vm.startBroadcast(deployerPrivateKey);
-        YourContract yourContract =
-            new YourContract(vm.addr(deployerPrivateKey));
-        console.logString(
-            string.concat(
-                "YourContract deployed at: ", vm.toString(address(yourContract))
-            )
+        ScaffoldERC721 yourContract = new ScaffoldERC721(
+            "Test",
+            "T",
+            // "ipfs://bafybeicilmsvboiccw7tba3knvxiokuxysqxwgycmr3vwfisypefcmxxwu/",
+            "ipfs://bafybeicpvzgkhgyhwggrtctzvztuk2mftmt56xogv6pi7mx2v42go35ltu/",
+            0,
+            0,
+            0,
+            1
         );
+
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+
         vm.stopBroadcast();
 
         /**
