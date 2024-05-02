@@ -8,15 +8,16 @@
 //   //Authenticator,
 //   Provider,
 // } from "@w3ui/react";
-// import { useProvider } from "./MyProvider";
+import { useDatamodel } from "./MyProvider";
 import type { NextPage } from "next";
 
 // import scaffoldConfig from "~~/scaffold.config";
 
 const NftStoragePage: NextPage = () => {
   // const { client, accounts, spaces, logout } = useProvider({});
+  const { client } = useDatamodel({});
 
-  // console.log(client);
+  console.log(client);
   // console.log(accounts);
   // console.log(spaces);
   // console.log(logout);

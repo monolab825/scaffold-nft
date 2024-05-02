@@ -3,7 +3,10 @@ import {
   useEffect,
   useState, //Fragment, createContext,  useContext,  useMemo
 } from "react";
-import { STORE_SAVE_EVENT, createClient } from "@w3ui/core";
+import {
+  //STORE_SAVE_EVENT,
+  createClient,
+} from "@w3ui/core";
 
 // import { createComponent, createElement } from "ariakit-react-utils";
 
@@ -11,19 +14,22 @@ export * from "@w3ui/core";
 
 export function useDatamodel({ servicePrincipal, connection }: any) {
   const [client, setClient] = useState<any>();
-  const [events, setEvents] = useState<any>();
-  const [accounts, setAccounts] = useState<any>([]);
-  const [spaces, setSpaces] = useState<any>([]);
+  //   const [events, setEvents] = useState<any>();
+  //   const [accounts, setAccounts] = useState<any>([]);
+  //   const [spaces, setSpaces] = useState<any>([]);
   // update this function any time servicePrincipal or connection change
   const setupClient = useCallback(async () => {
-    const { client, events } = await createClient({
+    const {
+      client,
+      //, events
+    } = await createClient({
       servicePrincipal,
       connection,
     });
     setClient(client);
-    setEvents(events);
-    setAccounts(Object.values(client.accounts()));
-    setSpaces(client.spaces());
+    // setEvents(events);
+    // setAccounts(Object.values(client.accounts()));
+    // setSpaces(client.spaces());
   }, [servicePrincipal, connection]);
   // run setupClient once each time it changes
   useEffect(() => {
@@ -31,49 +37,49 @@ export function useDatamodel({ servicePrincipal, connection }: any) {
   }, [setupClient]);
   // set up event listeners to refresh accounts and spaces when
   // the store:save event from @w3ui/core happens
-  useEffect(() => {
-    if (client === undefined || events === undefined) return;
-    const handleStoreSave = () => {
-      setAccounts(Object.values(client.accounts()));
-      setSpaces(client.spaces());
-    };
-    events.addEventListener(STORE_SAVE_EVENT, handleStoreSave);
-    return () => {
-      events?.removeEventListener(STORE_SAVE_EVENT, handleStoreSave);
-    };
-  }, [client, events]);
-  const logout = async () => {
-    // it's possible that setupClient hasn't been run yet - run createClient here
-    // to get a reliable handle on the latest store
-    const { store } = await createClient({
-      servicePrincipal,
-      connection,
-    });
-    await store.reset();
-    // set state back to defaults
-    setClient(undefined);
-    setEvents(undefined);
-    setAccounts([]);
-    setSpaces([]);
-    // set state up again
-    await setupClient();
-  };
+  //   useEffect(() => {
+  //     if (client === undefined || events === undefined) return;
+  //     const handleStoreSave = () => {
+  //       setAccounts(Object.values(client.accounts()));
+  //       setSpaces(client.spaces());
+  //     };
+  //     events.addEventListener(STORE_SAVE_EVENT, handleStoreSave);
+  //     return () => {
+  //       events?.removeEventListener(STORE_SAVE_EVENT, handleStoreSave);
+  //     };
+  //   }, [client, events]);
+  //   const logout = async () => {
+  //     // it's possible that setupClient hasn't been run yet - run createClient here
+  //     // to get a reliable handle on the latest store
+  //     const { store } = await createClient({
+  //       servicePrincipal,
+  //       connection,
+  //     });
+  //     await store.reset();
+  //     // set state back to defaults
+  //     setClient(undefined);
+  //     setEvents(undefined);
+  //     setAccounts([]);
+  //     setSpaces([]);
+  //     // set state up again
+  //     await setupClient();
+  //   };
   return {
     client,
-    accounts,
-    spaces,
-    logout,
+    // accounts,
+    // spaces,
+    // logout,
   };
 }
 
-export function useProvider({ servicePrincipal, connection }: any) {
-  const { client, accounts, spaces, logout } = useDatamodel({
-    servicePrincipal,
-    connection,
-  });
+// export function useProvider({ servicePrincipal, connection }: any) {
+//   const { client, accounts, spaces, logout } = useDatamodel({
+//     servicePrincipal,
+//     connection,
+//   });
 
-  return { client, accounts, spaces, logout };
-}
+//   return { client, accounts, spaces, logout };
+// }
 
 // const ContextDefaultValue = [
 //     {
