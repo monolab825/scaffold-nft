@@ -1,6 +1,5 @@
 import {
-  useCallback,
-  useEffect,
+  useCallback, //   useEffect,
   useState, //Fragment, createContext,  useContext,  useMemo
 } from "react";
 import {
@@ -10,7 +9,7 @@ import {
 
 // import { createComponent, createElement } from "ariakit-react-utils";
 
-export * from "@w3ui/core";
+// export * from "@w3ui/core";
 
 export function useDatamodel({ servicePrincipal, connection }: any) {
   const [client, setClient] = useState<any>();
@@ -18,7 +17,8 @@ export function useDatamodel({ servicePrincipal, connection }: any) {
   //   const [accounts, setAccounts] = useState<any>([]);
   //   const [spaces, setSpaces] = useState<any>([]);
   // update this function any time servicePrincipal or connection change
-  const setupClient = useCallback(async () => {
+  //const setupClient =
+  useCallback(async () => {
     const {
       client,
       //, events
@@ -32,9 +32,9 @@ export function useDatamodel({ servicePrincipal, connection }: any) {
     // setSpaces(client.spaces());
   }, [servicePrincipal, connection]);
   // run setupClient once each time it changes
-  useEffect(() => {
-    setupClient();
-  }, [setupClient]);
+  //   useEffect(() => {
+  //     setupClient();
+  //   }, [setupClient]);
   // set up event listeners to refresh accounts and spaces when
   // the store:save event from @w3ui/core happens
   //   useEffect(() => {
