@@ -8,15 +8,23 @@
 //   //Authenticator,
 //   Provider,
 // } from "@w3ui/react";
-import { useDatamodel } from "./MyProvider";
+import { useEffect } from "react";
+// import { useDatamodel } from "./MyProvider";
+import { createClient } from "@w3ui/core";
 import type { NextPage } from "next";
 
 // import scaffoldConfig from "~~/scaffold.config";
 
 const NftStoragePage: NextPage = () => {
   // const { client, accounts, spaces, logout } = useProvider({});
-  useDatamodel({});
+  // useDatamodel({});
 
+  useEffect(() => {
+    async function get() {
+      await createClient({});
+    }
+    get();
+  }, []);
   // console.log(accounts);
   // console.log(spaces);
   // console.log(logout);
