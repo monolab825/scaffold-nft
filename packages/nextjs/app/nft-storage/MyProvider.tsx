@@ -33,7 +33,7 @@ export function useDatamodel({ servicePrincipal, connection }: any) {
   }, [servicePrincipal, connection]);
   // run setupClient once each time it changes
   useEffect(() => {
-    void setupClient();
+    setupClient();
   }, [setupClient]);
   // set up event listeners to refresh accounts and spaces when
   // the store:save event from @w3ui/core happens
