@@ -8,18 +8,18 @@
 //   //Authenticator,
 //   Provider,
 // } from "@w3ui/react";
-import { useProvider } from "./MyProvider";
+// import { useProvider } from "./MyProvider";
 import type { NextPage } from "next";
 
 // import scaffoldConfig from "~~/scaffold.config";
 
 const NftStoragePage: NextPage = () => {
-  const { client, accounts, spaces, logout } = useProvider({});
+  // const { client, accounts, spaces, logout } = useProvider({});
 
-  console.log(client);
-  console.log(accounts);
-  console.log(spaces);
-  console.log(logout);
+  // console.log(client);
+  // console.log(accounts);
+  // console.log(spaces);
+  // console.log(logout);
 
   return (
     <div className="flex flex-col items-center justify-center">
