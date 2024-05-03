@@ -27,22 +27,7 @@ contract DeployScript is ScaffoldETHDeploy {
             1
         );
 
-        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
-        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
-        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
-        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
-        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
-        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
-        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
-        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
-        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
-        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
-        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
-        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
-        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
-        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
-        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
-        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676);
+        yourContract.mint(0x2F15D4A66D22ecC6967928b6A76Ab06897b05676, 15);
 
         vm.stopBroadcast();
 
