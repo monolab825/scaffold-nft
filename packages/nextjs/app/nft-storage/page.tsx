@@ -4,10 +4,6 @@
 // import { Identity } from "./_components/Identity";
 // import { MyUploader } from "./_components/MyUploader";
 // import { SpaceEnsurer } from "./_components/SpaceEnsurer";
-import {
-  //Authenticator,
-  Provider,
-} from "@w3ui/react";
 // import { useEffect } from "react";
 // import * as DID from "@ipld/dag-ucan/did";
 // import { connect } from "@ucanto/client";
@@ -21,6 +17,7 @@ import type { NextPage } from "next";
 
 // import { AgentData } from '@web3-storage/access/agent';
 // import { Client } from './client.js';
+// import { generate } from '@ucanto/principal/rsa';
 
 // const DB_NAME = "@w3ui";
 // const DB_STORE_NAME = "core";
@@ -101,32 +98,24 @@ import type { NextPage } from "next";
 //   };
 // }
 
+// import {
+//   //Authenticator,
+//   Provider,
+// } from "@w3ui/react";
+
 const NftStoragePage: NextPage = () => {
-  // const { client, accounts, spaces, logout } = useProvider({});
-  // useDatamodel({});
-
-  // useEffect(() => {
-  //   async function get() {
-  //     await createClient({});
-  //   }
-  //   get();
-  // }, []);
-  // console.log(accounts);
-  // console.log(spaces);
-  // console.log(logout);
-
   return (
     <div className="flex flex-col items-center justify-center">
-      <Provider>
-        {/* <Authenticator> */}
-        {/* <AuthenticationEnsurer>
+      {/* <Provider> */}
+      {/* <Authenticator> */}
+      {/* <AuthenticationEnsurer>
             <Identity />
             <SpaceEnsurer did={scaffoldConfig.did as `did:${string}:${string}`}>
               <MyUploader />
             </SpaceEnsurer>
           </AuthenticationEnsurer> */}
-        {/* </Authenticator> */}
-      </Provider>
+      {/* </Authenticator> */}
+      {/* </Provider> */}
     </div>
   );
 };
