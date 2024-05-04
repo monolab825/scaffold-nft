@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Select from "react-dropdown-select";
 
-export default function useAdvancedFiltering(inputComponents: any) {
+export default function useAdvancedFiltering(inputComponents: any, onSubmitCallback?: any) {
   const options = [
     { value: "ipfs" as "ipfs" | "nftstorage" | "w3s", label: "IPFS" },
     { value: "nftstorage" as "ipfs" | "nftstorage" | "w3s", label: "NFT Storage" },
@@ -14,19 +14,6 @@ export default function useAdvancedFiltering(inputComponents: any) {
 
   const [backEndOption, setBackendOption] = useState(defaultOption.value);
 
-  const [renderedTokenIds, setRenderedTokenIds] = useState<bigint[]>([
-    BigInt(1),
-    BigInt(2),
-    BigInt(3),
-    BigInt(4),
-    BigInt(5),
-    BigInt(6),
-    BigInt(7),
-    BigInt(8),
-    BigInt(9),
-    BigInt(10),
-  ]);
-
   async function onSubmit(event: any) {
     event.preventDefault();
 
@@ -38,7 +25,7 @@ export default function useAdvancedFiltering(inputComponents: any) {
       tempArr.push(BigInt(i));
     }
 
-    setRenderedTokenIds([...tempArr]);
+    if (onSubmitCallback) onSubmitCallback(tempArr);
   }
 
   const [isShowingAdvancedSettings, setIsShowingAdvancedSettings] = useState(false);
@@ -111,5 +98,5 @@ export default function useAdvancedFiltering(inputComponents: any) {
     </>
   );
 
-  return { renderedTokenIds, backEndOption, output };
+  return { backEndOption, output };
 }

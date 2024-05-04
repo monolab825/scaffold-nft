@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useState } from "react";
 import "react-dropdown/style.css";
 import { NftCard } from "~~/components/nft-card/NftCard";
 import { AddressCard, AddressCardProps } from "~~/components/nft-card/values/AddressCard";
@@ -36,7 +37,25 @@ const inputOptions2: any[] = [
 
 export default function Collection({ params }: { params: { network: string; address: string } }) {
   const { inputComponents, componentsToRender } = useCheckboxes(inputOptions2);
-  const { renderedTokenIds, backEndOption, output: advancedOutput } = useAdvancedFiltering(inputComponents);
+
+  const [renderedTokenIds, setRenderedTokenIds] = useState<bigint[]>([
+    BigInt(1),
+    BigInt(2),
+    BigInt(3),
+    BigInt(4),
+    BigInt(5),
+    BigInt(6),
+    BigInt(7),
+    BigInt(8),
+    BigInt(9),
+    BigInt(10),
+  ]);
+
+  async function onSubmit(newIds: bigint[]) {
+    setRenderedTokenIds([...newIds]);
+  }
+
+  const { backEndOption, output: advancedOutput } = useAdvancedFiltering(inputComponents, onSubmit);
 
   const { tokens, isLoading, isError } = useTokens(
     params["network"],

@@ -1,11 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import type { NextPage } from "next";
 import { NftCard } from "~~/components/nft-card/NftCard";
 import { AddressCard, AddressCardProps } from "~~/components/nft-card/values/AddressCard";
 import { CollectionNameCard, CollectionNameCardProps } from "~~/components/nft-card/values/CollectionNameCard";
 import { CollectionSymbolCard, CollectionSymbolCardProps } from "~~/components/nft-card/values/CollectionSymbolCard";
 import { CollectionDetails } from "~~/components/nft-card/values/extensions/CollectionDetails";
+import useAdvancedFiltering from "~~/hooks/useAdvancedFiltering";
 import useCheckboxes from "~~/hooks/useCheckboxes";
 import { useTokens } from "~~/hooks/useToken";
 
@@ -35,21 +37,46 @@ const CollectionSymbolCardComponent = (props: CollectionSymbolCardProps) => {
 const TestingGrounds: NextPage = () => {
   const { inputComponents, componentsToRender } = useCheckboxes(inputOptions2);
 
-  const arr = [];
-  for (let i = 1; i <= 10; i++) {
-    arr.push(BigInt(i));
+  const [renderedTokenIds, setRenderedTokenIds] = useState<bigint[]>([
+    BigInt(1),
+    BigInt(2),
+    BigInt(3),
+    BigInt(4),
+    BigInt(5),
+    BigInt(6),
+    BigInt(7),
+    BigInt(8),
+    BigInt(9),
+    BigInt(10),
+  ]);
+
+  async function onSubmit(newIds: bigint[]) {
+    setRenderedTokenIds([...newIds]);
+    // await refetch();
   }
-  const tokens = useTokens(arr, "w3s");
+
+  const { backEndOption, output: advancedOutput } = useAdvancedFiltering(inputComponents, onSubmit);
+
+  const { tokens, isLoading, isError } = useTokens(renderedTokenIds, backEndOption);
 
   const tokensComponents = tokens.map((token, index) => {
-    console.log(componentsToRender);
-
     return <NftCard key={index} token={token} renderOrder={componentsToRender} />;
   });
 
+  let mainContent;
+  if (isLoading) {
+    mainContent = <p>Loading...</p>;
+  } else {
+    if (isError) {
+      mainContent = <p>There was an error. Please try changing the advanced settings.</p>;
+    } else {
+      mainContent = tokensComponents;
+    }
+  }
+
   return (
-    <div className="flex flex-col justify-center items-center">
-      <div className="flex flex-wrap">{inputComponents}</div>
+    <div className="flex flex-col items-center justify-center">
+      {advancedOutput}
       <div className="w-full">
         <CollectionDetails
           token={tokens[0]}
@@ -60,10 +87,7 @@ const TestingGrounds: NextPage = () => {
           CollectionSymbolCard={CollectionSymbolCardComponent}
         />
       </div>
-
-      <div className="flex flex-wrap justify-center m-1 p-1 bg-base-100 rounded lg:max-w-[1300px]">
-        {tokensComponents}
-      </div>
+      <div className="flex flex-wrap justify-center m-1 p-1 bg-base-100 rounded lg:max-w-[1300px]">{mainContent}</div>{" "}
     </div>
   );
 };

@@ -27,8 +27,6 @@ export const useTokens = (
 
   useEffect(() => {
     async function get() {
-      console.log(replacementType);
-
       setIsLoading(true);
       setIsError(false);
 

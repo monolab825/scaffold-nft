@@ -14,23 +14,50 @@ const replacement = {
 export const useTokens = (tokenIds: bigint[], replacementType: "ipfs" | "nftstorage" | "w3s" = "ipfs") => {
   const { data: scaffoldErc721 } = useScaffoldContract({ contractName: "ScaffoldERC721" });
 
-  const { data: collectionName } = useScaffoldReadContract({
+  const {
+    data: collectionName,
+    isLoading: isLoadingName,
+    isError: isErrorName,
+  } = useScaffoldReadContract({
     contractName: "ScaffoldERC721",
     functionName: "name",
   });
 
-  const { data: collectionSymbol } = useScaffoldReadContract({
+  const {
+    data: collectionSymbol,
+    isLoading: isLoadingSymbol,
+    isError: isErrorSymbol,
+  } = useScaffoldReadContract({
     contractName: "ScaffoldERC721",
     functionName: "symbol",
   });
 
-  const { uris } = useTokenURIs(scaffoldErc721, tokenIds);
+  // const [myUris, setMyUris] = useState<any[]>([]);
+
+  // useEffect(() => {
+  //   async function get() {
+  //     const tempArr = [];
+
+  //     for (let i = 0; i < tokenIds.length; i++) {
+  //       const result = await scaffoldErc721?.read.tokenURI([tokenIds[i]]);
+  //       tempArr.push(result);
+  //     }
+
+  //     console.log("Set");
+
+  //     setMyUris([...tempArr]);
+  //   }
+
+  //   get();
+  // }, [scaffoldErc721?.address, tokenIds]);
+
+  const { uris, isLoading: isLoadingUris, isError: isErrorUris } = useTokenURIs(scaffoldErc721, tokenIds);
 
   for (let i = 0; i < uris.length; i++) {
     uris[i] = uris[i].replace("ipfs://", replacement[replacementType]);
   }
 
-  const { responses } = useFetches(uris);
+  const { responses, isLoading: isLoadingFetches, isError: isErrorFetches } = useFetches(uris);
 
   const tokens: any[] = [];
   for (let i = 0; i < responses.length; i++) {
@@ -46,7 +73,12 @@ export const useTokens = (tokenIds: bigint[], replacementType: "ipfs" | "nftstor
     tokens.push(token);
   }
 
-  return tokens;
+  return {
+    tokens,
+    isLoading: isLoadingName || isLoadingSymbol || isLoadingUris || isLoadingFetches,
+    isError: isErrorName || isErrorSymbol || isErrorUris || isErrorFetches,
+    // refetch: refetchURIs,
+  };
 };
 
 export const useToken = (tokenId: bigint, replacementType: "ipfs" | "nftstorage" | "w3s" = "ipfs") => {
