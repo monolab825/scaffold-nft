@@ -1,24 +1,24 @@
 "use client";
 
-import { useState } from "react";
 import type { NextPage } from "next";
 import { NftCard } from "~~/components/nft-card/NftCard";
 import { AddressCard, AddressCardProps } from "~~/components/nft-card/values/AddressCard";
 import { CollectionNameCard, CollectionNameCardProps } from "~~/components/nft-card/values/CollectionNameCard";
 import { CollectionSymbolCard, CollectionSymbolCardProps } from "~~/components/nft-card/values/CollectionSymbolCard";
 import { CollectionDetails } from "~~/components/nft-card/values/extensions/CollectionDetails";
+import useCheckboxes from "~~/hooks/useCheckboxes";
 // import { NameCard, NameCardProps } from "~~/components/NftCardValue/NameCard";
 import { useTokens } from "~~/hooks/useToken";
 
-const inputOptions: any[] = [
-  "Image",
-  "Id",
-  "Name",
-  "Description",
-  "Attributes",
-  "Address",
-  "CollectionName",
-  "CollectionSymbol",
+const inputOptions2: any[] = [
+  { value: "Image", defaultValue: true },
+  { value: "Id", defaultValue: true },
+  { value: "Name", defaultValue: true },
+  { value: "Description", defaultValue: true },
+  { value: "Attributes", defaultValue: true },
+  { value: "Address", defaultValue: true },
+  { value: "CollectionName", defaultValue: true },
+  { value: "CollectionSymbol", defaultValue: true },
 ];
 
 const AddressCardComponent = (props: AddressCardProps) => {
@@ -34,38 +34,35 @@ const CollectionSymbolCardComponent = (props: CollectionSymbolCardProps) => {
 };
 
 const TestingGrounds: NextPage = () => {
-  const [checkeds, setCheckeds] = useState<boolean[]>([true, true, true, true, true, true, true, true]);
+  const { inputComponents, componentsToRender } = useCheckboxes(inputOptions2);
 
-  const handleChange = (index: number) => {
-    const temp: boolean[] = checkeds;
+  // const [checkeds, setCheckeds] = useState<boolean[]>([true, true, true, true, true, true, true, true]);
 
-    temp[index] = !temp[index];
+  // const handleChange = (index: number) => {
+  //   const temp: boolean[] = checkeds;
 
-    setCheckeds([...temp]);
-  };
+  //   temp[index] = !temp[index];
 
-  const inputComponents = inputOptions.map((inputName, index) => {
-    return (
-      <div key={index + "-input"}>
-        <label className="m-1">
-          {inputName}
-          <input
-            className="m-1"
-            type="checkbox"
-            checked={checkeds[index]}
-            onChange={() => {
-              handleChange(index);
-            }}
-          />
-        </label>
-      </div>
-    );
-  });
+  //   setCheckeds([...temp]);
+  // };
 
-  const componentsToRender: any = [];
-  for (let i = 0; i < checkeds.length; i++) {
-    if (checkeds[i]) componentsToRender.push(inputOptions[i]);
-  }
+  // const inputComponents = inputOptions.map((inputName, index) => {
+  //   return (
+  //     <div key={index + "-input"}>
+  //       <label className="m-1">
+  //         {inputName}
+  //         <input
+  //           className="m-1"
+  //           type="checkbox"
+  //           checked={checkeds[index]}
+  //           onChange={() => {
+  //             handleChange(index);
+  //           }}
+  //         />
+  //       </label>
+  //     </div>
+  //   );
+  // });
 
   // const token = useToken(BigInt(1), "w3s");
 
@@ -76,6 +73,8 @@ const TestingGrounds: NextPage = () => {
   const tokens = useTokens(arr, "w3s");
 
   const tokensComponents = tokens.map((token, index) => {
+    console.log(componentsToRender);
+
     return <NftCard key={index} token={token} renderOrder={componentsToRender} />;
   });
 
