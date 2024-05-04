@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+// import { useState } from "react";
 import { renderInputOptions } from "../nftCollectionPagesConfig";
 import type { NextPage } from "next";
 import { NftCard } from "~~/components/nft-card/NftCard";
@@ -11,17 +11,7 @@ import { CollectionDetails } from "~~/components/nft-card/values/extensions/Coll
 import useAdvancedFiltering from "~~/hooks/useAdvancedFiltering";
 import useCheckboxes from "~~/hooks/useCheckboxes";
 import { useTokens } from "~~/hooks/useToken";
-
-// const inputOptions2: any[] = [
-//   { value: "Image", defaultValue: true },
-//   { value: "Id", defaultValue: true },
-//   { value: "Name", defaultValue: true },
-//   { value: "Description", defaultValue: true },
-//   { value: "Attributes", defaultValue: true },
-//   { value: "Address", defaultValue: false },
-//   { value: "CollectionName", defaultValue: false },
-//   { value: "CollectionSymbol", defaultValue: false },
-// ];
+import useTokenIds from "~~/hooks/useTokenIds";
 
 const AddressCardComponent = (props: AddressCardProps) => {
   return <AddressCard {...props} bgColor="bg-base-300" />;
@@ -38,27 +28,14 @@ const CollectionSymbolCardComponent = (props: CollectionSymbolCardProps) => {
 const TestingGrounds: NextPage = () => {
   const { inputComponents, componentsToRender } = useCheckboxes(renderInputOptions);
 
-  const [renderedTokenIds, setRenderedTokenIds] = useState<bigint[]>([
-    BigInt(1),
-    BigInt(2),
-    BigInt(3),
-    BigInt(4),
-    BigInt(5),
-    BigInt(6),
-    BigInt(7),
-    BigInt(8),
-    BigInt(9),
-    BigInt(10),
-  ]);
-
+  const { tokenIds, setTokenIds } = useTokenIds(15);
   async function onSubmit(newIds: bigint[]) {
-    setRenderedTokenIds([...newIds]);
-    // await refetch();
+    setTokenIds([...newIds]);
   }
 
   const { backEndOption, output: advancedOutput } = useAdvancedFiltering(inputComponents, onSubmit);
 
-  const { tokens, isLoading, isError } = useTokens(renderedTokenIds, backEndOption);
+  const { tokens, isLoading, isError } = useTokens(tokenIds, backEndOption);
 
   const tokensComponents = tokens.map((token, index) => {
     return <NftCard key={index} token={token} renderOrder={componentsToRender} />;

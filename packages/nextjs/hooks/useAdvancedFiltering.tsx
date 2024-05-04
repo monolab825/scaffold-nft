@@ -8,7 +8,7 @@ export default function useAdvancedFiltering(inputComponents: any, onSubmitCallb
     { value: "w3s" as "ipfs" | "nftstorage" | "w3s", label: "web3.storage" },
   ];
 
-  const defaultOption = options[1];
+  const defaultOption = options[2];
 
   const [selectedDropdownOption, setSelectedDropdownOption] = useState(defaultOption.value);
 
