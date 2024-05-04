@@ -7,7 +7,6 @@ import { CollectionNameCard, CollectionNameCardProps } from "~~/components/nft-c
 import { CollectionSymbolCard, CollectionSymbolCardProps } from "~~/components/nft-card/values/CollectionSymbolCard";
 import { CollectionDetails } from "~~/components/nft-card/values/extensions/CollectionDetails";
 import useCheckboxes from "~~/hooks/useCheckboxes";
-// import { NameCard, NameCardProps } from "~~/components/NftCardValue/NameCard";
 import { useTokens } from "~~/hooks/useToken";
 
 const inputOptions2: any[] = [
@@ -35,36 +34,6 @@ const CollectionSymbolCardComponent = (props: CollectionSymbolCardProps) => {
 
 const TestingGrounds: NextPage = () => {
   const { inputComponents, componentsToRender } = useCheckboxes(inputOptions2);
-
-  // const [checkeds, setCheckeds] = useState<boolean[]>([true, true, true, true, true, true, true, true]);
-
-  // const handleChange = (index: number) => {
-  //   const temp: boolean[] = checkeds;
-
-  //   temp[index] = !temp[index];
-
-  //   setCheckeds([...temp]);
-  // };
-
-  // const inputComponents = inputOptions.map((inputName, index) => {
-  //   return (
-  //     <div key={index + "-input"}>
-  //       <label className="m-1">
-  //         {inputName}
-  //         <input
-  //           className="m-1"
-  //           type="checkbox"
-  //           checked={checkeds[index]}
-  //           onChange={() => {
-  //             handleChange(index);
-  //           }}
-  //         />
-  //       </label>
-  //     </div>
-  //   );
-  // });
-
-  // const token = useToken(BigInt(1), "w3s");
 
   const arr = [];
   for (let i = 1; i <= 10; i++) {
@@ -94,7 +63,6 @@ const TestingGrounds: NextPage = () => {
 
       <div className="flex flex-wrap justify-center m-1 p-1 bg-base-100 rounded lg:max-w-[1300px]">
         {tokensComponents}
-        {/* <NftCard token={token} /> */}
       </div>
     </div>
   );

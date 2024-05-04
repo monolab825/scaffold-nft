@@ -1,16 +1,5 @@
 import { useState } from "react";
 
-// const inputOptions: any[] = [
-//   "Image",
-//   "Id",
-//   "Name",
-//   "Description",
-//   "Attributes",
-//   "Address",
-//   "CollectionName",
-//   "CollectionSymbol",
-// ];
-
 type test = {
   value: string;
   defaultValue: boolean;
@@ -54,8 +43,6 @@ export default function useCheckboxes(checks: test[]) {
   for (let i = 0; i < checkeds.length; i++) {
     if (checkeds[i]) componentsToRender.push(checks[i].value);
   }
-
-  console.log(componentsToRender);
 
   return { inputComponents, componentsToRender };
 }
