@@ -3,9 +3,9 @@ import Select from "react-dropdown-select";
 
 export default function useAdvancedFiltering(inputComponents: any) {
   const options = [
-    { value: "ipfs", label: "IPFS" },
-    { value: "nftstorage", label: "NFT Storage" },
-    { value: "w3s", label: "web3.storage" },
+    { value: "ipfs" as "ipfs" | "nftstorage" | "w3s", label: "IPFS" },
+    { value: "nftstorage" as "ipfs" | "nftstorage" | "w3s", label: "NFT Storage" },
+    { value: "w3s" as "ipfs" | "nftstorage" | "w3s", label: "web3.storage" },
   ];
 
   const defaultOption = options[1];

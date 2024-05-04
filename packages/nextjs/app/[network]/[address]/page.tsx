@@ -36,14 +36,13 @@ const inputOptions2: any[] = [
 
 export default function Collection({ params }: { params: { network: string; address: string } }) {
   const { inputComponents, componentsToRender } = useCheckboxes(inputOptions2);
-
   const { renderedTokenIds, backEndOption, output: advancedOutput } = useAdvancedFiltering(inputComponents);
 
   const { tokens, isLoading, isError } = useTokens(
     params["network"],
     params["address"],
     renderedTokenIds,
-    backEndOption as "ipfs" | "nftstorage" | "w3s",
+    backEndOption,
   );
 
   const tokensComponents = tokens.map((token, index) => {
