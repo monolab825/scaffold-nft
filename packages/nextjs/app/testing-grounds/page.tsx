@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { renderInputOptions } from "../nftCollectionPagesConfig";
 import type { NextPage } from "next";
 import { NftCard } from "~~/components/nft-card/NftCard";
 import { AddressCard, AddressCardProps } from "~~/components/nft-card/values/AddressCard";
@@ -11,16 +12,16 @@ import useAdvancedFiltering from "~~/hooks/useAdvancedFiltering";
 import useCheckboxes from "~~/hooks/useCheckboxes";
 import { useTokens } from "~~/hooks/useToken";
 
-const inputOptions2: any[] = [
-  { value: "Image", defaultValue: true },
-  { value: "Id", defaultValue: true },
-  { value: "Name", defaultValue: true },
-  { value: "Description", defaultValue: true },
-  { value: "Attributes", defaultValue: true },
-  { value: "Address", defaultValue: true },
-  { value: "CollectionName", defaultValue: true },
-  { value: "CollectionSymbol", defaultValue: true },
-];
+// const inputOptions2: any[] = [
+//   { value: "Image", defaultValue: true },
+//   { value: "Id", defaultValue: true },
+//   { value: "Name", defaultValue: true },
+//   { value: "Description", defaultValue: true },
+//   { value: "Attributes", defaultValue: true },
+//   { value: "Address", defaultValue: false },
+//   { value: "CollectionName", defaultValue: false },
+//   { value: "CollectionSymbol", defaultValue: false },
+// ];
 
 const AddressCardComponent = (props: AddressCardProps) => {
   return <AddressCard {...props} bgColor="bg-base-300" />;
@@ -35,7 +36,7 @@ const CollectionSymbolCardComponent = (props: CollectionSymbolCardProps) => {
 };
 
 const TestingGrounds: NextPage = () => {
-  const { inputComponents, componentsToRender } = useCheckboxes(inputOptions2);
+  const { inputComponents, componentsToRender } = useCheckboxes(renderInputOptions);
 
   const [renderedTokenIds, setRenderedTokenIds] = useState<bigint[]>([
     BigInt(1),

@@ -3,6 +3,7 @@
 import React from "react";
 import { useState } from "react";
 import "react-dropdown/style.css";
+import { renderInputOptions } from "~~/app/nftCollectionPagesConfig";
 import { NftCard } from "~~/components/nft-card/NftCard";
 import { AddressCard, AddressCardProps } from "~~/components/nft-card/values/AddressCard";
 import { CollectionNameCard, CollectionNameCardProps } from "~~/components/nft-card/values/CollectionNameCard";
@@ -24,19 +25,8 @@ const CollectionSymbolCardComponent = (props: CollectionSymbolCardProps) => {
   return <CollectionSymbolCard {...props} bgColor="bg-base-300" />;
 };
 
-const inputOptions2: any[] = [
-  { value: "Image", defaultValue: true },
-  { value: "Id", defaultValue: true },
-  { value: "Name", defaultValue: true },
-  { value: "Description", defaultValue: true },
-  { value: "Attributes", defaultValue: true },
-  { value: "Address", defaultValue: true },
-  { value: "CollectionName", defaultValue: true },
-  { value: "CollectionSymbol", defaultValue: true },
-];
-
 export default function Collection({ params }: { params: { network: string; address: string } }) {
-  const { inputComponents, componentsToRender } = useCheckboxes(inputOptions2);
+  const { inputComponents, componentsToRender } = useCheckboxes(renderInputOptions);
 
   const [renderedTokenIds, setRenderedTokenIds] = useState<bigint[]>([
     BigInt(1),
