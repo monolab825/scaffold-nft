@@ -32,25 +32,6 @@ export const useTokens = (tokenIds: bigint[], replacementType: "ipfs" | "nftstor
     functionName: "symbol",
   });
 
-  // const [myUris, setMyUris] = useState<any[]>([]);
-
-  // useEffect(() => {
-  //   async function get() {
-  //     const tempArr = [];
-
-  //     for (let i = 0; i < tokenIds.length; i++) {
-  //       const result = await scaffoldErc721?.read.tokenURI([tokenIds[i]]);
-  //       tempArr.push(result);
-  //     }
-
-  //     console.log("Set");
-
-  //     setMyUris([...tempArr]);
-  //   }
-
-  //   get();
-  // }, [scaffoldErc721?.address, tokenIds]);
-
   const { uris, isLoading: isLoadingUris, isError: isErrorUris } = useTokenURIs(scaffoldErc721, tokenIds);
 
   for (let i = 0; i < uris.length; i++) {
