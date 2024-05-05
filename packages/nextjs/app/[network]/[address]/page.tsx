@@ -3,7 +3,7 @@
 import React from "react";
 import "react-dropdown/style.css";
 import { renderInputOptions } from "~~/app/nftCollectionPagesConfig";
-import { Tokens } from "~~/components/Tokens";
+import { Collection as CollectionCard } from "~~/components/Collection";
 import useAdvancedFiltering from "~~/hooks/useAdvancedFiltering";
 import useCheckboxes from "~~/hooks/useCheckboxes";
 import useTokenIds from "~~/hooks/useTokenIds";
@@ -19,12 +19,17 @@ export default function Collection({ params }: { params: { network: string; addr
 
   const { chosenOption, output: advancedOutput } = useAdvancedFiltering(inputComponents, onSubmit);
 
-  const { tokens, isLoading, isError } = useTokens(params["network"], params["address"], tokenIds, chosenOption);
+  const { collection, isLoading, isError } = useTokens(params["network"], params["address"], tokenIds, chosenOption);
 
   return (
     <div className="flex flex-col items-center justify-center">
       {advancedOutput}
-      <Tokens tokens={tokens} isLoading={isLoading} isError={isError} renderOrder={componentsToRender} />
+      <CollectionCard
+        collection={collection}
+        isLoading={isLoading}
+        isError={isError}
+        renderOrder={componentsToRender}
+      />
     </div>
   );
 }

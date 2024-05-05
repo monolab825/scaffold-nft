@@ -28,7 +28,7 @@ type Props = {
 };
 
 export const Collection = ({ collection, isLoading, isError, renderOrder }: Props) => {
-  const tokensComponents = collection.tokens.map((token: any, index: number) => {
+  const tokensComponents = collection?.tokens?.map((token: any, index: number) => {
     return <NftCard key={index} token={token} renderOrder={renderOrder} />;
   });
 
@@ -47,7 +47,7 @@ export const Collection = ({ collection, isLoading, isError, renderOrder }: Prop
     <div className="flex flex-col items-center justify-center">
       <div className="w-full">
         <CollectionDetails
-          token={collection.tokens[0]}
+          token={collection?.tokens[0]}
           showDescriptor={true}
           bgColor="bg-base-100"
           AddressCard={AddressCardComponent}

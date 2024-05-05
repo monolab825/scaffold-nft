@@ -23,7 +23,7 @@ export const useTokens = (
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const [tokens, setTokens] = useState<any[]>([]);
+  const [collection, setCollection] = useState<any>(undefined);
 
   useEffect(() => {
     async function get() {
@@ -69,7 +69,13 @@ export const useTokens = (
           arr.push(token);
         }
 
-        setTokens([...arr]);
+        const collection = {} as any;
+        collection.tokens = arr;
+        collection.address = address;
+        collection.symbol = collectionSymbol;
+        collection.name = collectionName;
+
+        setCollection(collection);
       } catch (e) {
         console.log(e);
         setIsError(true);
@@ -80,5 +86,5 @@ export const useTokens = (
     get();
   }, [publicClient?.account, tokenIds]);
 
-  return { tokens, isLoading, isError };
+  return { collection, isLoading, isError };
 };
