@@ -12,12 +12,12 @@ export default function useAdvancedFiltering(inputComponents: any, onSubmitCallb
 
   const [selectedDropdownOption, setSelectedDropdownOption] = useState(defaultOption.value);
 
-  const [backEndOption, setBackendOption] = useState(defaultOption.value);
+  const [chosenOption, setChosenOption] = useState(defaultOption.value);
 
   async function onSubmit(event: any) {
     event.preventDefault();
 
-    setBackendOption(selectedDropdownOption);
+    setChosenOption(selectedDropdownOption);
 
     const tempArr = [];
 
@@ -98,5 +98,5 @@ export default function useAdvancedFiltering(inputComponents: any, onSubmitCallb
     </>
   );
 
-  return { backEndOption, output };
+  return { chosenOption, output };
 }

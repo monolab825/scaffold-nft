@@ -34,9 +34,9 @@ export default function Collection({ params }: { params: { network: string; addr
     setTokenIds([...newIds]);
   }
 
-  const { backEndOption, output: advancedOutput } = useAdvancedFiltering(inputComponents, onSubmit);
+  const { chosenOption, output: advancedOutput } = useAdvancedFiltering(inputComponents, onSubmit);
 
-  const { tokens, isLoading, isError } = useTokens(params["network"], params["address"], tokenIds, backEndOption);
+  const { tokens, isLoading, isError } = useTokens(params["network"], params["address"], tokenIds, chosenOption);
 
   const tokensComponents = tokens.map((token, index) => {
     return <NftCard key={index} token={token} renderOrder={componentsToRender} />;
