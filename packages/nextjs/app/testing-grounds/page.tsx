@@ -5,7 +5,7 @@ import type { NextPage } from "next";
 import { Tokens } from "~~/components/Tokens";
 import useAdvancedFiltering from "~~/hooks/useAdvancedFiltering";
 import useCheckboxes from "~~/hooks/useCheckboxes";
-import { useTokens } from "~~/hooks/useToken";
+import { useScaffoldTokens } from "~~/hooks/useScaffoldTokens";
 import useTokenIds from "~~/hooks/useTokenIds";
 
 const TestingGrounds: NextPage = () => {
@@ -18,7 +18,7 @@ const TestingGrounds: NextPage = () => {
 
   const { chosenOption, output: advancedOutput } = useAdvancedFiltering(inputComponents, onSubmit);
 
-  const { tokens, isLoading, isError } = useTokens(tokenIds, chosenOption);
+  const { tokens, isLoading, isError } = useScaffoldTokens(tokenIds, chosenOption);
 
   return (
     <div className="flex flex-col items-center justify-center">

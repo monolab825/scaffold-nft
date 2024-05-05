@@ -2,7 +2,6 @@
 
 import { useFetches } from "./UseFetches";
 import { useTokenURIs } from "./useTokenURIs";
-import { useFetch } from "usehooks-ts";
 import { useScaffoldContract, useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
 const replacement = {
@@ -11,7 +10,7 @@ const replacement = {
   w3s: "https://w3s.link/ipfs/",
 };
 
-export const useTokens = (tokenIds: bigint[], replacementType: "ipfs" | "nftstorage" | "w3s" = "ipfs") => {
+export const useScaffoldTokens = (tokenIds: bigint[], replacementType: "ipfs" | "nftstorage" | "w3s" = "ipfs") => {
   const { data: scaffoldErc721 } = useScaffoldContract({ contractName: "ScaffoldERC721" });
 
   const {
@@ -58,42 +57,5 @@ export const useTokens = (tokenIds: bigint[], replacementType: "ipfs" | "nftstor
     tokens,
     isLoading: isLoadingName || isLoadingSymbol || isLoadingUris || isLoadingFetches,
     isError: isErrorName || isErrorSymbol || isErrorUris || isErrorFetches,
-    // refetch: refetchURIs,
   };
-};
-
-export const useToken = (tokenId: bigint, replacementType: "ipfs" | "nftstorage" | "w3s" = "ipfs") => {
-  const { data: scaffoldErc721 } = useScaffoldContract({ contractName: "ScaffoldERC721" });
-
-  const { data: tokenURI } = useScaffoldReadContract({
-    contractName: "ScaffoldERC721",
-    functionName: "tokenURI",
-    args: [tokenId],
-  });
-
-  const { data: collectionName } = useScaffoldReadContract({
-    contractName: "ScaffoldERC721",
-    functionName: "name",
-  });
-
-  const { data: collectionSymbol } = useScaffoldReadContract({
-    contractName: "ScaffoldERC721",
-    functionName: "symbol",
-  });
-
-  const formattedURI = tokenURI?.replace("ipfs://", replacement[replacementType]);
-
-  const { data: result } = useFetch<any>(formattedURI);
-
-  result ? (result.image = result?.image?.replace("ipfs://", replacement[replacementType])) : <></>;
-
-  const token = {} as any;
-  token.address = scaffoldErc721?.address;
-  token.metadata = result;
-  token.id = tokenId;
-  token.uri = formattedURI;
-  token.collectionName = collectionName;
-  token.collectionSymbol = collectionSymbol;
-
-  return token;
 };
