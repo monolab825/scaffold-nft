@@ -53,8 +53,15 @@ export const useScaffoldTokens = (tokenIds: bigint[], replacementType: "ipfs" | 
     tokens.push(token);
   }
 
+  const collection = {} as any;
+  collection.tokens = tokens;
+  collection.address = scaffoldErc721?.address;
+  collection.symbol = collectionSymbol;
+  collection.name = collectionName;
+
   return {
     tokens,
+    collection,
     isLoading: isLoadingName || isLoadingSymbol || isLoadingUris || isLoadingFetches,
     isError: isErrorName || isErrorSymbol || isErrorUris || isErrorFetches,
   };

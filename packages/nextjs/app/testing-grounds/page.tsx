@@ -2,7 +2,7 @@
 
 import { renderInputOptions } from "../nftCollectionPagesConfig";
 import type { NextPage } from "next";
-import { Tokens } from "~~/components/Tokens";
+import { Collection } from "~~/components/Collection";
 import useAdvancedFiltering from "~~/hooks/useAdvancedFiltering";
 import useCheckboxes from "~~/hooks/useCheckboxes";
 import { useScaffoldTokens } from "~~/hooks/useScaffoldTokens";
@@ -18,12 +18,12 @@ const TestingGrounds: NextPage = () => {
 
   const { chosenOption, output: advancedOutput } = useAdvancedFiltering(inputComponents, onSubmit);
 
-  const { tokens, isLoading, isError } = useScaffoldTokens(tokenIds, chosenOption);
+  const { collection, isLoading, isError } = useScaffoldTokens(tokenIds, chosenOption);
 
   return (
     <div className="flex flex-col items-center justify-center">
       {advancedOutput}
-      <Tokens tokens={tokens} isLoading={isLoading} isError={isError} renderOrder={componentsToRender} />
+      <Collection collection={collection} isLoading={isLoading} isError={isError} renderOrder={componentsToRender} />
     </div>
   );
 };
