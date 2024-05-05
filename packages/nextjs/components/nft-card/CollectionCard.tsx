@@ -27,7 +27,7 @@ type Props = {
   renderOrder: any;
 };
 
-export const Collection = ({ collection, isLoading, isError, renderOrder }: Props) => {
+export const CollectionCard = ({ collection, isLoading, isError, renderOrder }: Props) => {
   const tokensComponents = collection?.tokens?.map((token: any, index: number) => {
     return <NftCard key={index} token={token} renderOrder={renderOrder} />;
   });
