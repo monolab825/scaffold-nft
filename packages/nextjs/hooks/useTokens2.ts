@@ -12,10 +12,20 @@ const replacement = {
   w3s: "https://w3s.link/ipfs/",
 };
 
-export const useTokens = (chainName: string, address: string, tokenIds: bigint[], replacementType: string) => {
+export const useTokens = (
+  chainName: string,
+  address: string,
+  tokenIds: bigint[],
+  replacementType: string,
+  loadType = "link",
+) => {
   const chain = allChains[chainName as keyof typeof allChains];
-  const selectedChain = chain;
-  const publicClient = usePublicClient({ chainId: selectedChain?.id });
+
+  console.log(chain);
+
+  const publicClient = usePublicClient({ chainId: chain.id });
+
+  console.log(publicClient);
 
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -40,6 +50,14 @@ export const useTokens = (chainName: string, address: string, tokenIds: bigint[]
           functionName: "symbol",
         });
 
+        //const balanceOf =
+        await publicClient?.readContract({
+          address,
+          abi: erc721Abi,
+          functionName: "balanceOf",
+          args: ["0xAD10ec43441927C72D0f55bD495fDc762802a2Bb"],
+        });
+
         const arr = [];
 
         for (let i = 0; i < tokenIds.length; i++) {
@@ -50,19 +68,28 @@ export const useTokens = (chainName: string, address: string, tokenIds: bigint[]
             args: [tokenIds[i]],
           });
 
-          console.log(tokenURI);
+          let jsonMetadata;
+          let uri;
 
-          const tokenURIFormatted = tokenURI?.replace("ipfs://", replacement[replacementType as replacementType]);
-
-          const metadata = await fetch(tokenURIFormatted!);
-          const metadataJson = await metadata.json();
-          metadataJson.image = metadataJson.image.replace("ipfs://", replacement[replacementType as replacementType]);
+          if (loadType === "utf8") {
+            const data = Buffer.from(tokenURI!.substring(27), "utf-8").toString();
+            const parsedJson = JSON.parse(data);
+            console.log(parsedJson);
+            // jsonMetadata = parsedJson;
+          } else if (loadType === "link") {
+            const tokenURIFormatted = tokenURI?.replace("ipfs://", replacement[replacementType as replacementType]);
+            const metadata = await fetch(tokenURIFormatted!);
+            const metadataJson = await metadata.json();
+            metadataJson.image = metadataJson.image.replace("ipfs://", replacement[replacementType as replacementType]);
+            jsonMetadata = metadataJson;
+            uri = tokenURIFormatted;
+          }
 
           const token = {} as any;
           token.address = address;
-          token.metadata = metadataJson;
+          token.metadata = jsonMetadata;
           token.id = tokenIds[i];
-          token.uri = tokenURIFormatted;
+          token.uri = uri;
           token.collectionName = collectionName;
           token.collectionSymbol = collectionSymbol;
           arr.push(token);

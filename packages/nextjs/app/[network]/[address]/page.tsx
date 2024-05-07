@@ -19,7 +19,13 @@ export default function CollectionPage({ params }: { params: { network: string; 
 
   const { chosenOption, output: advancedOutput } = useAdvancedFiltering(inputComponents, onSubmit);
 
-  const { collection, isLoading, isError } = useTokens(params["network"], params["address"], tokenIds, chosenOption);
+  const { collection, isLoading, isError } = useTokens(
+    params["network"],
+    params["address"],
+    tokenIds,
+    chosenOption,
+    "utf8",
+  );
 
   return (
     <div className="flex flex-col items-center justify-center">
