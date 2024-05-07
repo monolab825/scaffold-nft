@@ -79,11 +79,10 @@ export const useTokens = (
           let jsonMetadata;
           let uri;
 
-          if (loadType === "utf8") {
-            const data = Buffer.from(tokenURI!.substring(27), "utf-8").toString();
+          if (loadType === "base64") {
+            const data = Buffer.from(tokenURI!.substring(29), "base64").toString();
             const parsedJson = JSON.parse(data);
-            console.log(parsedJson);
-            // jsonMetadata = parsedJson;
+            jsonMetadata = parsedJson;
           } else if (loadType === "link") {
             const tokenURIFormatted = tokenURI?.replace("ipfs://", replacement[replacementType as replacementType]);
             const metadata = await fetch(tokenURIFormatted!);
