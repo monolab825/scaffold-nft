@@ -4,18 +4,15 @@ import { erc721Abi } from "viem";
 import * as allChains from "viem/chains";
 import { usePublicClient } from "wagmi";
 
+export type replacementType = "ipfs" | "nftstorage" | "w3s";
+
 const replacement = {
   ipfs: "https://ipfs.io/ipfs/",
   nftstorage: "https://nftstorage.link/ipfs/",
   w3s: "https://w3s.link/ipfs/",
 };
 
-export const useTokens = (
-  chainName: string,
-  address: string,
-  tokenIds: bigint[],
-  replacementType: "ipfs" | "nftstorage" | "w3s" = "ipfs",
-) => {
+export const useTokens = (chainName: string, address: string, tokenIds: bigint[], replacementType: string) => {
   const chain = allChains[chainName as keyof typeof allChains];
   const selectedChain = chain;
   const publicClient = usePublicClient({ chainId: selectedChain?.id });
@@ -53,11 +50,13 @@ export const useTokens = (
             args: [tokenIds[i]],
           });
 
-          const tokenURIFormatted = tokenURI?.replace("ipfs://", replacement[replacementType]);
+          console.log(tokenURI);
+
+          const tokenURIFormatted = tokenURI?.replace("ipfs://", replacement[replacementType as replacementType]);
 
           const metadata = await fetch(tokenURIFormatted!);
           const metadataJson = await metadata.json();
-          metadataJson.image = metadataJson.image.replace("ipfs://", replacement[replacementType]);
+          metadataJson.image = metadataJson.image.replace("ipfs://", replacement[replacementType as replacementType]);
 
           const token = {} as any;
           token.address = address;

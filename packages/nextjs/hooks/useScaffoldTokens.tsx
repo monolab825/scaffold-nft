@@ -2,6 +2,7 @@
 
 import { useFetches } from "./UseFetches";
 import { useTokenURIs } from "./useTokenURIs";
+import { replacementType } from "./useTokens2";
 import { useScaffoldContract, useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
 const replacement = {
@@ -10,7 +11,7 @@ const replacement = {
   w3s: "https://w3s.link/ipfs/",
 };
 
-export const useScaffoldTokens = (tokenIds: bigint[], replacementType: "ipfs" | "nftstorage" | "w3s" = "ipfs") => {
+export const useScaffoldTokens = (tokenIds: bigint[], replacementType = "ipfs") => {
   const { data: scaffoldErc721 } = useScaffoldContract({ contractName: "ScaffoldERC721" });
 
   const {
@@ -34,14 +35,18 @@ export const useScaffoldTokens = (tokenIds: bigint[], replacementType: "ipfs" | 
   const { uris, isLoading: isLoadingUris, isError: isErrorUris } = useTokenURIs(scaffoldErc721, tokenIds);
 
   for (let i = 0; i < uris.length; i++) {
-    uris[i] = uris[i].replace("ipfs://", replacement[replacementType]);
+    uris[i] = uris[i].replace("ipfs://", replacement[replacementType as replacementType]);
   }
 
   const { responses, isLoading: isLoadingFetches, isError: isErrorFetches } = useFetches(uris);
 
   const tokens: any[] = [];
   for (let i = 0; i < responses.length; i++) {
-    responses[i] ? (responses[i].image = responses[i].image.replace("ipfs://", replacement[replacementType])) : <></>;
+    responses[i] ? (
+      (responses[i].image = responses[i].image.replace("ipfs://", replacement[replacementType as replacementType]))
+    ) : (
+      <></>
+    );
 
     const token = {} as any;
     token.address = scaffoldErc721?.address;
