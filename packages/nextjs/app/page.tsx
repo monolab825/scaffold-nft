@@ -34,7 +34,7 @@ const Home: NextPage = () => {
   async function onSubmit(e: any) {
     e.preventDefault();
 
-    window.location.href = "https://ladders.vision/" + selectedDropdownOption + "/" + e.target[0].value;
+    window.location.href = "https://ladders.vision/" + selectedDropdownOption + "/" + e.target[1].value;
   }
 
   return (
