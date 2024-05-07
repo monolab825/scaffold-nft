@@ -3,6 +3,7 @@ import { useState } from "react";
 import { erc721Abi } from "viem";
 import * as allChains from "viem/chains";
 import { usePublicClient } from "wagmi";
+import { createConfig, http } from "wagmi";
 
 export type replacementType = "ipfs" | "nftstorage" | "w3s";
 
@@ -21,9 +22,16 @@ export const useTokens = (
 ) => {
   const chain = allChains[chainName as keyof typeof allChains];
 
-  console.log(chain);
+  const config = createConfig({
+    chains: [chain],
+    transports: {
+      [chain.id]: http(),
+    } as any,
+  });
 
-  const publicClient = usePublicClient({ chainId: chain.id });
+  console.log(chain.id);
+
+  const publicClient = usePublicClient({ chainId: chain.id, config });
 
   console.log(publicClient);
 
