@@ -10,6 +10,12 @@ import {
   BeakerIcon, // CogIcon, // BugAntIcon, MagnifyingGlassIcon
 } from "@heroicons/react/24/outline";
 
+function insertSpaces(string: string) {
+  string = string.replace(/([a-z])([A-Z])/g, "$1 $2");
+  string = string.replace(/([A-Z])([A-Z][a-z])/g, "$1 $2");
+  return string;
+}
+
 const Home: NextPage = () => {
   const options = [];
 
@@ -18,7 +24,7 @@ const Home: NextPage = () => {
   for (const key of keys) {
     options.push({
       value: key,
-      label: key,
+      label: insertSpaces(key).replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase()),
     });
   }
 
@@ -32,10 +38,12 @@ const Home: NextPage = () => {
 
   const [selectedDropdownOption, setSelectedDropdownOption] = useState(defaultOption);
 
+  console.log(selectedDropdownOption);
+
   async function onSubmit(e: any) {
     e.preventDefault();
 
-    window.location.href = "/" + selectedDropdownOption + "/" + e.target[1].value;
+    window.location.href = "/" + selectedDropdownOption.value + "/" + e.target[1].value;
   }
 
   const [output, setOutput] = useState<any>();
@@ -72,8 +80,10 @@ const Home: NextPage = () => {
               <Select
                 options={options}
                 className="text-black bg-base-100"
-                onChange={(event: any) => {
-                  if (event[0]) setSelectedDropdownOption(event[0].value);
+                onChange={(option: any) => {
+                  console.log(option);
+
+                  option ? setSelectedDropdownOption(option) : "";
                 }}
                 defaultValue={defaultOption}
                 instanceId="network-select"

@@ -24,9 +24,8 @@ export default function useAdvancedFiltering(inputComponents: any, onSubmitCallb
 
   const defaultMetadataLinkLoadOption = metadataLinkLoadOptions[0];
 
-  const [metadataLinkSelectedDropdownOption, setMetadataLinkLoadSelectedDropdownOption] = useState(
-    defaultMetadataLinkLoadOption.value,
-  );
+  const [metadataLinkSelectedDropdownOption, setMetadataLinkLoadSelectedDropdownOption] =
+    useState(defaultMetadataLinkLoadOption);
 
   const [metadataLinkLoadChosenOption, setMetadataLinkLoadChosenOption] = useState(defaultMetadataLinkLoadOption.value);
 
@@ -34,7 +33,7 @@ export default function useAdvancedFiltering(inputComponents: any, onSubmitCallb
     event.preventDefault();
 
     // setMetadataLoadMethodChosenOption(metadataLoadMethodSelectedDropdownOption);
-    setMetadataLinkLoadChosenOption(metadataLinkSelectedDropdownOption);
+    setMetadataLinkLoadChosenOption(metadataLinkSelectedDropdownOption.value);
 
     const tempArr = [];
 
@@ -83,8 +82,8 @@ export default function useAdvancedFiltering(inputComponents: any, onSubmitCallb
               <Select
                 options={metadataLinkLoadOptions}
                 className="text-black bg-base-100"
-                onChange={(event: any) => {
-                  setMetadataLinkLoadSelectedDropdownOption(event[0].value);
+                onChange={(option: any) => {
+                  option ? setMetadataLinkLoadSelectedDropdownOption(option) : "";
                 }}
                 defaultValue={defaultMetadataLinkLoadOption}
                 theme={theme => ({
