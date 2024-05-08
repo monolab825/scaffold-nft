@@ -81,12 +81,17 @@ export const useTokens = (
         // });
 
         //const balanceOf =
-        await publicClient?.readContract({
-          address,
-          abi: erc721Abi,
-          functionName: "balanceOf",
-          args: ["0xAD10ec43441927C72D0f55bD495fDc762802a2Bb"],
-        });
+
+        try {
+          await publicClient?.readContract({
+            address,
+            abi: erc721Abi,
+            functionName: "balanceOf",
+            args: ["0xAD10ec43441927C72D0f55bD495fDc762802a2Bb"],
+          });
+        } catch (e) {
+          console.log(e);
+        }
 
         const arr = [];
 
@@ -100,6 +105,7 @@ export const useTokens = (
               args: [tokenIds[i]],
             });
           } catch (e) {
+            console.log(e);
             tokenURI = await publicClient?.readContract({
               address,
               abi: erc1155Abi,
