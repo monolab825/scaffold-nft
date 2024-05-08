@@ -2,22 +2,24 @@ import { useState } from "react";
 import Select from "react-dropdown-select";
 
 export default function useAdvancedFiltering(inputComponents: any, onSubmitCallback?: any) {
-  const options = [
+  const metadataLinkLoadOptions = [
     { value: "ipfs", label: "IPFS" },
     { value: "nftstorage", label: "NFT Storage" },
     { value: "w3s", label: "web3.storage" },
   ];
 
-  const defaultOption = options[2];
+  const defaultMetadataLinkLoadOption = metadataLinkLoadOptions[2];
 
-  const [selectedDropdownOption, setSelectedDropdownOption] = useState(defaultOption.value);
+  const [metadataLinkSelectedDropdownOption, setMetadataLinkLoadSelectedDropdownOption] = useState(
+    defaultMetadataLinkLoadOption.value,
+  );
 
-  const [chosenOption, setChosenOption] = useState(defaultOption.value);
+  const [metadataLinkLoadChosenOption, setMetadataLinkLoadChosenOption] = useState(defaultMetadataLinkLoadOption.value);
 
   async function onSubmit(event: any) {
     event.preventDefault();
 
-    setChosenOption(selectedDropdownOption);
+    setMetadataLinkLoadChosenOption(metadataLinkSelectedDropdownOption);
 
     const tempArr = [];
 
@@ -61,15 +63,15 @@ export default function useAdvancedFiltering(inputComponents: any, onSubmitCallb
                 defaultValue={1}
               />
             </div>
-            <p className="text-center m-0">Metadata Load Type</p>
+            <p className="text-center m-0">Metadata Link Load Method</p>
             <div className="w-64">
               <Select
-                options={options}
+                options={metadataLinkLoadOptions}
                 className="text-black bg-base-100"
                 onChange={(event: any) => {
-                  setSelectedDropdownOption(event[0].value);
+                  setMetadataLinkLoadSelectedDropdownOption(event[0].value);
                 }}
-                values={[defaultOption]}
+                values={[defaultMetadataLinkLoadOption]}
               />
             </div>
 
@@ -98,5 +100,5 @@ export default function useAdvancedFiltering(inputComponents: any, onSubmitCallb
     </>
   );
 
-  return { chosenOption, output };
+  return { chosenOption: metadataLinkLoadChosenOption, output };
 }
