@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useChainId } from "wagmi";
+// import { useChainId } from "wagmi";
 import {
   Bars3Icon,
   BeakerIcon,
@@ -72,10 +72,10 @@ export const HeaderMenuLinks = ({ menuLinks }: Props) => {
 export const Header = () => {
   const [instancedHeaderLinks, setInstancedHeaderLinks] = useState(menuLinks);
 
-  const chainId = useChainId();
+  // const chainId = useChainId();
 
   useEffect(() => {
-    if (chainId === 31337) {
+    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
       setInstancedHeaderLinks([
         ...instancedHeaderLinks,
         {
@@ -87,7 +87,7 @@ export const Header = () => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chainId]);
+  }, []);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const burgerMenuRef = useRef<HTMLDivElement>(null);

@@ -38,6 +38,25 @@ const Home: NextPage = () => {
     window.location.href = "/" + selectedDropdownOption + "/" + e.target[1].value;
   }
 
+  let output;
+
+  console.log(location.hostname);
+
+  if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+    output = (
+      <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
+        <BeakerIcon className="h-8 w-8 fill-secondary" />
+        <p>
+          Test your local deployments at the{" "}
+          <Link href="/testing-grounds" passHref className="link">
+            Testing Grounds
+          </Link>{" "}
+          tab.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="flex items-center flex-col flex-grow pt-10">
@@ -115,7 +134,8 @@ const Home: NextPage = () => {
               </p>
             </div> */}
 
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
+            {output}
+            {/* <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
               <BeakerIcon className="h-8 w-8 fill-secondary" />
               <p>
                 Test your local deployments at the{" "}
@@ -124,7 +144,7 @@ const Home: NextPage = () => {
                 </Link>{" "}
                 tab.
               </p>
-            </div>
+            </div> */}
 
             {/* <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
               <CogIcon className="h-8 w-8 fill-secondary" />
