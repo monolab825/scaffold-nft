@@ -17,14 +17,18 @@ export default function CollectionPage({ params }: { params: { network: string; 
     setTokenIds([...newIds]);
   }
 
-  const { chosenOption, output: advancedOutput } = useAdvancedFiltering(inputComponents, onSubmit);
+  const {
+    chosenOption,
+    // chosenOption2,
+    output: advancedOutput,
+  } = useAdvancedFiltering(inputComponents, onSubmit);
 
   const { collection, isLoading, isError } = useTokens(
     params["network"],
     params["address"],
     tokenIds,
     chosenOption,
-    "utf8",
+    //chosenOption2,
   );
 
   return (

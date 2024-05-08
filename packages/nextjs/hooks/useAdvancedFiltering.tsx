@@ -1,14 +1,27 @@
 import { useState } from "react";
 import Select from "react-dropdown-select";
 
-export default function useAdvancedFiltering(inputComponents: any, onSubmitCallback?: any) {
-  const metadataLinkLoadOptions = [
-    { value: "ipfs", label: "IPFS" },
-    { value: "nftstorage", label: "NFT Storage" },
-    { value: "w3s", label: "web3.storage" },
-  ];
+const metadataLinkLoadOptions = [
+  { value: "ipfs", label: "IPFS" },
+  { value: "nftstorage", label: "NFT Storage" },
+  { value: "w3s", label: "web3.storage" },
+];
 
-  const defaultMetadataLinkLoadOption = metadataLinkLoadOptions[2];
+// const metadataLoadMethods = [
+//   { value: "url", label: "url" },
+//   { value: "base64", label: "base64" },
+// ];
+
+export default function useAdvancedFiltering(inputComponents: any, onSubmitCallback?: any) {
+  // const defaultMetadataLoadMethod = metadataLoadMethods[1];
+
+  // const [metadataLoadMethodSelectedDropdownOption, setMetadataLoadMethodSelectedDropdownOption] = useState(
+  //   defaultMetadataLoadMethod.value,
+  // );
+
+  // const [metadataLoadMethodChosenOption, setMetadataLoadMethodChosenOption] = useState(defaultMetadataLoadMethod.value);
+
+  const defaultMetadataLinkLoadOption = metadataLinkLoadOptions[0];
 
   const [metadataLinkSelectedDropdownOption, setMetadataLinkLoadSelectedDropdownOption] = useState(
     defaultMetadataLinkLoadOption.value,
@@ -19,6 +32,7 @@ export default function useAdvancedFiltering(inputComponents: any, onSubmitCallb
   async function onSubmit(event: any) {
     event.preventDefault();
 
+    // setMetadataLoadMethodChosenOption(metadataLoadMethodSelectedDropdownOption);
     setMetadataLinkLoadChosenOption(metadataLinkSelectedDropdownOption);
 
     const tempArr = [];
@@ -74,6 +88,18 @@ export default function useAdvancedFiltering(inputComponents: any, onSubmitCallb
                 values={[defaultMetadataLinkLoadOption]}
               />
             </div>
+            {/* 
+            <p className="text-center m-0">Metadata Load Method</p>
+            <div className="w-64">
+              <Select
+                options={metadataLoadMethods}
+                className="text-black bg-base-100"
+                onChange={(event: any) => {
+                  setMetadataLoadMethodSelectedDropdownOption(event[0].value);
+                }}
+                values={[defaultMetadataLoadMethod]}
+              />
+            </div> */}
 
             <button type="submit" className="btn btn-sm btn-primary">
               Refresh
@@ -100,5 +126,9 @@ export default function useAdvancedFiltering(inputComponents: any, onSubmitCallb
     </>
   );
 
-  return { chosenOption: metadataLinkLoadChosenOption, output };
+  return {
+    chosenOption: metadataLinkLoadChosenOption,
+    //chosenOption2: metadataLoadMethodChosenOption,
+    output,
+  };
 }

@@ -18,7 +18,7 @@ export const useTokens = (
   address: string,
   tokenIds: bigint[],
   replacementType: string,
-  loadType = "link",
+  // loadType = "url",
 ) => {
   const chain = allChains[chainName as keyof typeof allChains];
 
@@ -76,27 +76,30 @@ export const useTokens = (
             args: [tokenIds[i]],
           });
 
-          let jsonMetadata;
-          let uri;
+          // if (loadType === "base64") {
+          //   const data = Buffer.from(tokenURI!.substring(29), "base64").toString();
+          //   const parsedJson = JSON.parse(data);
+          //   jsonMetadata = parsedJson;
+          // }
+          //  else if (loadType === "url") {
+          console.log("here ye");
 
-          if (loadType === "base64") {
-            const data = Buffer.from(tokenURI!.substring(29), "base64").toString();
-            const parsedJson = JSON.parse(data);
-            jsonMetadata = parsedJson;
-          } else if (loadType === "link") {
-            const tokenURIFormatted = tokenURI?.replace("ipfs://", replacement[replacementType as replacementType]);
-            const metadata = await fetch(tokenURIFormatted!);
-            const metadataJson = await metadata.json();
-            metadataJson.image = metadataJson.image.replace("ipfs://", replacement[replacementType as replacementType]);
-            jsonMetadata = metadataJson;
-            uri = tokenURIFormatted;
-          }
+          const tokenURIFormatted = tokenURI?.replace("ipfs://", replacement[replacementType as replacementType]);
+
+          console.log(tokenURIFormatted);
+          const metadata = await fetch(tokenURIFormatted!);
+          console.log(metadata);
+          const metadataJson = await metadata.json();
+          console.log(metadataJson);
+
+          metadataJson.image = metadataJson.image.replace("ipfs://", replacement[replacementType as replacementType]);
+          // }
 
           const token = {} as any;
           token.address = address;
-          token.metadata = jsonMetadata;
+          token.metadata = metadataJson;
           token.id = tokenIds[i];
-          token.uri = uri;
+          token.uri = tokenURIFormatted;
           token.collectionName = collectionName;
           token.collectionSymbol = collectionSymbol;
           arr.push(token);
