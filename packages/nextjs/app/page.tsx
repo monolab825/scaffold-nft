@@ -40,9 +40,7 @@ const Home: NextPage = () => {
 
   let output;
 
-  console.log(location.hostname);
-
-  if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+  if (location?.hostname === "localhost" || location?.hostname === "127.0.0.1") {
     output = (
       <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
         <BeakerIcon className="h-8 w-8 fill-secondary" />
