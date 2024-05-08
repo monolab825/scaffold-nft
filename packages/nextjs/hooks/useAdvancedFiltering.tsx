@@ -1,5 +1,6 @@
 import { useState } from "react";
-import Select from "react-dropdown-select";
+// import Select from "react-dropdown-select";
+import Select from "react-select";
 
 const metadataLinkLoadOptions = [
   { value: "ipfs", label: "IPFS" },
@@ -85,7 +86,19 @@ export default function useAdvancedFiltering(inputComponents: any, onSubmitCallb
                 onChange={(event: any) => {
                   setMetadataLinkLoadSelectedDropdownOption(event[0].value);
                 }}
-                values={[defaultMetadataLinkLoadOption]}
+                defaultValue={defaultMetadataLinkLoadOption}
+                theme={theme => ({
+                  ...theme,
+                  colors: {
+                    ...theme.colors,
+                    primary25: "#efeaff",
+                    primary50: "#c1aeff",
+                    primary: "#551d98",
+                  },
+                })}
+                styles={{
+                  menuList: provided => ({ ...provided, maxHeight: 280, overflow: "auto" }),
+                }}
               />
             </div>
             {/* 

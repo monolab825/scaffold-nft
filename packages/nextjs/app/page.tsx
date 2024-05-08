@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import type { NextPage } from "next";
-import Select from "react-dropdown-select";
+// import Select from "react-dropdown-select";
+import Select from "react-select";
 import * as allChains from "viem/chains";
 import {
   BeakerIcon, // CogIcon, // BugAntIcon, MagnifyingGlassIcon
@@ -55,7 +56,20 @@ const Home: NextPage = () => {
                 onChange={(event: any) => {
                   if (event[0]) setSelectedDropdownOption(event[0].value);
                 }}
-                values={[defaultOption]}
+                defaultValue={defaultOption}
+                instanceId="network-select"
+                theme={theme => ({
+                  ...theme,
+                  colors: {
+                    ...theme.colors,
+                    primary25: "#efeaff",
+                    primary50: "#c1aeff",
+                    primary: "#551d98",
+                  },
+                })}
+                styles={{
+                  menuList: provided => ({ ...provided, maxHeight: 280, overflow: "auto" }),
+                }}
               />
             </div>
 
