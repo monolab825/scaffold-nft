@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { NextPage } from "next";
 // import Select from "react-dropdown-select";
@@ -38,22 +38,24 @@ const Home: NextPage = () => {
     window.location.href = "/" + selectedDropdownOption + "/" + e.target[1].value;
   }
 
-  let output;
+  const [output, setOutput] = useState<any>();
 
-  if (location?.hostname === "localhost" || location?.hostname === "127.0.0.1") {
-    output = (
-      <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-        <BeakerIcon className="h-8 w-8 fill-secondary" />
-        <p>
-          Test your local deployments at the{" "}
-          <Link href="/testing-grounds" passHref className="link">
-            Testing Grounds
-          </Link>{" "}
-          tab.
-        </p>
-      </div>
-    );
-  }
+  useEffect(() => {
+    if (location?.hostname === "localhost" || location?.hostname === "127.0.0.1") {
+      setOutput(
+        <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
+          <BeakerIcon className="h-8 w-8 fill-secondary" />
+          <p>
+            Test your local deployments at the{" "}
+            <Link href="/testing-grounds" passHref className="link">
+              Testing Grounds
+            </Link>{" "}
+            tab.
+          </p>
+        </div>,
+      );
+    }
+  }, []);
 
   return (
     <>
