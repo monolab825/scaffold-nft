@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import erc1155Abi from "./erc1155Abi.json";
 import { erc721Abi } from "viem";
 import * as allChains from "viem/chains";
 import { usePublicClient } from "wagmi";
@@ -45,18 +46,39 @@ export const useTokens = (
       setIsLoading(true);
       setIsError(false);
 
+      let collectionName;
       try {
-        const collectionName = await publicClient?.readContract({
+        collectionName = await publicClient?.readContract({
           address,
           abi: erc721Abi,
           functionName: "name",
         });
+      } catch (e) {
+        console.log(e);
+      }
 
-        const collectionSymbol = await publicClient?.readContract({
+      let collectionSymbol;
+      try {
+        collectionSymbol = await publicClient?.readContract({
           address,
           abi: erc721Abi,
           functionName: "symbol",
         });
+      } catch (e) {
+        console.log(e);
+      }
+      try {
+        // const collectionName = await publicClient?.readContract({
+        //   address,
+        //   abi: erc721Abi,
+        //   functionName: "name",
+        // });
+
+        // const collectionSymbol = await publicClient?.readContract({
+        //   address,
+        //   abi: erc721Abi,
+        //   functionName: "symbol",
+        // });
 
         //const balanceOf =
         await publicClient?.readContract({
@@ -69,12 +91,22 @@ export const useTokens = (
         const arr = [];
 
         for (let i = 0; i < tokenIds.length; i++) {
-          const tokenURI = await publicClient?.readContract({
-            address,
-            abi: erc721Abi,
-            functionName: "tokenURI",
-            args: [tokenIds[i]],
-          });
+          let tokenURI: any;
+          try {
+            tokenURI = await publicClient?.readContract({
+              address,
+              abi: erc721Abi,
+              functionName: "tokenURI",
+              args: [tokenIds[i]],
+            });
+          } catch (e) {
+            tokenURI = await publicClient?.readContract({
+              address,
+              abi: erc1155Abi,
+              functionName: "uri",
+              args: [tokenIds[i]],
+            });
+          }
 
           // if (loadType === "base64") {
           //   const data = Buffer.from(tokenURI!.substring(29), "base64").toString();
@@ -82,17 +114,22 @@ export const useTokens = (
           //   jsonMetadata = parsedJson;
           // }
           //  else if (loadType === "url") {
-          console.log("here ye");
 
-          const tokenURIFormatted = tokenURI?.replace("ipfs://", replacement[replacementType as replacementType]);
+          let tokenURIFormatted;
+          let metadataJson;
 
-          console.log(tokenURIFormatted);
-          const metadata = await fetch(tokenURIFormatted!);
-          console.log(metadata);
-          const metadataJson = await metadata.json();
-          console.log(metadataJson);
+          try {
+            tokenURIFormatted = tokenURI?.replace("ipfs://", replacement[replacementType as replacementType]);
+
+            const metadata = await fetch(tokenURIFormatted!);
+            metadataJson = await metadata.json();
+          } catch (e) {
+            console.log(e);
+            metadataJson = JSON.parse(tokenURI?.substring(27));
+          }
 
           metadataJson.image = metadataJson.image.replace("ipfs://", replacement[replacementType as replacementType]);
+
           // }
 
           const token = {} as any;
